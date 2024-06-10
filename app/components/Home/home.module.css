@@ -1,0 +1,222 @@
+
+@media screen and (max-width: 430px) {
+    .headerPadre {
+        padding: 1rem;
+        box-shadow: rgba(14, 30, 37, 0.12) 0px 2px 4px 0px, rgba(14, 30, 37, 0.32) 0px 2px 16px 0px;
+    }
+
+    .cabeza {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .divCabeza {
+        padding: .5rem;
+        border: 1px solid rgb(201, 201, 201);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 20px;
+        border-radius: 10px;
+    }
+
+    .divForm {
+        display: flex;
+        gap: 9px;
+    }
+
+    .lupaBtn {
+        border: none;
+        background-color: white;
+    }
+
+    .lupaImg {
+        width: 30px;
+    }
+
+    .divCabeza input {
+        
+        border:1px solid rgb(201, 201, 201);
+        border-radius: 5px;
+    }
+
+    
+
+    /* Sección Ofertas */
+    .ofertas {
+        margin-top: 1rem;
+        box-shadow: rgba(14, 30, 37, 0.12) 0px 2px 4px 0px, rgba(14, 30, 37, 0.32) 0px 2px 16px 0px;
+        background: #ffffff;
+        padding: 2rem 0;
+        background: rgb(255,255,255);
+        background: linear-gradient(0deg, rgba(255,255,255,1) 0%, rgba(35,150,255,1) 100%);
+    }
+
+    .ofertas h2 {
+        font-size: 2rem;
+        margin-bottom: 1rem;
+    }
+
+    .ofertas p {
+        font-size: 1.2rem;
+        margin-bottom: 1.5rem;
+    }
+
+    .btn {
+        padding: 0.5rem 1rem;
+        font-size: 1rem;
+
+    }
+
+    /*Que estas buscando*/
+
+    .queEstasBuscando {
+        padding: 2rem 0;
+    }
+
+   .dentroQueEstasBuscando {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 1rem;
+        padding: .3rem;
+    }
+    .dentro-que-estas-buscando a {
+        margin: 1rem;
+        color: black;
+    }
+
+    .opciones {
+        display: flex;
+        align-items: center;
+        overflow-x: auto;
+        gap: 2rem;
+        padding: 1rem;
+    }
+
+    .opcion {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        flex: 0 0 auto;
+        width: 100px;
+        text-align: center;
+        background-color: rgb(255, 255, 255);
+        border-radius: 10px;
+        
+        box-shadow: rgba(14, 30, 37, 0.12) 0px 2px 4px 0px, rgba(14, 30, 37, 0.32) 0px 2px 16px 0px;
+
+    }
+
+    .opcion img {
+        height: 100px;
+
+        width: 100px;
+    }
+
+    .opcion p {
+        margin: 0; 
+        font-size: 1rem; 
+    }
+
+
+    /* Sección Lo más Vendido */
+.container{
+    padding: 1rem;
+}
+    .cardsContainer {
+        overflow-x: auto;
+        white-space: nowrap;
+        padding-bottom: 20px;
+    }
+
+    .cards {
+        display: flex;
+        gap: 20px;
+        flex-wrap: nowrap;
+    }
+
+    .card {
+        flex: 0 0 auto;
+        width: 300px;
+    }
+
+    .masVendido {
+        padding: 2rem 0;
+        overflow-x: auto;
+        white-space: nowrap;
+    }
+
+    .sectionHeader {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 1.5rem;
+    }
+
+    .section-header h2 {
+        font-size: 1.5rem;
+    }
+
+    .section-header .ver-mas {
+        font-size: 1rem;
+    }
+
+    .card-body h5 {
+        display: flex;
+        justify-content: center;
+    }
+    .cardImgTop{
+        width: 100%;
+    }
+
+    /*Navegador*/
+    .navegador {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 50px;
+        box-shadow: rgba(14, 30, 37, 0.12) 0px 2px 4px 0px, rgba(14, 30, 37, 0.32) 0px 2px 16px 0px;
+        border-radius: 15px 15px 0 0;
+        padding: .4rem;
+        position: relative;
+    }
+
+    .primeros2 {
+        display: flex;
+        margin-right: 30px;
+        gap: 30px;
+    }
+
+    .ultimos2 {
+        display: flex;
+        margin-left: 10px;
+        gap: 30px;
+    }
+
+    .itemsNav a {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        position: relative;
+        color: black;
+        text-decoration: none;
+    }
+
+    .favoritos {
+        padding: 1rem;
+        border-radius: 50%;
+        background-color: #2E3192;
+        position: absolute;
+        top: -20px;
+        left: 50%;
+        transform: translateX(-50%);
+    }
+
+    .favoritos path {
+        color: white;
+    }
+}
