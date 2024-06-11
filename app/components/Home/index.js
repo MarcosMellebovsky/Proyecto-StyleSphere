@@ -76,7 +76,7 @@ export default function Inicio() {
             <section className={styles.queEstasBuscando}>
                 <div className={styles.dentroQueEstasBuscando}>
                     <h2>¿Qué estás buscando?</h2>
-                    <a href="">Ver todas</a>
+                    <a href="../productos/index.js">Ver todas</a>
                 </div>
                 <div className={styles.opciones}>
                 {Productos.map((producto, index) => (
