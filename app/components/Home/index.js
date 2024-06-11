@@ -41,11 +41,12 @@ export default function Inicio() {
             direccion:" Villa del parque - campana 2321"
         }
     ]
-    
+
+  
 
     return (
         <>
-        <div className={styles.headerPadre}>
+       <div className={styles.headerPadre}>
         <header className={styles.cabeza}>
             <div className={styles.divCabeza}>
                 <form action="" className={styles.divForm} method="GET"> 
@@ -98,11 +99,15 @@ export default function Inicio() {
 
 
             <section className={styles.masVendido}>
+
                 <div className={styles.container}>
+
                     <div className={styles.sectionHeader}>
                         <h2>Lo más vendido <span>🔥🔥</span></h2>
                     </div>
+
                     <div className={styles.cardsContainer}>
+
                         <div className={styles.cards}>
                             {locales.map((local, index) => (
                                 <div key={index} className={styles.card}> 
@@ -116,24 +121,31 @@ export default function Inicio() {
                                 </div>
                             ))}
                         </div>
+
                     </div>
+
                 </div>
+
             </section>
 
     <div className={styles.navegador}>
+
         <div className={styles.primeros2}>
+
             <div className={styles.itemsNav}>
                 <a href="./index.html">
                     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-house" viewBox="0 0 16 16" aria-label="Home"><path d="M8.707 1.5a1 1 0 0 0-1.414 0L.646 8.146a.5.5 0 0 0 .708.708L2 8.207V13.5A1.5 1.5 0 0 0 3.5 15h9a1.5 1.5 0 0 0 1.5-1.5V8.207l.646.647a.5.5 0 0 0 .708-.708L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293zM13 7.207V13.5a.5.5 0 0 1-.5.5h-9a.5.5 0 0 1-.5-.5V7.207l5-5z"/></svg>
                     <p>Home</p>
                 </a>
             </div>
+
             <div className={styles.itemsNav}>
                 <a href="">
                     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-cart" viewBox="0 0 16 16" aria-label="Cart"><path d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .491.592l-1.5 8A.5.5 0 0 1 13 12H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5M3.102 4l1.313 7h8.17l1.313-7zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4m7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4m-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2m7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2"/></svg>
                     <p>Carrito</p>
                 </a>
             </div>
+            
         </div>
 
         <div className={styles.favoritos}>
