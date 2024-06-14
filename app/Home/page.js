@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import styles from './home.module.css';
 
 export default function Inicio() {
@@ -76,7 +77,7 @@ export default function Inicio() {
             <section className={styles.queEstasBuscando}>
                 <div className={styles.dentroQueEstasBuscando}>
                     <h2>¿Qué estás buscando?</h2>
-                    <a href="../productos/index.js">Ver todas</a>
+                    <Link href="/productos" >Ver todas</Link>
                 </div>
                 <div className={styles.opciones}>
                 {Productos.map((producto, index) => (

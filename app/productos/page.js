@@ -1,5 +1,9 @@
+import Link from 'next/link'
 import styles from './productos.module.css'
-<>
+
+export default function Productos(){
+    return (
+        <>
 
 <div className={styles.HeaderPadre}>
         <header className={styles.Cabeza}>
@@ -15,7 +19,7 @@ import styles from './productos.module.css'
         </header>
     </div>
     <div className={styles.VolverHeader}>
-        <a className={styles.AHeader} href="./home.html"><svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-chevron-left back-button" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M11.354 1.646a.5.5 0 0 1 0 .708L5.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0"/></svg></a>
+        <Link className={styles.AHeader} href="/"><svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-chevron-left back-button" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M11.354 1.646a.5.5 0 0 1 0 .708L5.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0"/></svg></Link>
     </div>
 
     <div className={styles.HeaderTitle}>
@@ -29,9 +33,9 @@ import styles from './productos.module.css'
 
         <div class={styles.Categories}>
             <div className={styles.CategoriesDentro}>
-                <a href="../index.html" className={styles.Category}>
+                <Link href="/" className={styles.Category}>
                 <img src="../img/buzo-canguro-rustico-beige1-20507034b4a83904cd16880467893341-640-0-removebg-preview (1).png" alt="buzos"/>
-                </a>
+                </Link>
                 <p>Buzos</p>
             </div>
            
@@ -83,3 +87,5 @@ import styles from './productos.module.css'
         </div>
     </div>
 </>
+    )
+}
