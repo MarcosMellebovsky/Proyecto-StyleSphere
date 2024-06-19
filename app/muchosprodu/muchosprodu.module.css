@@ -1,0 +1,28 @@
+.carta {
+    display: grid;
+    grid-template-columns: 1fr 2fr; /* Imagen ocupa 1 parte, texto ocupa 2 partes */
+    gap: 20px; /* Espacio entre elementos */
+    align-items: center; /* Centra verticalmente */
+    border: 2px solid black;
+    border-radius: 5px;
+    padding: 10px;
+    width: 350px;
+    
+    box-shadow: 10px 10px 10px rgb(72, 12, 238);
+}
+.padreCarta {
+    margin-top: 2rem;
+    display: flex;
+    justify-content: center;
+}
+.imgCarta {
+    width: 100%;
+    max-width: 100px; /* Tamaño máximo de la imagen */
+    height: auto; /* Para mantener la proporción */}
+.pmucho{
+    grid-area: pmucho;
+}
+.h1mucho{
+    grid-area: h1mucho;
+}
+

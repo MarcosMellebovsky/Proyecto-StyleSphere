@@ -1,21 +1,9 @@
 import Link from 'next/link'
-import styles from './productos.module.css'
+import styles from './muchosprodu.module.css'
 
-export default function Productos(){
+export default function mas(){
 
-    const seccionProductos = [
-        { img:"/Remera-sublimar-hombre--removebg-preview.png", text: "Buzos"},
-        { img:"/Remera-sublimar-hombre--removebg-preview.png", text: "Buzos"},
-        { img:"/Remera-sublimar-hombre--removebg-preview.png", text: "Buzos"},
-        { img:"/Remera-sublimar-hombre--removebg-preview.png", text: "Buzos"},
-        { img:"/Remera-sublimar-hombre--removebg-preview.png", text: "Buzos"},
-        { img:"/Remera-sublimar-hombre--removebg-preview.png", text: "Buzos"},
-        { img:"/Remera-sublimar-hombre--removebg-preview.png", text: "Buzos"},
-        { img:"/Remera-sublimar-hombre--removebg-preview.png", text: "Buzos"},
-        { img:"/Remera-sublimar-hombre--removebg-preview.png", text: "Buzos"},
-        { img:"/Remera-sublimar-hombre--removebg-preview.png", text: "Buzos"},
-        { img:"/Remera-sublimar-hombre--removebg-preview.png", text: "Buzos"},
-    ];
+   
 
     return (
         <>
@@ -39,21 +27,51 @@ export default function Productos(){
             </div>
 
             <div className={styles.HeaderTitle}>
-                <h1 className={styles.TituloCategorias}>Categorías</h1>
+                <h1 className={styles.TituloCategorias}>Productos</h1>
+            </div>
+            <div className={styles.padreCarta}>
+                <div className={styles.carta}>
+                <img className={styles.imgCarta} src="../Remera-sublimar-hombre--removebg-preview.png" alt=""/>
+                <div className={styles.texto}>
+                <h1 className={styles.h1mucho}>asfafasf</h1>
+                <p  className={styles.pmucho}>asfafasf</p>
+                </div>
+                </div>
+            </div>
+            <div className={styles.padreCarta}>
+                <div className={styles.carta}>
+                <img className={styles.imgCarta} src="../local.jpg" alt=""/>
+                </div>
             </div>
         
-            <section className={styles.Container}>
-                <div className={styles.Categories}>
-                    {seccionProductos.map((seccion, index) => (
-                        <div key={index} className={styles.CategoriesDentro}>
-                            <Link href="/muchosprodu" className={styles.Category}>
-                                <img src={seccion.img} alt="buzos"/>
-                            </Link>
-                            <p>{seccion.text}</p>
-                        </div>
-                    ))}
+            <div className={styles.padreCarta}>
+                <div className={styles.carta}>
+                <img className={styles.imgCarta} src="../local.jpg" alt=""/>
                 </div>
-            </section>
+            </div>
+        
+            <div className={styles.padreCarta}>
+                <div className={styles.carta}>
+                <img className={styles.imgCarta} src="../local.jpg" alt=""/>
+                </div>
+            </div>
+        
+            <div className={styles.padreCarta}>
+                <div className={styles.carta}>
+                <img className={styles.imgCarta} src="../local.jpg" alt=""/>
+                </div>
+            </div>
+        
+            <div className={styles.padreCarta}>
+                <div className={styles.carta}>
+                <img className={styles.imgCarta} src="../local.jpg" alt=""/>
+                </div>
+            </div>
+        
+
+    
+        
+            
         </>
     )
 }
