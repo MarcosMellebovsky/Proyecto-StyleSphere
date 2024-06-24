@@ -1,7 +1,7 @@
 "use client";
 import Link from 'next/link'
 import styles from './muchosprodu.module.css'
-import SearchBar from '../buscador'
+import SearchBar from '../componentes estaticos/buscador'
 import React, { useState } from 'react';
 
 

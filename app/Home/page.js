@@ -1,61 +1,59 @@
 "use client";
 import Link from 'next/link';
-import styles from './home.module.css';
-import React, { useState } from 'react';
-import SearchBar from '../buscador';
+import styles from '../Home/home.module.css'; // Asegúrate de que la ruta es correcta
+import React, { useState, useEffect } from 'react';
+import SearchBar from '../componentes estaticos/buscador';
+import Navegador from '../componentes estaticos/navegador';
 
-export default function Inicio() {
-    const Productos = [
-        {
-            nombre:"Remera",
-            imagen:"/Remera-sublimar-hombre--removebg-preview.png"   
+
     
-        },
-        {
-            nombre:"Short",
-            imagen:"/Remera-sublimar-hombre--removebg-preview.png"  
-        },
-        {
-            nombre:"Campera",
-            imagen:"/Remera-sublimar-hombre--removebg-preview.png"  
-        },
-        {
-            nombre:"Buzo",
-            imagen:"/Remera-sublimar-hombre--removebg-preview.png"  
-        },
-        {nombre:"Pantalon",
-        imagen:"/Remera-sublimar-hombre--removebg-preview.png"  },
-    ]
-
-    const locales = [
-        {
-            imagenLocal: "/local.jpg",
-            nombreLocal : "Portsaid",
-            direccion:" Villa del parque - campana 2321"
-        },
-        {
-            imagenLocal: "/local.jpg",
-            nombreLocal : "Portsaid",
-            direccion:" Villa del parque - campana 2321"
-        }
-        ,
-        {
-            imagenLocal: "/local.jpg",
-            nombreLocal : "Portsaid",
-            direccion:" Villa del parque - campana 2321"
-        }
-    ]
-
-    const [searchQuery, setSearchQuery] = useState('');
-
-    const handleSearchChange = (e) => {
-        setSearchQuery(e.target.value);
-    };
-
-    const handleSearch = () => {
-        alert(`Searching for: ${searchQuery}`);
-    };
-
+    export default function Inicio() {
+        const [productos, setProductos] = useState([]);
+        const [searchQuery, setSearchQuery] = useState('');
+    
+        useEffect(() => {
+            const fetchProductos = async () => {
+                try {
+                    const response = await fetch('/api/tipoProducto');
+                    if (!response.ok) {
+                        throw new Error('Network response was not ok');
+                    }
+                    const data = await response.json();
+                    setProductos(data);
+                } catch (error) {
+                    console.error('Error fetching productos:', error);
+                }
+            };
+    
+            fetchProductos();
+        }, []);
+    
+        const handleSearchChange = (e) => {
+            setSearchQuery(e.target.value);
+        };
+    
+        const handleSearch = () => {
+            alert(`Searching for: ${searchQuery}`);
+        };
+        const locales = [
+            {
+                imagenLocal: "/local.jpg",
+                nombreLocal : "Portsaid",
+                direccion:" Villa del parque - campana 2321"
+            },
+            {
+                imagenLocal: "/local.jpg",
+                nombreLocal : "Portsaid",
+                direccion:" Villa del parque - campana 2321"
+            }
+            ,
+            {
+                imagenLocal: "/local.jpg",
+                nombreLocal : "Portsaid",
+                direccion:" Villa del parque - campana 2321"
+            }
+        ]
+    
   
 
     return (
@@ -81,7 +79,7 @@ export default function Inicio() {
                     <Link href="/productos" >Ver todas</Link>
                 </div>
                 <div className={styles.opciones}>
-                {Productos.map((producto, index) => (
+                {productos.map((producto, index) => (
                         <div key={index} className={styles.opcion}>
                             <img src={producto.imagen}  />
                             <p>{producto.nombre}</p>
@@ -90,7 +88,7 @@ export default function Inicio() {
                 </div>
 
                 <div className={styles.opciones}>
-                {Productos.map((producto, index) => (
+                {productos.map((producto, index) => (
                         <div key={index} className={styles.opcion}>
                             <img src={producto.imagen}  />
                             <p>{producto.nombre}</p>
@@ -131,7 +129,9 @@ export default function Inicio() {
             </section>
 
    
-
+            <Navegador/>
+            
         </>
     );
 }
+

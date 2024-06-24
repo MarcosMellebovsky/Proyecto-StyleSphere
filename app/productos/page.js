@@ -2,24 +2,23 @@
 import React, { useState } from 'react';
 import Link from 'next/link';
 import styles from './productos.module.css';
-import Categorias from '../muchosprodu/page';
-import SearchBar from '../buscador/index';
-
+import SearchBar from '../componentes estaticos/buscador/index';
+import Navegador from '../componentes estaticos/navegador';
 export default function Productos() {
     const [searchQuery, setSearchQuery] = useState('');
 
     const seccionProductos = [
-        { img:"/Remera-sublimar-hombre--removebg-preview.png", text: "Buzos"},
-        { img:"/Remera-sublimar-hombre--removebg-preview.png", text: "Buzos"},
-        { img:"/Remera-sublimar-hombre--removebg-preview.png", text: "Buzos"},
-        { img:"/Remera-sublimar-hombre--removebg-preview.png", text: "Buzos"},
-        { img:"/Remera-sublimar-hombre--removebg-preview.png", text: "Buzos"},
-        { img:"/Remera-sublimar-hombre--removebg-preview.png", text: "Buzos"},
-        { img:"/Remera-sublimar-hombre--removebg-preview.png", text: "Buzos"},
-        { img:"/Remera-sublimar-hombre--removebg-preview.png", text: "Buzos"},
-        { img:"/Remera-sublimar-hombre--removebg-preview.png", text: "Buzos"},
-        { img:"/Remera-sublimar-hombre--removebg-preview.png", text: "Buzos"},
-        { img:"/Remera-sublimar-hombre--removebg-preview.png", text: "Buzos"},
+        { id:1,img:"/Remera-sublimar-hombre--removebg-preview.png", text: "Buzos"},
+        { id:2,img:"/Remera-sublimar-hombre--removebg-preview.png", text: "Buzos"},
+        { id:3,img:"/Remera-sublimar-hombre--removebg-preview.png", text: "Buzos"},
+        { id:4,img:"/Remera-sublimar-hombre--removebg-preview.png", text: "Buzos"},
+        { id:5,img:"/Remera-sublimar-hombre--removebg-preview.png", text: "Buzos"},
+        { id:6,img:"/Remera-sublimar-hombre--removebg-preview.png", text: "Buzos"},
+        { id:7,img:"/Remera-sublimar-hombre--removebg-preview.png", text: "Buzos"},
+        { id:8,img:"/Remera-sublimar-hombre--removebg-preview.png", text: "Buzos"},
+        { id:9,img:"/Remera-sublimar-hombre--removebg-preview.png", text: "Buzos"},
+        { id:10,img:"/Remera-sublimar-hombre--removebg-preview.png", text: "Buzos"},
+        { id:11,img:"/Remera-sublimar-hombre--removebg-preview.png", text: "Buzos"},
         
     ];
 
@@ -54,7 +53,7 @@ export default function Productos() {
                 <div className={styles.Categories}>
                     {seccionProductos.map((seccion, index) => (
                         <div key={index} className={styles.CategoriesDentro}>
-                            <Link href="/muchosprodu" className={styles.Category}>
+                            <Link href="/categorias" className={styles.Category}>
                                 <img src={seccion.img} alt="buzos"/>
                             </Link>
                             <p>{seccion.text}</p>
@@ -62,6 +61,7 @@ export default function Productos() {
                     ))}
                 </div>
             </section>
+            <Navegador/>
         </>
     );
 }
