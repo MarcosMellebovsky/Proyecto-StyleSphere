@@ -87,14 +87,7 @@ import Navegador from '../componentes estaticos/navegador';
                     ))}
                 </div>
 
-                <div className={styles.opciones}>
-                {productos.map((producto, index) => (
-                        <div key={index} className={styles.opcion}>
-                            <img src={producto.imagen}  />
-                            <p>{producto.nombre}</p>
-                        </div>
-                    ))}
-                </div>
+                
             </section>
 
 
