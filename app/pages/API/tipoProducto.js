@@ -1,6 +1,6 @@
 // pages/api/tipoProducto.js
 
-export default async function handler(req, res) {
+/* export default async function handler(req, res) {
     try {
         const response = await fetch('http://localhost:3001/api/tipoProducto'); // Ajusta la URL y el puerto si es necesario
         if (!response.ok) {
@@ -13,4 +13,4 @@ export default async function handler(req, res) {
       res.status(500).json({ error: 'Failed to fetch data' });
     }
   }
-  
+  */
