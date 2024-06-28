@@ -9,20 +9,15 @@ import Navegador from '../componentes estaticos/navegador';
     
     export default function Inicio() {
         const [productos, setProductos] = useState([]);
-        const [searchQuery, setSearchQuery] = useState('');
+       
     
         useEffect(() => {
             const fetchProductos = async () => {
-                try {
-                    const response = await fetch('http://localhost:3001/api/tipoProducto');
-                    if (!response.ok) {
-                        throw new Error('Network response was not ok');
-                    }
-                    const data = await response.json();
-                    setProductos(data);
-                } catch (error) {
-                    console.error('Error fetching productos:', error);
-                }
+            
+                const response = await fetch('http://localhost:3001/api/tipoProducto');
+                const data = await response.json();
+                setProductos(data);
+               
             };
     
             fetchProductos();
@@ -32,9 +27,7 @@ import Navegador from '../componentes estaticos/navegador';
             setSearchQuery(e.target.value);
         };
     
-        const handleSearch = () => {
-            alert(`Searching for: ${searchQuery}`);
-        };
+      
         const locales = [
             {
                 imagenLocal: "/local.jpg",
@@ -59,7 +52,7 @@ import Navegador from '../componentes estaticos/navegador';
     return (
         <>
             <div className={styles.HeaderPadre}>
-                <SearchBar value={searchQuery} onChange={handleSearchChange} onSearch={handleSearch}/>
+                <SearchBar/>
             </div>
             
 

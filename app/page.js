@@ -1,12 +1,12 @@
 import Image from "next/image";
 import styles from "./page.module.css";
-import Inicio from "./Home/page";
+import Principal from './principal/page'
 
 
 export default function Home() {
   return (
     <>
-      <Inicio></Inicio>
+      <Principal></Principal>
       
       
     </>
