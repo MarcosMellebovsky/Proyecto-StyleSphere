@@ -1,9 +1,9 @@
 "use client";
 import Link from 'next/link';
-import styles from '../Home/home.module.css'; // Asegúrate de que la ruta es correcta
+import styles from './home.module.css'; 
 import React, { useState, useEffect } from 'react';
-import SearchBar from '../componentes estaticos/buscador';
-import Navegador from '../componentes estaticos/navegador';
+import SearchBar from '../../componentes estaticos/buscador';
+import Navegador from '../../componentes estaticos/navegador';
 
 
     
@@ -23,9 +23,7 @@ import Navegador from '../componentes estaticos/navegador';
             fetchProductos();
         }, []);
     
-        const handleSearchChange = (e) => {
-            setSearchQuery(e.target.value);
-        };
+       
     
       
         const locales = [

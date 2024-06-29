@@ -2,8 +2,8 @@
 import React, { useState } from 'react';
 import Link from 'next/link';
 import styles from './productos.module.css';
-import SearchBar from '../componentes estaticos/buscador/index';
-import Navegador from '../componentes estaticos/navegador';
+import SearchBar from '../../componentes estaticos/buscador/index';
+import Navegador from '../../componentes estaticos/navegador';
 export default function Productos() {
     const [searchQuery, setSearchQuery] = useState('');
 
