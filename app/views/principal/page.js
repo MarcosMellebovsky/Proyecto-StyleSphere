@@ -17,12 +17,8 @@ export default function Principal() {
                 <p className={styles.d}>¡Encuentra todo lo que quieras aquí!</p>
                 <hr className={styles.clasHR} />
                 <div className={styles.bon}>
-                    <Link className={styles.botonIngresar} href="/app/views/iniciar_Sesion">
-                        Iniciar sesion
-                    </Link>
-                    <Link className={styles.botonRegistrarse} href="/home">
-                    Registrarse
-                    </Link>
+                    <Link className={styles.botonIngresar} href="../../views/iniciar_Sesion">Iniciar sesion</Link>
+                    <Link className={styles.botonRegistrarse} href="../../views/iniciar_Sesion">Registrarse</Link>
                 </div>
             </main>
         </div>
