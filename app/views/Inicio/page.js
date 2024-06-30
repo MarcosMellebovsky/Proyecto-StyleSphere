@@ -2,8 +2,8 @@
 import Link from 'next/link';
 import styles from './home.module.css'; 
 import React, { useState, useEffect } from 'react';
-import SearchBar from '../../componentes estaticos/buscador';
-import Navegador from '../../componentes estaticos/navegador';
+import SearchBar from '../../components/buscador';
+import Navegador from '../../components/navegador';
 
 
     

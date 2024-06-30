@@ -10,18 +10,18 @@ export default function Principal() {
                     src="/logo.png"
                     width={1000}
                     height={250}
-                    alt="Picture of the author"
+                    alt="Logo"
                     className={styles.img}
                 />
                 <h1 className={styles.h1}>¡Bienvenido!</h1>
                 <p className={styles.d}>¡Encuentra todo lo que quieras aquí!</p>
                 <hr className={styles.clasHR} />
                 <div className={styles.bon}>
-                    <Link className={styles.boton} href="../views/Home">
-                        Iniciar sesión
+                    <Link className={styles.botonIngresar} href="../views/Home">
+                        Iniciar sesion
                     </Link>
-                    <Link className={styles.boton} href="/home">
-                        Registrarse
+                    <Link className={styles.botonRegistrarse} href="/home">
+                    Registrarse
                     </Link>
                 </div>
             </main>

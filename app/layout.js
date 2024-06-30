@@ -8,7 +8,7 @@ export const metadata = {
   title: "StyleSphere",
   description: "",
   icons: {
-    icon: '/icons8-favicon.gif', 
+    icon: '/icons8-favicon-94.png', 
   },
 };
 
