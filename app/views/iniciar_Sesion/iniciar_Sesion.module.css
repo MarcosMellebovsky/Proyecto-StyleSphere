@@ -1,221 +1,231 @@
-/* Agregar estilos para los nuevos elementos y mejorar la apariencia general */
-
-
 .padre {
-    font-family: Arial, sans-serif;
-    
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    max-width: 100%;
-  
-   
-  }
-  
-  .headerRegistro {
-    text-align: center;
-    margin-bottom: 20px;
-  }
-  .headerRegistro h1{
-    font-size: 24px;
-    margin-bottom: 10px; 
-  }
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  max-width: 100%;
+}
 
-  .headerRegistro p{
-    color: #666;
-  }
-  
-  .logo {
-    width: auto;
-    margin-bottom: auto;
-  }
+.headerRegistro {
+  text-align: center;
+  margin-bottom: 20px;
+}
 
- 
+.headerRegistro h1 {
+  font-size: 24px;
+  margin-bottom: 10px;
+}
 
-  
-  .formContainer {
-    display: flex;
-    flex-direction: column;
-  }
-  
-  .input_container {
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    margin-top: 1rem;
-    justify-content: center;
-    margin: 1rem;
-  }
-  
-  .input_label {
-    display: block;
-    margin-bottom: 5px;
-    font-weight: bold;
-  }
-  
-  .icon {
-    position: absolute;
-    top: 30px;
-    left: 10px;
-    width: 20px;
-    height: 20px;
-  }
-  
-  .input_field {
-    
-    padding: 10px 10px 10px 40px;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-  }
-  
-  .checkbox_label {
-    display: flex;
-    align-items: center;
-    font-size: 14px;
-  }
-  
-  .checkbox_input {
-    margin-right: 10px;
-  }
-  .divSumbit{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-  
-  .submit_button {
-    background: #007bff;
-    color: #fff;
-    padding: 10px;
-    border: none;
-    border-radius: 4px;
-    font-size: 18px;
-    text-align: center;
-    text-decoration: none;
-    width: 80%;
-    margin-top: 1rem;
-  }
-  
-  .submit_button:hover {
-    background: #0056b3;
-  }
-  
-  .links {
-    display: flex;
-    justify-content:center;
-    margin-top: 20px;
-    gap: 50px;
+.headerRegistro p {
+  color: #666;
+}
 
+.logo {
+  width: auto;
+  margin-bottom: auto;
+}
 
-  }
-  
-  .links a {
-    color: gray;
-    font-size: 14px;
-    text-decoration: none;
-  }
+.formContainer {
+  display: flex;
+  flex-direction: column;
+}
 
- 
-  .strongA{
-    text-decoration: underline;
-    color: rgb(0, 0, 0);
-  }
-  
-  
-  .links a:hover {
-    text-decoration: underline;
-  }
-  
-  .social-login {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin-top: 20px;
-  }
-  
-  .social-button {
-    background: #3b5998;
-    color: #fff;
-    padding: 10px;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    width: 100%;
-    margin-bottom: 10px;
-    font-size: 16px;
-  }
-  
-  .social-button.twitter {
-    background: #1da1f2;
-  }
-  
-  .social-button:hover {
-    opacity: 0.9;
-  }
-  
-  .separator {
-    width: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 30px;
-    color: #acacac;
-    padding-top: 2rem;
-  }
-  
-  
-  .separator .line {
-    display: block;
-    width: 100%;
-    height: 1px;
-    border: 0;
-    background-color: #9e9b9b;
-    
-  }
-  
+.input_container {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  margin-top: 1rem;
+  justify-content: center;
+  margin: 1rem;
+}
 
-.divBtn{
+.input_label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: bold;
+}
+
+.icon {
+  position: absolute;
+  top: 30px;
+  left: 10px;
+  width: 20px;
+  height: 20px;
+}
+
+.input_field {
+  padding: 10px 10px 10px 40px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  outline: none;
+}
+
+.input_field:focus {
+  border: 1px solid #aaa;
+}
+
+.checkbox_label {
+  display: flex;
+  align-items: center;
+  font-size: 14px;
+}
+
+.checkbox_input {
+  margin-right: 10px;
+}
+
+.divSumbit {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.submit_button {
+  background: #007bff;
+  color: #fff;
+  padding: 10px;
+  border: none;
+  border-radius: 4px;
+  font-size: 18px;
+  text-align: center;
+  text-decoration: none;
+  width: 80%;
+  margin-top: 1rem;
+}
+
+.submit_button:hover {
+  background: #0056b3;
+}
+
+.links {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+  gap: 50px;
+}
+
+.links a {
+  color: gray;
+  font-size: 14px;
+  text-decoration: none;
+}
+
+.strongA {
+  text-decoration: underline;
+  color: rgb(0, 0, 0);
+}
+
+.links a:hover {
+  text-decoration: underline;
+}
+
+.social-login {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 20px;
+}
+
+.social-button {
+  background: #3b5998;
+  color: #fff;
+  padding: 10px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  width: 100%;
+  margin-bottom: 10px;
+  font-size: 16px;
+}
+
+.social-button.twitter {
+  background: #1da1f2;
+}
+
+.social-button:hover {
+  opacity: 0.9;
+}
+
+.separator {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 30px;
+  color: #acacac;
+  padding-top: 2rem;
+}
+
+.separator .line {
+  display: block;
+  width: 100%;
+  height: 1px;
+  border: 0;
+  background-color: #9e9b9b;
+}
+
+.divBtn {
   margin-top: 20px;
   display: flex;
   justify-content: center;
   align-items: center;
 }
-  .btnG {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 10px 20px;
-    gap: 10px;
-    background-color: white;
-    border: 1px solid #ededef;
-    border-radius: 5px;
-    font-weight: 500;
-   
-    width: 80%;
-    cursor: pointer;
-    
+
+.btnG {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px 20px;
+  gap: 10px;
+  background-color: white;
+  border: 1px solid #ededef;
+  border-radius: 5px;
+  font-weight: 500;
+  width: 80%;
+  cursor: pointer;
 }
 
 .btnG:hover {
   background-color: #f1f1f1;
 }
 
-.btnG svg {
-    margin-right: 10px;
-}
-.divRegistro{
-  
+.divRegistro {
   display: flex;
   justify-content: center;
   align-items: center;
   margin-top: 17rem;
 }
-.divRegistro a{
+
+.divRegistro a {
   text-decoration: none;
   color: gray;
 }
-.divRegistro strong{
+
+.divRegistro strong {
   color: rgb(0, 0, 0);
   text-decoration: underline;
 }
+
+.input_container {
+  position: relative;
+  margin-bottom: 20px;
+}
+
+.invalid .input_field {
+  border: 2px solid red;
+}
+
+.valid .input_field {
+  border: 2px solid green;
+}
+
+.validationIcon {
+  position: absolute;
+  right: 10px;
+  top: 67%;
+  transform: translateY(-50%);
+}
+
+
+
 
