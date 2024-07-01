@@ -59,3 +59,23 @@
     border-radius: 0 0 0 5px;
 }
 
+.h1mucho {
+    margin: 5px;
+    font-size: 12px;
+}
+
+.texto {
+    text-align: justify;
+    gap: 20px;
+}
+
+.huevo {
+    position: absolute;
+    top: 0px;
+    right:0px;
+    width: 30px;
+    height: 25px;
+    background-color: rgb(255, 255, 255);
+  padding: 1.5px;
+    border-radius: 0 0 0 5px;
+}
