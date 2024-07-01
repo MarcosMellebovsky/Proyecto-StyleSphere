@@ -1,50 +1,39 @@
 "use client";
-import Link from 'next/link';
-import styles from './home.module.css'; 
 import React, { useState, useEffect } from 'react';
+import Link from 'next/link';
+import styles from './home.module.css';
 import SearchBar from '../../components/buscador';
 import Navegador from '../../components/navegador';
 
+export default function Inicio() {
+    const [productos, setProductos] = useState([]);
+    const [locales, setLocales] = useState([]);
 
-    
-    export default function Inicio() {
-        const [productos, setProductos] = useState([]);
-       
-    
-        useEffect(() => {
-            const fetchProductos = async () => {
-            
+    useEffect(() => {
+        const fetchProductos = async () => {
+        
                 const response = await fetch('http://localhost:3001/api/tipoProducto');
                 const data = await response.json();
                 setProductos(data);
-               
-            };
-    
-            fetchProductos();
-        }, []);
-    
-       
-    
-      
-        const locales = [
-            {
-                imagenLocal: "/local.jpg",
-                nombreLocal : "Portsaid",
-                direccion:" Villa del parque - campana 2321"
-            },
-            {
-                imagenLocal: "/local.jpg",
-                nombreLocal : "Portsaid",
-                direccion:" Villa del parque - campana 2321"
-            }
-            ,
-            {
-                imagenLocal: "/local.jpg",
-                nombreLocal : "Portsaid",
-                direccion:" Villa del parque - campana 2321"
-            }
-        ]
-    
+            
+        };
+
+        fetchProductos();
+    }, []);
+
+    useEffect(() => {
+        const fetchLocales = async () => {
+            
+                const response = await fetch('http://localhost:3001/api/locales');
+                const data = await response.json();
+                
+                setLocales(data);
+           
+        };
+
+        fetchLocales();
+    }, []);
+
   
 
     return (
@@ -52,9 +41,6 @@ import Navegador from '../../components/navegador';
             <div className={styles.HeaderPadre}>
                 <SearchBar/>
             </div>
-            
-
-            
 
             <section className={styles.ofertas}>
                 <div className={styles.container}>
@@ -69,53 +55,52 @@ import Navegador from '../../components/navegador';
                     <h2>¿Qué estás buscando?</h2>
                     <Link href="./productos" >Ver todas</Link>
                 </div>
-                <div className={styles.opciones}>
-                {productos.map((producto, index) => (
-                        <div key={index} className={styles.opcion}>
-                            <img src={producto.imagen}  />
-                            <p>{producto.nombre}</p>
-                        </div>
-                    ))}
-                </div>
 
-                
+                <div className={styles.opciones}>
+                    <div className={styles.opcionesArriba}>
+                        {productos.slice(0, 4).map((producto, index) => ( 
+                            <div key={index} className={styles.opcion}>
+                                <img src={producto.imagen} alt={`Imagen de ${producto.nombre}`} />
+                                <p>{producto.nombre}</p>
+                            </div>
+                        ))}
+                    </div>
+
+                    <div className={styles.opcionesAbajo}>
+                        {productos.slice(4, 8).map((producto, index) => ( 
+                            <div key={index} className={styles.opcion}>
+                                <img src={producto.imagen} alt={`Imagen de ${producto.nombre}`} />
+                                <p>{producto.nombre}</p>
+                            </div>
+                        ))}
+                    </div>
+                </div>
             </section>
 
-
             <section className={styles.masVendido}>
-
                 <div className={styles.container}>
-
                     <div className={styles.sectionHeader}>
                         <h2>Lo más vendido <span>🔥🔥</span></h2>
                     </div>
-
                     <div className={styles.cardsContainer}>
-
                         <div className={styles.cards}>
                             {locales.map((local, index) => (
                                 <div key={index} className={styles.card}> 
                                     <div className="card">
-                                        <img src={local.imagenLocal} className={styles.cardImgTop} alt={local.nombreLocal}/>
+                                        <img src={local.imagen} className={styles.cardImgTop} alt={local.nombreLocal}/>
                                         <div className="card-body">
-                                            <h5 className="card-title">{local.nombreLocal}</h5>
+                                            <h5 className="card-title">{local.nombre}</h5>
                                             <p className="card-text">{local.direccion}</p>
                                         </div>
                                     </div>
                                 </div>
                             ))}
                         </div>
-
                     </div>
-
                 </div>
-
             </section>
 
-   
             <Navegador/>
-            
         </>
     );
 }
-
