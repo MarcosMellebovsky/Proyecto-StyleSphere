@@ -67,7 +67,7 @@ import Navegador from '../../components/navegador';
             <section className={styles.queEstasBuscando}>
                 <div className={styles.dentroQueEstasBuscando}>
                     <h2>¿Qué estás buscando?</h2>
-                    <Link href="/productos" >Ver todas</Link>
+                    <Link href="./productos" >Ver todas</Link>
                 </div>
                 <div className={styles.opciones}>
                 {productos.map((producto, index) => (
