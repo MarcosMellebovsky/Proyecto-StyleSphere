@@ -7,16 +7,7 @@ import React, { useState } from 'react';
 import Swal from 'sweetalert2';
 
 export default function Categorias() {
-    const [searchQuery, setSearchQuery] = useState('');
     const [isBookmarked, setIsBookmarked] = useState(Array(7).fill(false));
-
-    const handleSearchChange = (e) => {
-        setSearchQuery(e.target.value);
-    };
-
-    const handleSearch = () => {
-        alert(`Searching for: ${searchQuery}`);
-    };
 
     const toggleBookmark = (index) => {
         setIsBookmarked(prevState => {
@@ -47,7 +38,7 @@ export default function Categorias() {
     return (
         <>
             <div className={styles.HeaderPadre}>
-                <SearchBar value={searchQuery} onChange={handleSearchChange} onSearch={handleSearch} />
+                <SearchBar/>
             </div>
 
             <div className={styles.VolverHeader}>
