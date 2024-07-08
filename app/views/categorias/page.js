@@ -51,15 +51,16 @@ export default function Categorias() {
 
             <div className={styles.HeaderTitle}>
                 <h1 className={styles.TituloCategorias}>Productos</h1>
+                
             </div>
 
             <div className={styles.padreCarta}>
                 {[...Array(7)].map((_, index) => (
                     <div key={index} className={styles.carta}>
-                        <img className={styles.imgCarta} src="../imgaa.jpg" alt="Producto" />
+                        <img className={styles.imgCarta} src="../rem.png" alt="Producto" />
                         <svg 
                             onClick={() => toggleBookmark(index)}
-                            className={styles.huevo} 
+                            className={styles.favorito} 
                             xmlns="http://www.w3.org/2000/svg" 
                             width="16" 
                             height="16" 
@@ -75,7 +76,18 @@ export default function Categorias() {
                         <div className={styles.texto}>
                             <h4 className={styles.h1mucho}>Remera negra</h4>
                             <p className={styles.h1mucho}>$5400</p>
+                          <div className={styles.btns}>
+                          <button className={styles.boton}>Comprar</button>
+                          <div className={styles.iconbutton}>
+                          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-eye-fill" viewBox="0 0 16 16">
+  <path d="M10.5 8a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0"/>
+  <path d="M0 8s3-5.5 8-5.5S16 8 16 8s-3 5.5-8 5.5S0 8 0 8m8 3.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7"/>
+</svg>
+                    </div>
+                  
+            
                         </div>
+                        </div>  
                     </div>
                 ))}
             </div>

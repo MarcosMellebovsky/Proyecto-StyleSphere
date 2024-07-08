@@ -7,75 +7,108 @@
       rgba(14, 30, 37, 0.32) 0px 2px 16px 0px;
 }
 
-.carta {
+.HeaderTitle {
+    text-align: center;
     display: flex;
-    flex-direction: column;
-    border: 2px solid rgb(159, 157, 157);
-    box-shadow: 3px 3px 3px 3px rgb(159, 157, 157);
-    border-radius: 4px;
-    width: 45vw;
-    height: auto;
-    position: relative;
+    justify-content: space-around;
+    margin: 20px 0;
+}
+
+.TituloCategorias {
+    font-size: 24px;
+    color: #333;
 }
 
 .padreCarta {
     display: grid;
-    align-items: center;
-    grid-template-columns: 1fr 1fr; 
-    grid-template-rows: 1fr 1fr; 
-    justify-content: center;
-    gap: 1rem;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+    padding: 20px;
+}
+
+.carta {
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    overflow: hidden;
+    position: relative;
+    transition: transform 0.3s ease;
+}
+
+
+
+.imgCarta {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+}
+
+.favorito {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    width: 30px;
+    height: 30px;
+    padding: 5px;
+    background-color: #fff;
+    border-radius: 0 5px 0 5px;
+    cursor: pointer;
+}
+
+.texto {
     padding: 10px;
 }
 
-.imgCarta {
-    max-width: 100%; 
-    height: auto;
+.h1mucho {
+    font-size: 15px;
+    margin-bottom: 5px;
 }
 
 .pmucho {
-    margin: 2px;
-    font-size: 12px;
+    font-size: 14px;
+    color: #666;
+    margin: 0;
 }
 
-.h1mucho {
-    margin: 5px;
-    font-size: 12px;
+
+.btns {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    justify-content: center;
+    margin-top: 10px;
 }
 
-.texto {
-    text-align: justify;
-    gap: 20px;
+.boton {
+    background-color: #000;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    height: 40px; /* Altura del botón */
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
-.huevo {
-    position: absolute;
-    top: 0px;
-    right:0px;
-    width: 30px;
-    height: 25px;
-    background-color: rgb(255, 255, 255);
-  padding: 1.5px;
-    border-radius: 0 0 0 5px;
+.iconbutton {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 50px;
+    height: 40px; /* Misma altura que el botón */
+    border: 1px solid #000;
+    cursor: pointer;
+    background-color: #fff;
+}
+.filterbutton {
+    display: flex;
+    align-items: center;
+    border: 1px solid #000;
+    padding: 5px 10px;
+    background-color: #fff;
+    cursor: pointer;
+    font-size: 16px;
+    gap: 15px;
 }
 
-.h1mucho {
-    margin: 5px;
-    font-size: 12px;
-}
-
-.texto {
-    text-align: justify;
-    gap: 20px;
-}
-
-.huevo {
-    position: absolute;
-    top: 0px;
-    right:0px;
-    width: 30px;
-    height: 25px;
-    background-color: rgb(255, 255, 255);
-  padding: 1.5px;
-    border-radius: 0 0 0 5px;
-}

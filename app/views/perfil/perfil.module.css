@@ -1,0 +1,47 @@
+.container {
+    padding: 20px;
+    background-color: #fff;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    
+  }
+  
+  .username {
+    text-align: center;
+    font-size: 24px;
+    margin-top: 5rem;
+    margin-bottom: 20px;
+  }
+  
+  .menu {
+    width: 80vw;
+    margin-top: 3rem;
+    border-top: 1px solid #ddd;
+    border-bottom: 1px solid #ddd;
+    
+  }
+  
+  .menuItem {
+    display: flex;
+    align-items: center;
+    padding: 15px;
+    border-top: 1px solid #ddd;
+    gap: 1rem;
+    margin-top: 1rem;
+  }
+  
+  .menuItem:first-child {
+    border-top: none;
+    margin-top: 1rem;
+  }
+  
+  .icon {
+    margin-right: 10px;
+    gap: 1rem;
+  }
+  
+  .logout {
+    color: red;
+  }
+  
