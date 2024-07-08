@@ -1,5 +1,6 @@
 "use client";
 import React, { useState, useEffect } from 'react';
+import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import styles from './home.module.css';
 import SearchBar from '../../components/buscador';
@@ -8,14 +9,13 @@ import Navegador from '../../components/navegador';
 export default function Inicio() {
     const [productos, setProductos] = useState([]);
     const [locales, setLocales] = useState([]);
+    const router = useRouter();
 
     useEffect(() => {
         const fetchProductos = async () => {
-        
-                const response = await fetch('http://localhost:3001/api/tipoProducto');
-                const data = await response.json();
-                setProductos(data);
-            
+            const response = await fetch('http://localhost:3001/api/tipoProducto');
+            const data = await response.json();
+            setProductos(data);
         };
 
         fetchProductos();
@@ -23,23 +23,26 @@ export default function Inicio() {
 
     useEffect(() => {
         const fetchLocales = async () => {
-            
-                const response = await fetch('http://localhost:3001/api/locales');
-                const data = await response.json();
-                
-                setLocales(data);
-           
+            const response = await fetch('http://localhost:3001/api/locales');
+            const data = await response.json();
+            setLocales(data);
         };
 
         fetchLocales();
     }, []);
 
-  
+    const handleSearchFocus = () => {
+        router.push('/views/search');
+    };
+
+    const handleProductClick = (producto) => {
+        router.push(`/views/todos_los_productos?tipo=${producto.nombre}`);
+    };
 
     return (
         <>
             <div className={styles.HeaderPadre}>
-                <SearchBar/>
+                <SearchBar onFocus={handleSearchFocus} />
             </div>
 
             <section className={styles.ofertas}>
@@ -53,13 +56,13 @@ export default function Inicio() {
             <section className={styles.queEstasBuscando}>
                 <div className={styles.dentroQueEstasBuscando}>
                     <h2>¿Qué estás buscando?</h2>
-                    <Link href="./productos" >Ver todas</Link>
+                    <Link href="./productos">Ver todas</Link>
                 </div>
 
                 <div className={styles.opciones}>
                     <div className={styles.opcionesArriba}>
                         {productos.slice(0, 4).map((producto, index) => ( 
-                            <div key={index} className={styles.opcion}>
+                            <div key={index} className={styles.opcion} onClick={() => handleProductClick(producto)}>
                                 <img src={producto.imagen} alt={`Imagen de ${producto.nombre}`} />
                                 <p>{producto.nombre}</p>
                             </div>
@@ -68,7 +71,7 @@ export default function Inicio() {
 
                     <div className={styles.opcionesAbajo}>
                         {productos.slice(4, 8).map((producto, index) => ( 
-                            <div key={index} className={styles.opcion}>
+                            <div key={index} className={styles.opcion} onClick={() => handleProductClick(producto)}>
                                 <img src={producto.imagen} alt={`Imagen de ${producto.nombre}`} />
                                 <p>{producto.nombre}</p>
                             </div>
@@ -100,7 +103,7 @@ export default function Inicio() {
                 </div>
             </section>
 
-            <Navegador/>
+            <Navegador />
         </>
     );
 }

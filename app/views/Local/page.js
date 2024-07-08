@@ -1,7 +1,7 @@
 "use client";
 import React, { useState } from 'react';
-import SearchBar from '../../componentes estaticos/buscador';
-import Navegador from '../../componentes estaticos/navegador';
+import SearchBar from '../../components/buscador';
+import Navegador from '../../components/navegador';
 export default function Locales() {
     
     return(
