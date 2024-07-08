@@ -36,7 +36,7 @@ export default function Inicio() {
     };
 
     const handleProductClick = (producto) => {
-        router.push(`/views/todos_los_productos?tipo=${producto.nombre}`);
+        router.push(`/views/categorias?tipo=${producto.nombre}`);
     };
 
     return (

@@ -1,13 +1,19 @@
 "use client";
+import React, { useState, useEffect } from 'react';
+import { useSearchParams } from 'next/navigation';
 import Link from 'next/link';
-import styles from './muchosprodu.module.css';
+import styles from './categorias.module.css';
 import SearchBar from '../../components/buscador';
-import Navegador from '../../components/navegador';
-import React, { useState } from 'react';
 import Swal from 'sweetalert2';
+import { useRouter } from 'next/navigation';
+import Image from 'next/image';
 
 export default function Categorias() {
     const [isBookmarked, setIsBookmarked] = useState(Array(7).fill(false));
+    const [productos, setProductos] = useState([]);
+    const searchParams = useSearchParams();
+    const idTipoProducto = searchParams.get('idTipoProducto');
+    const router = useRouter();
 
     const toggleBookmark = (index) => {
         setIsBookmarked(prevState => {
@@ -35,64 +41,71 @@ export default function Categorias() {
         });
     };
 
+    const handleSearchFocus = () => {
+        router.push('/views/search');
+    };
+
+    useEffect(() => {
+        if (idTipoProducto) {
+            const fetchProductos = async () => {
+                try {
+                    const response = await fetch(`http://localhost:3001/api/producto/${idTipoProducto}`);
+                    const data = await response.json();
+                    setProductos(data);
+                } catch (error) {
+                    console.error("Error fetching productos:", error);
+                }
+            };
+
+            fetchProductos();
+        }
+    }, [idTipoProducto]);
+
+    const handleProductClick = (producto) => {
+        router.push(`/views/categorias?idTipoProducto=${producto.idTipoProducto}`);
+    };
+
     return (
         <>
             <div className={styles.HeaderPadre}>
-                <SearchBar/>
+                <SearchBar onFocus={handleSearchFocus} />
             </div>
 
-            <div className={styles.VolverHeader}>
-                <Link className={styles.AHeader} href="./productos">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" className="bi bi-chevron-left back-button" viewBox="0 0 16 16">
-                        <path fillRule="evenodd" d="M11.354 1.646a.5.5 0 0 1 0 .708L5.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0" />
-                    </svg>
-                </Link>
-            </div>
-
-            <div className={styles.HeaderTitle}>
-                <h1 className={styles.TituloCategorias}>Productos</h1>
-                
-            </div>
-
-            <div className={styles.padreCarta}>
-                {[...Array(7)].map((_, index) => (
-                    <div key={index} className={styles.carta}>
-                        <img className={styles.imgCarta} src="../rem.png" alt="Producto" />
-                        <svg 
-                            onClick={() => toggleBookmark(index)}
-                            className={styles.favorito} 
-                            xmlns="http://www.w3.org/2000/svg" 
-                            width="16" 
-                            height="16" 
-                            fill="currentColor" 
-                            viewBox="0 0 16 16"
-                        >
-                            {isBookmarked[index] ? (
-                                <path d="M2 2v13.5a.5.5 0 0 0 .74.439L8 13.069l5.26 2.87A.5.5 0 0 0 14 15.5V2a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2"/>
-                            ) : (
-                                <path d="M2 2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v13.5a.5.5 0 0 1-.777.416L8 13.101l-5.223 2.815A.5.5 0 0 1 2 15.5zm2-1a1 1 0 0 0-1 1v12.566l4.723-2.482a.5.5 0 0 1 .554 0L13 14.566V2a1 1 0 0 0-1-1z"/>
-                            )}
+            <div className={styles.padreFixt}>
+                <div className={styles.VolverHeader}>
+                    <Link className={styles.AHeader} href="../../views/Inicio">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" className="bi bi-chevron-left back-button" viewBox="0 0 16 16">
+                            <path fillRule="evenodd" d="M11.354 1.646a.5.5 0 0 1 0 .708L5.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0" />
                         </svg>
-                        <div className={styles.texto}>
-                            <h4 className={styles.h1mucho}>Remera negra</h4>
-                            <p className={styles.h1mucho}>$5400</p>
-                          <div className={styles.btns}>
-                          <button className={styles.boton}>Comprar</button>
-                          <div className={styles.iconbutton}>
-                          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-eye-fill" viewBox="0 0 16 16">
-  <path d="M10.5 8a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0"/>
-  <path d="M0 8s3-5.5 8-5.5S16 8 16 8s-3 5.5-8 5.5S0 8 0 8m8 3.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7"/>
-</svg>
-                    </div>
-                  
-            
-                        </div>
-                        </div>  
-                    </div>
-                ))}
+                    </Link>
+                </div>
+
+                <div className={styles.HeaderTitle}>
+                    <h1 className={styles.TituloCategorias}>Productos</h1>
+                </div>
             </div>
 
-            <Navegador />
+            <div className={styles.productosContainer}>
+                {idTipoProducto ? (
+                    <>
+                        <h2>{`Productos de tipo: ${idTipoProducto}`}</h2>
+                        <div className={styles.productosGrid}>
+                            {productos.map((producto, index) => (
+                                <div key={index} className={styles.productoCard} onClick={() => handleProductClick(producto)}>
+                                    <Image src={producto.imagen} alt={`Imagen de ${producto.nombre}`} width={50} height={50} className={styles.productoImagen} />
+                                    <p>{producto.nombre}</p>
+                                    <p>{producto.precio}</p>
+                                    <button onClick={() => toggleBookmark(index)} className={styles.bookmarkButton}>
+                                        {isBookmarked[index] ? "Eliminar de favoritos" : "Añadir a favoritos"}
+                                    </button>
+                                </div>
+                            ))}
+                        </div>
+                    </>
+                ) : (
+                    <p>No se ha seleccionado ningún tipo de producto.</p>
+                )}
+            </div>
         </>
     );
 }

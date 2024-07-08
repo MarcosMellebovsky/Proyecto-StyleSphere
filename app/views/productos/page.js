@@ -8,7 +8,9 @@ import Navegador from '../../components/navegador';
 export default function Productos() {
     const [productos, setProductos] = useState([]);
        
-    
+    const handleSearchFocus = () => {
+        router.push('/views/search');
+    };
     useEffect(() => {
         const fetchProductos = async () => {
         
@@ -25,10 +27,10 @@ export default function Productos() {
 
     return (
         <>
-            <div className={styles.HeaderPadre}>
-                <SearchBar/>
-            </div>
-                        
+         
+         <div className={styles.HeaderPadre}>
+                <SearchBar onFocus={handleSearchFocus} />
+            </div> 
 
             <div className={styles.VolverHeader}>
                 <Link className={styles.AHeader} href="./Inicio">

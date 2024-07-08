@@ -1,5 +1,4 @@
 @media screen and (max-width: 430px) {
-    /* Estilos para el encabezado */
     .HeaderPadre {
         display: flex;
         justify-content: center;
