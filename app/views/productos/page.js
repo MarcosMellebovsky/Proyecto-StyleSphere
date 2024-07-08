@@ -4,6 +4,7 @@ import React, { useState, useEffect } from 'react';
 import styles from './productos.module.css';
 import SearchBar from '../../components/buscador';
 import Navegador from '../../components/navegador';
+
 export default function Productos() {
     const [productos, setProductos] = useState([]);
        
@@ -47,8 +48,9 @@ export default function Productos() {
                         <div key={index} className={styles.CategoriesDentro}>
                             <Link href="./categorias" className={styles.Category}>
                                 <img src={seccion.imagen} alt=""/>
-                                <p>{seccion.nombre}</p>
+                                
                             </Link>
+                            <p>{seccion.nombre}</p>
                             
                         </div>
                     ))}

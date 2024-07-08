@@ -1,0 +1,124 @@
+.searchContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+    font-family: 'Arial', sans-serif;
+    background-color: #f9f9f9;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.searchHeader {
+    display: flex;
+    width: 100%;
+    max-width: 600px;
+    margin-bottom: 20px;
+}
+
+.searchInput {
+    flex: 1;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+    margin-right: 10px;
+}
+
+.clearButton {
+    padding: 10px 15px;
+    background-color: #f44336;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.clearButton:hover {
+    background-color: #d32f2f;
+}
+
+.results {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    max-width: 600px;
+}
+
+.resultItem {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    cursor: pointer;
+    background-color: white;
+    transition: box-shadow 0.3s;
+}
+
+.resultItem:hover {
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.resultImage {
+    width: 50px;
+    height: 50px;
+    object-fit: cover;
+    border-radius: 5px;
+    margin-right: 10px;
+}
+
+.resultName {
+    font-size: 16px;
+    flex: 1;
+}
+
+.noResults {
+    font-size: 16px;
+    color: #777;
+    text-align: center;
+}
+
+.searchHistory {
+    width: 100%;
+    max-width: 600px;
+    margin-top: 20px;
+}
+
+.searchHistory h3 {
+    margin-bottom: 10px;
+    font-size: 20px;
+    text-align: center;
+}
+
+.historyItem {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    border-bottom: 1px solid #ccc;
+    background-color: white;
+    transition: background-color 0.3s;
+}
+
+.historyItem:hover {
+    background-color: #f1f1f1;
+}
+
+.historyItemText {
+    cursor: pointer;
+    flex: 1;
+}
+
+.removeItemButton {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+}
+
+.imgBTN {
+    width: 30px;
+    height: 30px;
+}
