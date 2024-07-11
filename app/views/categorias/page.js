@@ -1,4 +1,6 @@
 "use client";
+
+
 import React, { useState, useEffect } from 'react';
 import { useSearchParams } from 'next/navigation';
 import Link from 'next/link';
@@ -46,24 +48,23 @@ export default function Categorias() {
     };
 
     useEffect(() => {
-        if (idTipoProducto) {
-            const fetchProductos = async () => {
-                try {
-                    const response = await fetch(`http://localhost:3001/api/producto/${idTipoProducto}`);
-                    const data = await response.json();
-                    setProductos(data);
-                } catch (error) {
-                    console.error("Error fetching productos:", error);
+        const fetchProductos = async () => {
+            try {
+                const response = await fetch(`http://localhost:3001/api/tipoProducto/${idTipoProducto}`);
+                if (!response.ok) {
+                    throw new Error('Error al obtener los productos');
                 }
-            };
+                const data = await response.json();
+                setProductos(data);
+            } catch (error) {
+                console.error("Error fetching productos:", error);
+            }
+        };
 
+        if (idTipoProducto) {
             fetchProductos();
         }
     }, [idTipoProducto]);
-
-    const handleProductClick = (producto) => {
-        router.push(`/views/categorias?idTipoProducto=${producto.idTipoProducto}`);
-    };
 
     return (
         <>
@@ -79,32 +80,21 @@ export default function Categorias() {
                         </svg>
                     </Link>
                 </div>
-
-                <div className={styles.HeaderTitle}>
-                    <h1 className={styles.TituloCategorias}>Productos</h1>
+                <div className={styles.productsContainer}>
+                    {productos.length > 0 ? (
+                        productos.map((producto, index) => (
+                            <div key={index} className={styles.productItem}>
+                                <Image width={100} height={100} src={producto.imagen} alt={producto.nombre} className={styles.productImage} />
+                                <p className={styles.productName}>{producto.nombre}</p>
+                                <button onClick={() => toggleBookmark(index)} className={styles.bookmarkButton}>
+                                    {isBookmarked[index] ? 'Quitar de favoritos' : 'Añadir a favoritos'}
+                                </button>
+                            </div>
+                        ))
+                    ) : (
+                        <p className={styles.noProducts}>No se encontraron productos para esta categoría</p>
+                    )}
                 </div>
-            </div>
-
-            <div className={styles.productosContainer}>
-                {idTipoProducto ? (
-                    <>
-                        <h2>{`Productos de tipo: ${idTipoProducto}`}</h2>
-                        <div className={styles.productosGrid}>
-                            {productos.map((producto, index) => (
-                                <div key={index} className={styles.productoCard} onClick={() => handleProductClick(producto)}>
-                                    <Image src={producto.imagen} alt={`Imagen de ${producto.nombre}`} width={50} height={50} className={styles.productoImagen} />
-                                    <p>{producto.nombre}</p>
-                                    <p>{producto.precio}</p>
-                                    <button onClick={() => toggleBookmark(index)} className={styles.bookmarkButton}>
-                                        {isBookmarked[index] ? "Eliminar de favoritos" : "Añadir a favoritos"}
-                                    </button>
-                                </div>
-                            ))}
-                        </div>
-                    </>
-                ) : (
-                    <p>No se ha seleccionado ningún tipo de producto.</p>
-                )}
             </div>
         </>
     );

@@ -2,7 +2,6 @@
 import Link from 'next/link';
 import React, { useState, useEffect } from 'react';
 import styles from './productos.module.css';
-import SearchBar from '../../components/buscador';
 import Navegador from '../../components/navegador';
 
 export default function Productos() {
@@ -28,9 +27,7 @@ export default function Productos() {
     return (
         <>
          
-         <div className={styles.HeaderPadre}>
-                <SearchBar onFocus={handleSearchFocus} />
-            </div> 
+        
 
             <div className={styles.VolverHeader}>
                 <Link className={styles.AHeader} href="./Inicio">
