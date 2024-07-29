@@ -1,0 +1,187 @@
+/* Estilos para el formulario */
+.form {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    gap: 10px;
+    max-width: 350px;
+    padding: 20px;
+    border-radius: 20px;
+    position: relative;
+  }
+  
+  /* Estilos generales para el contenedor principal */
+  .padre {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    max-width: 100%;
+  }
+  
+  /* Contenedor para centrar el formulario */
+  .todo {
+    display: flex;
+    justify-content: center;
+ 
+}
+
+  
+  /* Estilos para el título */
+  .title {
+    font-size: 23px;
+    color: royalblue;
+    font-weight: 600;
+    letter-spacing: -1px;
+    position: relative;
+    display: flex;
+    align-items: center;
+    padding-left: 30px;
+    margin-top: 2rem;
+
+  }
+  .bienvenida{
+    font-size: 28px;
+    justify-content: center;
+    text-align: center;
+    color: royalblue;
+    font-weight: 600;
+    letter-spacing: -1px;
+    position: relative;
+    display: flex;
+    align-items: center;
+  
+  }
+  /* Estilos para los puntos antes y después del título */
+  .title::before, .title::after {
+    position: absolute;
+    content: "";
+    height: 16px;
+    width: 16px;
+    border-radius: 50%;
+    left: 0px;
+    background-color: royalblue;
+  }
+  
+  .title::before {
+    width: 18px;
+    height: 18px;
+  }
+  
+  .title::after {
+    width: 18px;
+    height: 18px;
+    animation: pulse 1s linear infinite;
+  }
+  
+  /* Estilos para el mensaje y el enlace de inicio de sesión */
+  .message, .signin {
+    color: rgba(88, 87, 87, 0.822);
+    font-size: 14px;
+  }
+  
+  .signin {
+    text-align: center;
+    margin-top: 1rem;
+  }
+  
+  .signin a {
+    color: royalblue;
+  }
+  
+  .signin a:hover {
+    text-decoration: underline royalblue;
+  }
+  
+  /* Estilos para el contenedor flex dentro del formulario */
+  .flex {
+    display: flex;
+    width: 100%;
+    gap: 6px;
+  }
+  
+  /* Estilos para las etiquetas y entradas del formulario */
+  .form label {
+    position: relative;
+  }
+  
+  .form label .input {
+    width: 100%;
+    padding: 10px 10px 20px 10px;
+    outline: 0;
+    border: 1px solid rgba(105, 105, 105, 0.397);
+    border-radius: 10px;
+  }
+  
+  .form label .input + span {
+    position: absolute;
+    left: 10px;
+    top: 15px;
+    color: grey;
+    font-size: 0.9em;
+    cursor: text;
+    transition: 0.3s ease;
+  }
+  
+  .form label .input:placeholder-shown + span {
+    top: 15px;
+    font-size: 0.9em;
+  }
+  
+  .form label .input:focus + span, .form label .input:valid + span {
+    top: 30px;
+    font-size: 0.7em;
+    font-weight: 600;
+  }
+  
+  .form label .input:valid + span {
+    color: green;
+  }
+  
+  /* Estilos para el logo dentro del encabezado */
+  .logo {
+    width: auto;
+    margin: 0 auto; 
+    max-width: 100vw; 
+    justify-content: center;
+  }
+  
+  /* Estilos para el encabezado */
+  .headerRegistro {
+    background-color:
+    #41419b; 
+    padding: 20px; 
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  .hoad{
+    background-color: blue; 
+  }
+
+  .submit {
+    border: none;
+    outline: none;
+    background-color: royalblue;
+    padding: 10px;
+    border-radius: 10px;
+    color: #fff;
+    font-size: 16px;
+    transform: .3s ease;
+  }
+  
+  .submit:hover {
+    background-color: rgb(56, 90, 194);
+  }
+  
+  /* Animación de pulso para los puntos del título */
+  @keyframes pulse {
+    from {
+      transform: scale(0.9);
+      opacity: 1;
+    }
+    to {
+      transform: scale(1.8);
+      opacity: 0;
+    }
+  }
+  
