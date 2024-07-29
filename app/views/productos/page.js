@@ -3,10 +3,13 @@ import Link from 'next/link';
 import React, { useState, useEffect } from 'react';
 import styles from './productos.module.css';
 import Navegador from '../../components/navegador';
+import { useRouter } from 'next/navigation';
+
 
 export default function Productos() {
     const [productos, setProductos] = useState([]);
-       
+    const router = useRouter();
+
     const handleSearchFocus = () => {
         router.push('/views/search');
     };
@@ -21,6 +24,10 @@ export default function Productos() {
 
         fetchProductos();
     }, [productos]);
+
+    const handleProductClick = (producto) => {
+        router.push(`/views/categorias?idTipoProducto=${producto.idTipoProducto}`);
+    };
 
     
 
@@ -43,13 +50,13 @@ export default function Productos() {
         
             <section className={styles.Container}>
                 <div className={styles.Categories}>
-                    {productos.map((seccion, index) => (
-                        <div key={index} className={styles.CategoriesDentro}>
+                    {productos.map((producto, index) => (
+                        <div key={index} className={styles.CategoriesDentro} onClick={() => handleProductClick(producto)}>
                             <Link href="./categorias" className={styles.Category}>
-                                <img src={seccion.imagen} alt=""/>
+                                <img src={producto.imagen} alt={producto.nombre}/>
                                 
                             </Link>
-                            <p>{seccion.nombre}</p>
+                            <p>{producto.nombre}</p>
                             
                         </div>
                     ))}
@@ -58,4 +65,6 @@ export default function Productos() {
             <Navegador/>
         </>
     );
+
+    
 }

@@ -112,7 +112,7 @@ export default function Search() {
                         <li key={index} className={styles.historyItem}>
                             <span onClick={() => handleHistoryClick(item)} className={styles.historyItemText}>{item.nombre}</span>
                             <button onClick={() => removeFromHistory(item)} className={styles.removeItemButton}>
-                                <Image className={styles.imgBTN} src={"/borrar.png"} height={30} width={30} alt="Eliminar" />
+                                <img className={styles.imgBTN} src={"/borrar.png"} height={30} width={30} alt="Eliminar" />
                             </button>
                         </li>
                     ))}

@@ -2,7 +2,6 @@
 import React, { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
-import Image from 'next/image';
 import styles from './home.module.css';
 import SearchBar from '../../components/buscador';
 import Navegador from '../../components/navegador';
@@ -64,7 +63,7 @@ export default function Inicio() {
                     <div className={styles.opcionesArriba}>
                         {productos.slice(0, 4).map((producto, index) => ( 
                             <div key={index} className={styles.opcion} onClick={() => handleProductClick(producto)}>
-                                <Image width={200} height={100} src={producto.imagen} alt={`Imagen de ${producto.nombre}`} />
+                                <img width={200} height={100} src={producto.imagen} alt={`Imagen de ${producto.nombre}`} />
                                 <p>{producto.nombre}</p>
                             </div>
                         ))}
@@ -73,7 +72,7 @@ export default function Inicio() {
                     <div className={styles.opcionesAbajo}>
                         {productos.slice(4, 8).map((producto, index) => ( 
                             <div key={index} className={styles.opcion} onClick={() => handleProductClick(producto)}>
-                                <Image width={200} height={100} src={producto.imagen} alt={`Imagen de ${producto.nombre}`} />
+                                <img width={200} height={100} src={producto.imagen} alt={`Imagen de ${producto.nombre}`} />
                                 <p>{producto.nombre}</p>
                             </div>
                         ))}
@@ -91,7 +90,7 @@ export default function Inicio() {
                             {locales.map((local, index) => (
                                 <div key={index} className={styles.card}> 
                                     <div className="card">
-                                        <Image height={100} width={200} src={local.imagen} className={styles.cardImgTop} alt={local.nombreLocal}/>
+                                        <img height={100} width={200} src={local.imagen} className={styles.cardImgTop} alt={local.nombreLocal}/>
                                         <div className="card-body">
                                             <h5 className="card-title">{local.nombre}</h5>
                                             <p className="card-text">{local.direccion}</p>

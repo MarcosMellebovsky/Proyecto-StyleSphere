@@ -1,6 +1,4 @@
 "use client";
-
-
 import React, { useState, useEffect } from 'react';
 import { useSearchParams } from 'next/navigation';
 import Link from 'next/link';
@@ -50,7 +48,7 @@ export default function Categorias() {
     useEffect(() => {
         const fetchProductos = async () => {
             try {
-                const response = await fetch(`http://localhost:3001/api/tipoProducto/${idTipoProducto}`);
+                const response = await fetch(`http://localhost:3001/api/producto/${idTipoProducto}`);
                 if (!response.ok) {
                     throw new Error('Error al obtener los productos');
                 }
@@ -84,8 +82,9 @@ export default function Categorias() {
                     {productos.length > 0 ? (
                         productos.map((producto, index) => (
                             <div key={index} className={styles.productItem}>
-                                <Image width={100} height={100} src={producto.imagen} alt={producto.nombre} className={styles.productImage} />
+                                <img width={100} height={100} src={producto.imagen} alt={producto.nombre} className={styles.productImage} />
                                 <p className={styles.productName}>{producto.nombre}</p>
+                                <p></p>
                                 <button onClick={() => toggleBookmark(index)} className={styles.bookmarkButton}>
                                     {isBookmarked[index] ? 'Quitar de favoritos' : 'Añadir a favoritos'}
                                 </button>
