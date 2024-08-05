@@ -1,7 +1,9 @@
-@media screen and (max-width: 430px) {
+
+@media screen and (max-width: 400px) {
     .HeaderPadre {
         display: flex;
         justify-content: center;
+        flex-direction: column;
         align-items: center;
         padding: 1rem;
         box-shadow: rgba(14, 30, 37, 0.12) 0px 2px 4px 0px,
