@@ -2,6 +2,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    flex-wrap: wrap;
     padding: 1rem;
     box-shadow: rgba(14, 30, 37, 0.12) 0px 2px 4px 0px,
       rgba(14, 30, 37, 0.32) 0px 2px 16px 0px;
@@ -26,14 +27,7 @@
     margin: 0;
 }
 
-.productsContainer {
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    width: 100%; /* Ajusta el contenedor al ancho disponible */
-    max-width: 1200px; /* Ajusta según el diseño deseado */
-    margin: 0 auto; /* Centra el contenedor */
-}
+
 
 .productosGrid {
     display: grid;
@@ -41,16 +35,17 @@
     gap: 20px; /* Espacio entre los productos */
 }
 
-.productItem {
+
+    .productItem {
     display: flex;
     flex-direction: column;
     align-items: center;
     text-align: center;
-    position: relative; /* Permite posicionar el ícono sobre la imagen */
-    background-color: #fff; /* Fondo blanco para el contenedor del producto */
+    background-color: #fff;
     border-radius: 10px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
     padding: 10px;
+    overflow: hidden; /* Evita que el contenido se desborde */
 }
 
 .imageContainer {
@@ -59,32 +54,39 @@
 }
 
 .productImage {
-    width: 100%; /* Ajusta según sea necesario */
-    height: 150px; /* Ajusta según sea necesario */
-    object-fit: cover;
+    width: 100%; /* Asegúrate de que la imagen llene el ancho del contenedor */
+    height: 150px; /* Ajusta la altura según sea necesario */
+    object-fit: cover; /* Mantiene la proporción de la imagen y la recorta si es necesario */
     border-radius: 10px;
 }
 
 .bookmarkButton {
-    position: absolute; /* Posiciona el ícono sobre la imagen */
-    top: 10px; /* Ajusta según sea necesario */
-    right: 10px; /* Ajusta según sea necesario */
-    background: transparent;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background-color: rgba(255, 255, 255, 0.8); /* Fondo semi-transparente */
     border: none;
     cursor: pointer;
-    z-index: 10; /* Asegura que el ícono esté por encima de la imagen */
+    z-index: 10;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .bookmarkButton svg {
-    width: 24px; /* Ajusta el tamaño del ícono según sea necesario */
-    height: 24px; /* Ajusta el tamaño del ícono según sea necesario */
-    fill: #e21919; /* Ajusta el color del ícono según sea necesario */
+    width: 24px;
+    height: 24px;
+    fill: #e21919;
     transition: fill 0.3s;
 }
 
 .bookmarkButton:hover svg {
-    fill: #d32f2f; /* Cambia el color del ícono al pasar el mouse si lo deseas */
+    fill: #d32f2f;
 }
+
 
 .productName {
     margin: 10px 0;

@@ -76,10 +76,13 @@ export default function Categorias() {
                     </svg>
                 </Link>
                 <div className={styles.productsContainer}>
+               
                     <div className={styles.productosGrid}>
                         {productos.length > 0 ? (
                             productos.map((producto, index) => (
+                                
                                 <div key={index} className={styles.productItem}>
+                                        
                                     <div className={styles.imageContainer}>
                                         <img src={producto.imagen} alt={producto.nombre} className={styles.productImage} />
                                         <button onClick={() => toggleBookmark(index)} className={styles.bookmarkButton}>
