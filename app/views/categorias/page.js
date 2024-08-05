@@ -82,9 +82,9 @@ export default function Categorias() {
                     {productos.length > 0 ? (
                         productos.map((producto, index) => (
                             <div key={index} className={styles.productItem}>
-                                <img width={100} height={100} src={producto.imagen} alt={producto.nombre} className={styles.productImage} />
+                                {console.log(producto)}
+                                <img src={producto.imagen} alt={producto.nombre} className={styles.productImage} />
                                 <p className={styles.productName}>{producto.nombre}</p>
-                                <p></p>
                                 <button onClick={() => toggleBookmark(index)} className={styles.bookmarkButton}>
                                     {isBookmarked[index] ? 'Quitar de favoritos' : 'Añadir a favoritos'}
                                 </button>
