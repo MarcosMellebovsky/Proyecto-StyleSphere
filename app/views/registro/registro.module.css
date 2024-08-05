@@ -30,11 +30,12 @@
   /* Estilos para el título */
   .title {
     font-size: 23px;
-    color: royalblue;
+    color: 41419b;
     font-weight: 600;
     letter-spacing: -1px;
     position: relative;
     display: flex;
+    color: #41419b;
     align-items: center;
     padding-left: 30px;
     margin-top: 2rem;
@@ -44,7 +45,7 @@
     font-size: 28px;
     justify-content: center;
     text-align: center;
-    color: royalblue;
+    color: #41419b;
     font-weight: 600;
     letter-spacing: -1px;
     position: relative;
@@ -60,7 +61,8 @@
     width: 16px;
     border-radius: 50%;
     left: 0px;
-    background-color: royalblue;
+    
+    background-color:#41419b;
   }
   
   .title::before {
@@ -161,7 +163,7 @@
   .submit {
     border: none;
     outline: none;
-    background-color: royalblue;
+    background-color: #41419b;
     padding: 10px;
     border-radius: 10px;
     color: #fff;
