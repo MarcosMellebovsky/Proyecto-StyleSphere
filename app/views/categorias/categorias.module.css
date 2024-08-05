@@ -1,4 +1,3 @@
-
 .HeaderPadre {
     display: flex;
     justify-content: center;
@@ -7,6 +6,7 @@
     box-shadow: rgba(14, 30, 37, 0.12) 0px 2px 4px 0px,
       rgba(14, 30, 37, 0.32) 0px 2px 16px 0px;
 }
+
 .VolverHeader {
     margin: 1rem;
 }
@@ -26,53 +26,74 @@
     margin: 0;
 }
 
-.productosContainer {
+.productsContainer {
     padding: 20px;
-    background-color: #f9f9f9;
     border-radius: 10px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    width: 100%; /* Ajusta el contenedor al ancho disponible */
+    max-width: 1200px; /* Ajusta según el diseño deseado */
+    margin: 0 auto; /* Centra el contenedor */
 }
 
 .productosGrid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); /* Dos columnas */
+    gap: 20px; /* Espacio entre los productos */
+}
+
+.productItem {
     display: flex;
-    flex-wrap: wrap;
-    gap: 20px;
-    justify-content: center;
-}
-
-.productoCard {
-    background-color: white;
-    border: 1px solid #ccc;
-    border-radius: 10px;
-    padding: 10px;
-    width: 200px;
+    flex-direction: column;
+    align-items: center;
     text-align: center;
+    position: relative; /* Permite posicionar el ícono sobre la imagen */
+    background-color: #fff; /* Fondo blanco para el contenedor del producto */
+    border-radius: 10px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    transition: box-shadow 0.3s;
+    padding: 10px;
 }
 
-.productoCard:hover {
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+.imageContainer {
+    position: relative;
+     /* Permite que el ícono se posicione sobre la imagen */
 }
 
-.productoImagen {
-    width: 100%;
-    height: 150px;
+.productImage {
+    width: 100%; /* Ajusta según sea necesario */
+    height: 150px; /* Ajusta según sea necesario */
     object-fit: cover;
-    border-radius: 10px 10px 0 0;
+    border-radius: 10px;
 }
 
 .bookmarkButton {
-    margin-top: 10px;
-    padding: 5px 10px;
+    position: absolute; /* Posiciona el ícono sobre la imagen */
+    top: 10px; /* Ajusta según sea necesario */
+    right: 10px; /* Ajusta según sea necesario */
+    background: transparent;
     border: none;
-    border-radius: 5px;
-    background-color: #f44336;
-    color: white;
     cursor: pointer;
-    transition: background-color 0.3s;
+    z-index: 10; /* Asegura que el ícono esté por encima de la imagen */
 }
 
-.bookmarkButton:hover {
-    background-color: #d32f2f;
+.bookmarkButton svg {
+    width: 24px; /* Ajusta el tamaño del ícono según sea necesario */
+    height: 24px; /* Ajusta el tamaño del ícono según sea necesario */
+    fill: #e21919; /* Ajusta el color del ícono según sea necesario */
+    transition: fill 0.3s;
+}
+
+.bookmarkButton:hover svg {
+    fill: #d32f2f; /* Cambia el color del ícono al pasar el mouse si lo deseas */
+}
+
+.productName {
+    margin: 10px 0;
+}
+
+.productPrice {
+    margin: 0;
+}
+
+.noProducts {
+    text-align: center;
+    color: #666;
 }
