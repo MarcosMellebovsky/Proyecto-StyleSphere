@@ -9,6 +9,7 @@ const SearchBar = ({ value, onChange = () => {}, onSearch, onFocus }) => {
   const [filteredResult, setFilteredResult] = useState([]);
   const [searchHistory, setSearchHistory] = useState([]);
   const [isInputFocused, setIsInputFocused] = useState(false);
+  const [showNoResults, setShowNoResults] = useState(false);
 
   useEffect(() => {
     const history = JSON.parse(localStorage.getItem('searchHistory')) || [];
@@ -17,11 +18,7 @@ const SearchBar = ({ value, onChange = () => {}, onSearch, onFocus }) => {
 
   const handleKeyDown = (e) => {
     if (e.key === "Backspace") {
-      // Aquí puedes manejar específicamente el caso de "Backspace"
-      // Por ejemplo, podrías agregar lógica específica cuando se presiona esta tecla
       console.log("Backspace presionado");
-
-      // Si es necesario, puedes también forzar la actualización de los resultados
       handleChange(e);
     }
   };
@@ -32,6 +29,7 @@ const SearchBar = ({ value, onChange = () => {}, onSearch, onFocus }) => {
 
     if (searchQuery === '') {
       setFilteredResult([]);
+      setShowNoResults(false); // No mostrar el mensaje si el input está vacío
       return;
     }
 
@@ -45,8 +43,14 @@ const SearchBar = ({ value, onChange = () => {}, onSearch, onFocus }) => {
         item.nombre.toLowerCase().includes(searchQuery)
       );
       setFilteredResult(filtered);
+      
+      // Mostrar el mensaje si no hay resultados y el input no está vacío
+      setShowNoResults(filtered.length === 0);
+
     } catch (error) {
       console.error('Error fetching search results:', error);
+      setFilteredResult([]);
+      setShowNoResults(true); // Mostrar mensaje si hay un error
     }
   };
 
@@ -97,10 +101,17 @@ const SearchBar = ({ value, onChange = () => {}, onSearch, onFocus }) => {
           style={styles.input}
         />
 
-        <Link href={"/filtros"}>
+        <Link href={"./filtro"}>
           <Image width={25} height={25} src={"/filtrar.png"} alt="Filtrar" />
         </Link>
       </div>
+
+      {/* Mostrar mensaje si no hay resultados y el input no está vacío */}
+      {showNoResults && value !== '' && (
+        <div style={styles.noResults}>
+          No se encontraron resultados
+        </div>
+      )}
 
       <ul style={styles.resultList}>
         {filteredResult.map((r) => (
@@ -193,6 +204,12 @@ const styles = {
   resultText: {
     fontSize: '16px',
     fontWeight: '500',
+  },
+  noResults: {
+    marginTop: '10px',
+    color: '#999',
+    fontSize: '16px',
+    textAlign: 'center',
   },
   historyContainer: {
     backgroundColor: '#fff',
