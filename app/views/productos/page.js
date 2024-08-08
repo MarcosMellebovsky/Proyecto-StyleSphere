@@ -33,9 +33,6 @@ export default function Productos() {
 
     return (
         <>
-         
-        
-
             <div className={styles.VolverHeader}>
                 <Link className={styles.AHeader} href="./Inicio">
                     <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" className="bi bi-chevron-left back-button" viewBox="0 0 16 16">

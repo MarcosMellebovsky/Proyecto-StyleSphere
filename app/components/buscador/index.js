@@ -35,23 +35,28 @@ const SearchBar = ({ value, onChange = () => {}, onSearch, onFocus }) => {
 
     try {
       const res = await fetch(`http://localhost:3001/api/buscador/${encodeURIComponent(searchQuery)}`);
-      if (!res.ok) throw new Error('Error en la solicitud');
-      const data = await res.json();
-      setResult(data);
-
-      const filtered = data.filter(item =>
-        item.nombre.toLowerCase().includes(searchQuery)
-      );
-      setFilteredResult(filtered);
       
-      // Mostrar el mensaje si no hay resultados y el input no está vacío
+      if (!res.ok) throw new Error('Error en la solicitud');
+    
+      const data = await res.json();
+    
+      // Si quieres filtrar en el frontend, este bloque es necesario
+      const filtered = data.filter(item =>
+        item.nombre.toLowerCase().includes(searchQuery.toLowerCase()) // Asegúrate de comparar en minúsculas para evitar problemas de case-sensitive
+      );
+    
+      setResult(data); // Guarda los datos completos si los necesitas
+      setFilteredResult(filtered); // Guarda los datos filtrados
+    
+      // Mostrar el mensaje "No Results" si no se encuentra nada y la búsqueda no está vacía
       setShowNoResults(filtered.length === 0);
-
+    
     } catch (error) {
       console.error('Error fetching search results:', error);
-      setFilteredResult([]);
+      setFilteredResult([]); // Limpia los resultados
       setShowNoResults(true); // Mostrar mensaje si hay un error
     }
+    
   };
 
   const handleSearchClick = (query) => {
@@ -114,8 +119,8 @@ const SearchBar = ({ value, onChange = () => {}, onSearch, onFocus }) => {
       )}
 
       <ul style={styles.resultList}>
-        {filteredResult.map((r) => (
-          <li key={r.idTipoProducto} style={styles.resultItem}>
+        {filteredResult.map((r, index) => (
+          <li key={`${r.idTipoProducto}-${index}`} style={styles.resultItem}>
             <Link 
               href={`/views/categorias?idTipoProducto=${r.idTipoProducto}`} 
               style={styles.resultLink}
