@@ -1,4 +1,10 @@
 @media screen and (max-width: 430px) {
+  .productos_container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+  }
   .HeaderPadre {
     display: flex;
     justify-content: center;
@@ -70,11 +76,15 @@
   
     /*Seccion de productos*/
     .VolverHeader{
-     
-      margin: 1rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      width: 100%;
     }
     .AHeader{
-      color: black;
+      display: flex;
+      align-items: center;
+      margin-right: auto; 
     }
     .HeaderTitle {
       display: flex;
@@ -102,9 +112,9 @@
     }
   
     .TituloCategorias {
-      margin-bottom: 20px;
-      font-size: 24px;
-      color: #333;
+      flex-grow: 1; /* Permite que el título ocupe el espacio restante */
+      text-align: center; /* Centra el texto del título */
+      margin: 0;
     }
   
     .Categories {

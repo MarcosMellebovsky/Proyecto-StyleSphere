@@ -60,3 +60,40 @@
   font-size: 16px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
+
+.VolverHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.AHeader {
+  display: flex;
+  align-items: center;
+  margin-right: auto; /* Mantiene la flecha a la izquierda */
+}
+
+.title {
+  flex-grow: 1; /* Permite que el título ocupe el espacio restante */
+  text-align: center; /* Centra el texto del título */
+  margin: 0;
+}
+.botonAplicarFiltro {
+  margin-top: 20px;
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.botonAplicarFiltro:hover {
+  background-color: #0056b3;
+}
+
