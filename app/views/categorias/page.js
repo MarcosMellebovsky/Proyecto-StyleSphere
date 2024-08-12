@@ -6,6 +6,7 @@ import styles from './categorias.module.css';
 import SearchBar from '../../components/buscador';
 import Swal from 'sweetalert2';
 import { useRouter } from 'next/navigation';
+import Navegador from '@/app/components/navegador';
 
 export default function Categorias() {
     const [isBookmarked, setIsBookmarked] = useState(Array(7).fill(false));
@@ -54,7 +55,6 @@ export default function Categorias() {
                 const data = await response.json();
                 setProductos(data);
             } catch (error) {
-                console.error("Error fetching productos:", error);
             }
         };
 
@@ -107,6 +107,9 @@ export default function Categorias() {
                     </div>
                 </div>
             </div>
+                    <Navegador />
+
         </>
+        
     );
 }

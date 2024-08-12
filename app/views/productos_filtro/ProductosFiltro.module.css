@@ -17,45 +17,30 @@
     color: black;
 }
 
-.HeaderTitle {
-    text-align: center;
-    margin-bottom: 20px;
-}
-
-.TituloCategorias {
-    font-size: 2em;
-    margin: 0;
-}
-
-
-
 .productosGrid {
     display: grid;
-    grid-template-columns: repeat(2, 1fr); /* Dos columnas */
-    gap: 20px; /* Espacio entre los productos */
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
 }
 
-
-    .productItem {
+.productItem {
     display: flex;
     flex-direction: column;
-  
     background-color: #fff;
     border-radius: 10px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
     padding: 10px;
-    overflow: hidden; /* Evita que el contenido se desborde */
+    overflow: hidden;
 }
 
 .imageContainer {
     position: relative;
-     /* Permite que el ícono se posicione sobre la imagen */
 }
 
 .productImage {
-    width: 100%; /* Asegúrate de que la imagen llene el ancho del contenedor */
-    height: 150px; /* Ajusta la altura según sea necesario */
-    object-fit: cover; /* Mantiene la proporción de la imagen y la recorta si es necesario */
+    width: 100%;
+    height: 150px;
+    object-fit: cover;
     border-radius: 10px;
 }
 
@@ -63,7 +48,7 @@
     position: absolute;
     top: 10px;
     right: 10px;
-    background-color: rgba(255, 255, 255, 0.8); /* Fondo semi-transparente */
+    background-color: rgba(255, 255, 255, 0.8);
     border: none;
     cursor: pointer;
     z-index: 10;
@@ -85,7 +70,6 @@
 .bookmarkButton:hover svg {
     fill: black;
 }
-
 
 .productName {
     margin: 10px 0;

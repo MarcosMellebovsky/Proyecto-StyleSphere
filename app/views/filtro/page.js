@@ -1,5 +1,7 @@
 "use client";
 import { useEffect, useState } from 'react';
+import { usePathname } from 'next/navigation';
+
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -9,7 +11,7 @@ import styles from './Filtro.module.css';
 export default function FiltroPage() {
   const [productos, setProductos] = useState([]);
   const [seleccionados, setSeleccionados] = useState([]);
-  const router = useRouter(); // Hook para navegar a otra vista
+  const router = useRouter(); 
 
   useEffect(() => {
     const fetchProductos = async () => {
@@ -21,22 +23,22 @@ export default function FiltroPage() {
     fetchProductos();
   }, []);
 
-  const toggleSeleccionado = (nombre) => {
+  const toggleSeleccionado = (idTipoProducto) => {
     setSeleccionados((prevSeleccionados) =>
-      prevSeleccionados.includes(nombre)
-        ? prevSeleccionados.filter((item) => item !== nombre)
-        : [...prevSeleccionados, nombre]
+      prevSeleccionados.includes(idTipoProducto)
+        ? prevSeleccionados.filter((item) => item !== idTipoProducto)
+        : [...prevSeleccionados, idTipoProducto]
     );
   };
 
-  const aplicarFiltro = () => {
-    // Redirige a la nueva vista con los productos seleccionados
-    router.push({
-      pathname: '/productosFiltrados',
-      query: { seleccionados: JSON.stringify(seleccionados) },
-    });
+  const aplicarFiltro = async () => {
+    const query = seleccionados.length > 0 ? `?seleccionados=${seleccionados.join(',')}` : '';
+    const response = await fetch(`http://localhost:3001/api/producto/productos_filtro${query}`);
+    const productosFiltrados = await response.json();
+    router.push(`/views/productos_filtro?seleccionados=${seleccionados.join(',')}`);
+    
   };
-
+  
   return (
     <div className={styles.container}>
       <div className={styles.VolverHeader}>
@@ -51,10 +53,10 @@ export default function FiltroPage() {
         {productos.map((producto, index) => (
           <div
             key={index}
-            className={`${styles.filtroItem} ${seleccionados.includes(producto.nombre) ? styles.seleccionado : ''}`}
-            onClick={() => toggleSeleccionado(producto.nombre)}
+            className={`${styles.filtroItem} ${seleccionados.includes(producto.idTipoProducto) ? styles.seleccionado : ''}`}
+            onClick={() => toggleSeleccionado(producto.idTipoProducto)}
           >
-            {seleccionados.includes(producto.nombre) && (
+            {seleccionados.includes(producto.idTipoProducto) && (
               <FontAwesomeIcon icon={faCheck} className={styles.tick} />
             )}
             <img src={producto.imagen} className={styles.imagen_filtro} alt={producto.nombre} />
