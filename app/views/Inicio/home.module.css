@@ -92,7 +92,7 @@
     }
 
     .opciones {
-        
+        scrollbar-width: none;
         align-items: center;
         overflow-x: auto;
         gap: 2rem;
@@ -154,6 +154,7 @@
         overflow-x: auto;
         white-space: nowrap;
         padding-bottom: 20px;
+        scrollbar-width: none;
     }
 
     .cards {
