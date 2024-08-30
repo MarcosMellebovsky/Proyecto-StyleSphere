@@ -15,36 +15,6 @@ export default function Categorias() {
     const idTipoProducto = searchParams.get('idTipoProducto');
     const router = useRouter();
 
-    const toggleBookmark = (index) => {
-        setIsBookmarked(prevState => {
-            const newBookmarks = [...prevState];
-            newBookmarks[index] = !newBookmarks[index];
-            return newBookmarks;
-        });
-
-        const Toast = Swal.mixin({
-            toast: true,
-            position: "bottom-end",
-            showConfirmButton: false,
-            timer: 2500,
-            timerProgressBar: true,
-            didOpen: (toast) => {
-                toast.onmouseenter = Swal.stopTimer;
-                toast.onmouseleave = Swal.resumeTimer;
-            }
-        });
-
-        const isAdding = !isBookmarked[index];
-        Toast.fire({
-            icon: isAdding ? "success" : "info",
-            title: isAdding ? "Se añadió a favoritos" : "Se eliminó de tus favoritos"
-        });
-    };
-
-    const handleSearchFocus = () => {
-        router.push('/views/search');
-    };
-
     useEffect(() => {
         const fetchProductos = async () => {
             try {
@@ -55,6 +25,7 @@ export default function Categorias() {
                 const data = await response.json();
                 setProductos(data);
             } catch (error) {
+                console.error('Error:', error);
             }
         };
 
@@ -63,10 +34,49 @@ export default function Categorias() {
         }
     }, [idTipoProducto]);
 
+    const agregarAFavoritos = (idProducto) => {
+        let productosFavoritos = localStorage.getItem('productosFavoritos');
+        productosFavoritos = productosFavoritos ? productosFavoritos.split(',') : [];
+
+        if (!productosFavoritos.includes(String(idProducto))) {
+            productosFavoritos.push(idProducto);
+        } else {
+            // Si ya está en favoritos, lo elimina
+            productosFavoritos = productosFavoritos.filter(id => id !== String(idProducto));
+        }
+
+        localStorage.setItem('productosFavoritos', productosFavoritos.join(','));
+    };
+
+    const toggleBookmark = (index, idProducto) => {
+        setIsBookmarked(prevState => {
+            const newBookmarks = [...prevState];
+            newBookmarks[index] = !newBookmarks[index];
+            return newBookmarks;
+        });
+
+        agregarAFavoritos(idProducto); // Llamar a la función para agregar o quitar de favoritos
+
+        const isAdding = !isBookmarked[index];
+        Swal.fire({
+            toast: true,
+            position: "bottom-end",
+            icon: isAdding ? "success" : "info",
+            title: isAdding ? "Se añadió a favoritos" : "Se eliminó de tus favoritos",
+            showConfirmButton: false,
+            timer: 2500,
+            timerProgressBar: true,
+            didOpen: (toast) => {
+                toast.onmouseenter = Swal.stopTimer;
+                toast.onmouseleave = Swal.resumeTimer;
+            }
+        });
+    };
+
     return (
         <>
             <div className={styles.HeaderPadre}>
-                <SearchBar onFocus={handleSearchFocus} />
+                <SearchBar onFocus={() => router.push('/views/search')} />
             </div>
 
             <div className={styles.VolverHeader}>
@@ -76,16 +86,13 @@ export default function Categorias() {
                     </svg>
                 </Link>
                 <div className={styles.productsContainer}>
-               
                     <div className={styles.productosGrid}>
                         {productos.length > 0 ? (
                             productos.map((producto, index) => (
-                                
                                 <div key={index} className={styles.productItem}>
-                                        
                                     <div className={styles.imageContainer}>
                                         <img src={producto.imagen} alt={producto.nombre} className={styles.productImage} />
-                                        <button onClick={() => toggleBookmark(index)} className={styles.bookmarkButton}>
+                                        <button onClick={() => toggleBookmark(index, producto.id)} className={styles.bookmarkButton}>
                                             {isBookmarked[index] ? (
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-bookmark-fill" viewBox="0 0 16 16">
                                                     <path d="M2 2v13.5a.5.5 0 0 0 .74.439L8 13.069l5.26 2.87A.5.5 0 0 0 14 15.5V2a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2"/>
@@ -107,9 +114,7 @@ export default function Categorias() {
                     </div>
                 </div>
             </div>
-                    <Navegador />
-
+            <Navegador />
         </>
-        
     );
 }
