@@ -23,7 +23,7 @@ export default function Inicio() {
   
     useEffect(() => {
       const fetchLocales = async () => {
-        const response = await fetch('http://localhost:3001/api/locales');
+        const response = await fetch('http://localhost:3001/api/locales/top3');
         const data = await response.json();
         setLocales(data);
       };

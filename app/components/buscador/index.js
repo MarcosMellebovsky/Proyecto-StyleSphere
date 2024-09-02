@@ -31,8 +31,9 @@ const SearchBar = ({ value, onChange = () => {}, onSearch, onFocus }) => {
       setShowNoResults(false);
       return;
     }
+
+    try {
       const res = await fetch(`http://localhost:3001/api/buscador/${encodeURIComponent(searchQuery)}`);
-      if (!res.ok) throw new Error('Error en la solicitud');
       const data = await res.json();
       const filtered = data.filter(item =>
         item.nombre.toLowerCase().includes(searchQuery.toLowerCase())
@@ -40,9 +41,10 @@ const SearchBar = ({ value, onChange = () => {}, onSearch, onFocus }) => {
       setResult(data);
       setFilteredResult(filtered);
       setShowNoResults(filtered.length === 0);
-    
-    
-    
+    } catch (error) {
+      setFilteredResult([]);
+      setShowNoResults(true);
+    }
   };
 
   const handleSearchClick = (query) => {
@@ -98,7 +100,7 @@ const SearchBar = ({ value, onChange = () => {}, onSearch, onFocus }) => {
 
       {showNoResults && value !== '' && (
         <div className={Styles.noResults}>
-          No se encontraron resultados
+          No existe ese producto
         </div>
       )}
 
