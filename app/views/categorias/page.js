@@ -38,16 +38,15 @@ export default function Categorias() {
     }, [idTipoProducto]);
 
     const agregarAFavoritos = (producto) => {
-        let favoritosGuardados = { ...isBookmarked }; 
+        let favoritosGuardados = { ...isBookmarked };
+        console.log('isBookmarked', isBookmarked)
 
-      
-        if (favoritosGuardados[producto.id]) {
-            delete favoritosGuardados[producto.id];  
+        if (favoritosGuardados[producto.idProducto]) {
+            delete favoritosGuardados[producto.idProducto];
         } else {
-            favoritosGuardados[producto.id] = producto; 
+            favoritosGuardados[producto.idProducto] = producto;
         }
 
-        // Guardar el nuevo estado en localStorage y en el estado
         localStorage.setItem('productosFavoritos', JSON.stringify(favoritosGuardados));
         setIsBookmarked(favoritosGuardados);
     };
@@ -55,8 +54,7 @@ export default function Categorias() {
     const toggleBookmark = (producto) => {
         agregarAFavoritos(producto);
 
-        // Mostrar un mensaje dependiendo de si se añadió o eliminó
-        const isAdding = !isBookmarked[producto.id];
+        const isAdding = !isBookmarked[producto.idProducto];
         Swal.fire({
             toast: true,
             position: "bottom-end",
@@ -88,14 +86,14 @@ export default function Categorias() {
                     <div className={styles.productosGrid}>
                         {productos.length > 0 ? (
                             productos.map((producto) => (
-                                <div key={producto.id} className={styles.productItem}>
+                                <div key={producto.idProducto} className={styles.productItem}>
                                     <div className={styles.imageContainer}>
                                         <img src={producto.imagen} alt={producto.nombre} className={styles.productImage} />
                                         <button 
                                             onClick={() => toggleBookmark(producto)} 
                                             className={styles.bookmarkButton}
                                         >
-                                            {isBookmarked[producto.id] ? (
+                                            {isBookmarked[producto.idProducto] ? (
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-bookmark-fill" viewBox="0 0 16 16">
                                                     <path d="M2 2v13.5a.5.5 0 0 0 .74.439L8 13.069l5.26 2.87A.5.5 0 0 0 14 15.5V2a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2"/>
                                                 </svg>

@@ -4,6 +4,7 @@ import { useRouter } from 'next/navigation';
 import SearchBar from '../../components/buscador';
 import Navegador from '../../components/navegador';
 import styles from "./local.module.css";
+
 export default function Inicio() {
     const [productos, setProductos] = useState([]);
     const [locales, setLocales] = useState([]);
@@ -11,7 +12,7 @@ export default function Inicio() {
   
     useEffect(() => {
       const fetchProductos = async () => {
-        const response = await fetch('http://localhost:3001/api/tipoProducto');
+        const response = await fetch('http://localhost:3001/api/producto');
         const data = await response.json();
         setProductos(data);
       };
@@ -29,8 +30,8 @@ export default function Inicio() {
       fetchLocales();
     }, []);
   
-    const handleProductClick = (producto) => {
-      router.push(`/views/categorias?idTipoProducto=${producto.idTipoProducto}`);
+    const handleLocalClick = (local) => {
+      router.push(`/views/categorias?idTienda=${local.idProducto}`);
     };
     
     return(
@@ -41,21 +42,23 @@ export default function Inicio() {
             <div className={styles.cardsContainer}>
               <div className={styles.cards}>
                 {locales.map((local, index) => (
-                  <div key={index} className={styles.card}>
-                  <img height={100} width={200} src={local.imagen} className={styles.cardImgTop} alt={local.nombreLocal} />
-                  <div className={styles.padre_divs}>
-                    <p className={styles.card_title}>{local.nombre}</p>
-                    <div className={styles.card_body}>
-                      <p className={styles.card_text}>{local.direccion}</p>
+                  <div 
+                    key={index} 
+                    className={styles.card} 
+                    onClick={() => handleLocalClick(local)} 
+                  >
+                    <img height={100} width={200} src={local.imagen} className={styles.cardImgTop} alt={local.nombreLocal} />
+                    <div className={styles.padre_divs}>
+                      <p className={styles.card_title}>{local.nombre}</p>
+                      <div className={styles.card_body}>
+                        <p className={styles.card_text}>{local.direccion}</p>
+                      </div>
                     </div>
                   </div>
-                </div>
-                  
                 ))}
-
-</div></div>
-            <Navegador/>
+              </div>
+            </div>
+            <Navegador />
         </>
-        
-    )
+    );
 }

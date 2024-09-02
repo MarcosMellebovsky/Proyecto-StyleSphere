@@ -54,11 +54,11 @@
 }
 
 .bookmarkButton svg {
-    fill: #007bff;
+    fill: #000000;
 }
 
 .bookmarked svg {
-    fill: #e63946; /* Color para el botón marcado */
+    fill: #e63946;
 }
 
 .bookmarkButton:hover {

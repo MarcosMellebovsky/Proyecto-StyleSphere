@@ -71,7 +71,7 @@ export default function ProductosFiltro() {
             <div className={styles.productsContainer}>
                 <div className={styles.productosGrid}>
                     {productos.map((producto, index) => (
-                        <div key={producto.id} className={styles.productItem}>
+                        <div key={producto.idProducto} className={styles.productItem}>
                             <div className={styles.imageContainer}>
                                 <img src={producto.imagen} className={styles.productImage} alt={producto.nombre} />
                                 <button onClick={() => toggleBookmark(index)} className={styles.bookmarkButton}>
