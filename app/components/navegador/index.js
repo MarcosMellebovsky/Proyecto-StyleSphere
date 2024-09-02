@@ -27,7 +27,7 @@ const Navegador = () => {
       </div>
 
       <div className={styles.favoritos}>
-        <Link className={styles.linkNav} href="../../views/favorito">
+        <Link className={styles.linkNav} href="../../views/favoritos">
           <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" className="bi bi-bookmark" viewBox="0 0 16 16" aria-label="Favorites">
             <path d="M2 2v13.5a.5.5 0 0 0 .74.439L8 13.069l5.26 2.87a.5.5 0 0 0 .74-.439V2a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2M8 12.067L3 14.568V2a1 1 0 0 1 1-1h8a1 1 0 0 1 1 1v12.568l-5-2.501z" />
           </svg>

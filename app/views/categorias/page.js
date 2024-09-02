@@ -9,7 +9,7 @@ import { useRouter } from 'next/navigation';
 import Navegador from '@/app/components/navegador';
 
 export default function Categorias() {
-    const [isBookmarked, setIsBookmarked] = useState(Array(7).fill(false));
+    const [isBookmarked, setIsBookmarked] = useState({});
     const [productos, setProductos] = useState([]);
     const searchParams = useSearchParams();
     const idTipoProducto = searchParams.get('idTipoProducto');
@@ -24,6 +24,9 @@ export default function Categorias() {
                 }
                 const data = await response.json();
                 setProductos(data);
+
+                const favoritosGuardados = JSON.parse(localStorage.getItem('productosFavoritos')) || {};
+                setIsBookmarked(favoritosGuardados);
             } catch (error) {
                 console.error('Error:', error);
             }
@@ -34,30 +37,26 @@ export default function Categorias() {
         }
     }, [idTipoProducto]);
 
-    const agregarAFavoritos = (idProducto) => {
-        let productosFavoritos = localStorage.getItem('productosFavoritos');
-        productosFavoritos = productosFavoritos ? productosFavoritos.split(',') : [];
+    const agregarAFavoritos = (producto) => {
+        let favoritosGuardados = { ...isBookmarked }; 
 
-        if (!productosFavoritos.includes(String(idProducto))) {
-            productosFavoritos.push(idProducto);
+      
+        if (favoritosGuardados[producto.id]) {
+            delete favoritosGuardados[producto.id];  
         } else {
-            // Si ya está en favoritos, lo elimina
-            productosFavoritos = productosFavoritos.filter(id => id !== String(idProducto));
+            favoritosGuardados[producto.id] = producto; 
         }
 
-        localStorage.setItem('productosFavoritos', productosFavoritos.join(','));
+        // Guardar el nuevo estado en localStorage y en el estado
+        localStorage.setItem('productosFavoritos', JSON.stringify(favoritosGuardados));
+        setIsBookmarked(favoritosGuardados);
     };
 
-    const toggleBookmark = (index, idProducto) => {
-        setIsBookmarked(prevState => {
-            const newBookmarks = [...prevState];
-            newBookmarks[index] = !newBookmarks[index];
-            return newBookmarks;
-        });
+    const toggleBookmark = (producto) => {
+        agregarAFavoritos(producto);
 
-        agregarAFavoritos(idProducto); // Llamar a la función para agregar o quitar de favoritos
-
-        const isAdding = !isBookmarked[index];
+        // Mostrar un mensaje dependiendo de si se añadió o eliminó
+        const isAdding = !isBookmarked[producto.id];
         Swal.fire({
             toast: true,
             position: "bottom-end",
@@ -88,12 +87,15 @@ export default function Categorias() {
                 <div className={styles.productsContainer}>
                     <div className={styles.productosGrid}>
                         {productos.length > 0 ? (
-                            productos.map((producto, index) => (
-                                <div key={index} className={styles.productItem}>
+                            productos.map((producto) => (
+                                <div key={producto.id} className={styles.productItem}>
                                     <div className={styles.imageContainer}>
                                         <img src={producto.imagen} alt={producto.nombre} className={styles.productImage} />
-                                        <button onClick={() => toggleBookmark(index, producto.id)} className={styles.bookmarkButton}>
-                                            {isBookmarked[index] ? (
+                                        <button 
+                                            onClick={() => toggleBookmark(producto)} 
+                                            className={styles.bookmarkButton}
+                                        >
+                                            {isBookmarked[producto.id] ? (
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-bookmark-fill" viewBox="0 0 16 16">
                                                     <path d="M2 2v13.5a.5.5 0 0 0 .74.439L8 13.069l5.26 2.87A.5.5 0 0 0 14 15.5V2a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2"/>
                                                 </svg>
@@ -105,7 +107,7 @@ export default function Categorias() {
                                         </button>
                                     </div>
                                     <p className={styles.productName}>{producto.nombre}</p>
-                                    <p className={styles.productPrice}> ${producto.precio}</p>
+                                    <p className={styles.productPrice}>${producto.precio}</p>
                                 </div>
                             ))
                         ) : (

@@ -171,4 +171,35 @@
     text-align: center;
     margin-top: 5px;
   }
+  .navbar {
+    display: flex;
+    justify-content: space-around;
+    background-color: #fff;
+    padding: 10px 0;
+    border-top: 1px solid #ddd;
+  }
+  
+  .navItem {
+    text-align: center;
+    color: #555;
+  }
+  
+  .navItem img {
+    display: block;
+    margin: 0 auto;
+  }
+  
+  .activeLink .navItem {
+    color: #007bff;
+  }
+  
+  .activeLink img {
+    filter: brightness(0) saturate(100%) invert(33%) sepia(90%) saturate(3280%) hue-rotate(187deg) brightness(96%) contrast(95%);
+  }
+  
+  .navItem span {
+    display: block;
+    margin-top: 5px;
+  }
 }
+

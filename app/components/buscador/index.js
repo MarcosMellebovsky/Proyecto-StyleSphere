@@ -34,6 +34,7 @@ const SearchBar = ({ value, onChange = () => {}, onSearch, onFocus }) => {
 
     try {
       const res = await fetch(`http://localhost:3001/api/buscador/${encodeURIComponent(searchQuery)}`);
+      if (!res.ok) throw new Error('Error en la solicitud');
       const data = await res.json();
       const filtered = data.filter(item =>
         item.nombre.toLowerCase().includes(searchQuery.toLowerCase())
