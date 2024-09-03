@@ -30,8 +30,9 @@ export default function FiltroPage() {
     );
   };
   const handleProductClick = (producto) => {
-    router.push(`/views/categorias?idTipoProducto=${producto.idTipoProducto}`);
-  };
+    router.push(`/views/categorias?idTipoProducto=${producto.idTipoProducto}&from=productos`);
+};
+
 
  
 

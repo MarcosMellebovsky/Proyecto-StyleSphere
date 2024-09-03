@@ -11,6 +11,7 @@
     position: relative;
   }
   
+  
   .primeros2 {
     display: flex;
     margin-right: 30px;
@@ -50,4 +51,12 @@
   .pNav {
     color: black;
   }
+  .active {
+    color: blue;
+  }
+  
+  .active svg path {
+    fill: blue;
+  }
+  
 }

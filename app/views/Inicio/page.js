@@ -32,8 +32,9 @@ export default function Inicio() {
     }, []);
   
     const handleProductClick = (producto) => {
-      router.push(`/views/categorias?idTipoProducto=${producto.idTipoProducto}`);
-    };
+      router.push(`/views/categorias?idTipoProducto=${producto.idTipoProducto}&from=Inicio`);
+  };
+  
   
     return (
       <>

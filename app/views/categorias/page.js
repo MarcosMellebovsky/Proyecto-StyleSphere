@@ -13,6 +13,7 @@ export default function Categorias() {
     const [productos, setProductos] = useState([]);
     const searchParams = useSearchParams();
     const idTipoProducto = searchParams.get('idTipoProducto');
+    const from = searchParams.get('from'); // Obtenemos el valor del parámetro 'from'
     const router = useRouter();
 
     useEffect(() => {
@@ -39,7 +40,6 @@ export default function Categorias() {
 
     const agregarAFavoritos = (producto) => {
         let favoritosGuardados = { ...isBookmarked };
-        console.log('isBookmarked', isBookmarked)
 
         if (favoritosGuardados[producto.idProducto]) {
             delete favoritosGuardados[producto.idProducto];
@@ -70,6 +70,9 @@ export default function Categorias() {
         });
     };
 
+    // Determinamos la ruta de vuelta
+    const backLink = from === 'productos' ? '/views/productos' : '/views/Inicio';
+
     return (
         <>
             <div className={styles.HeaderPadre}>
@@ -77,7 +80,7 @@ export default function Categorias() {
             </div>
 
             <div className={styles.VolverHeader}>
-                <Link className={styles.AHeader} href="../../views/Inicio">
+                <Link className={styles.AHeader} href={backLink}>
                     <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" className="bi bi-chevron-left back-button" viewBox="0 0 16 16">
                         <path fillRule="evenodd" d="M11.354 1.646a.5.5 0 0 1 0 .708L5.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0" />
                     </svg>
