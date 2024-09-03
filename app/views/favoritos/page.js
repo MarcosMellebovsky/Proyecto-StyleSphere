@@ -25,12 +25,6 @@ export default function Favoritos() {
         if (productosFavoritos[idProducto]) {
             delete productosFavoritos[idProducto];
             setFavoritos(Object.values(productosFavoritos));
-        } else {
-            Swal.fire({
-                icon: 'error',
-                title: 'Error',
-                text: 'Este producto no se encuentra en favoritos.',
-            });
         }
 
         localStorage.setItem('productosFavoritos', JSON.stringify(productosFavoritos));
