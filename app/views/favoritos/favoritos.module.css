@@ -9,7 +9,7 @@
 
 .productosGrid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 2fr));
+    grid-template-columns:1fr 1fr ;
     gap: 20px;
 }
 
