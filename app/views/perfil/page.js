@@ -1,22 +1,51 @@
-import React from 'react';
+"use client";
+import React, { useState } from 'react';
 import styles from './perfil.module.css';
-import Image from "next/image";
 import Navegador from '@/app/components/navegador';
 
 const UserProfile = () => {
+  const [imageSrc, setImageSrc] = useState(null);
+
+  
+  const handleFileInputChange = (event) => {
+    const file = event.target.files[0];
+    if (file) {
+  
+      const fileURL = URL.createObjectURL(file);
+      setImageSrc(fileURL);
+    }
+  };
+
   return (
     <div className={styles.container}>
-       
-     <div className={styles.headerRegistro}>
-               <h1 className={styles.username}>Juan Cruz</h1>
-     
-
-     </div>
-     <div className={styles.separator}>
-          <hr className={styles.line} />
-          <span></span>
-          <hr className={styles.line} />
+      <div className={styles.headerRegistro}>
+        <h1 className={styles.username}>Juan Cruz</h1>
+        <div className={styles.padrefoto}>
+          <div className={styles.FotoPerfil}>
+        
+            <input 
+              type="file" 
+              onChange={handleFileInputChange} 
+              className={styles.cambiafoto} 
+              style={{ display: 'none' }} 
+              id="fileInput"
+            />
+            <label htmlFor="fileInput" className={styles.cambiafoto}>
+              {imageSrc ? (
+                <img src={imageSrc} alt="Perfil" className={styles.profileImage} />
+              ) : (
+                'Selecciona un archivo'
+              )}
+            </label>
+            
+          </div>
         </div>
+      </div>
+      <div className={styles.separator}>
+        <hr className={styles.line} />
+        <span></span>
+        <hr className={styles.line} />
+      </div>
       <div className={styles.menu2}>
         <div className={styles.menuItem}>
           <span className={styles.icon}>
@@ -62,7 +91,7 @@ const UserProfile = () => {
         <div className={styles.menuItem}>
           <span className={styles.icon}>
             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" className="bi bi-info-circle" viewBox="0 0 16 16">
-              <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16"/>
+              <path d="8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16"/>
               <path d="m8.93 6.588-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533zM9 4.5a1 1 0 1 1-2 0 1 1 0 0 1 2 0"/>
             </svg>
           </span>
@@ -73,6 +102,8 @@ const UserProfile = () => {
           <span></span>
           <hr className={styles.line} />
         </div>
+
+        
         <div className={styles.menuItemLog}>
           <span className={styles.icon}>
             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" className="bi bi-box2-heart" viewBox="0 0 16 16">
