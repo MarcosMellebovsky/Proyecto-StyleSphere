@@ -32,12 +32,15 @@ export default function Favoritos() {
 
     return (
         <div className={styles.favoritosContainer}>
-            <h1>Favoritos</h1>
-            <Link className={styles.AHeader} href="../../views/Inicio">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" className="bi bi-chevron-left back-button" viewBox="0 0 16 16">
-                        <path fillRule="evenodd" d="M11.354 1.646a.5.5 0 0 1 0 .708L5.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0" />
-                    </svg>
-                </Link>
+            <div className={styles.VolverHeader}>
+            <Link className={styles.AHeader} href="./Inicio">
+                <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" className="bi bi-chevron-left back-button" viewBox="0 0 16 16">
+                    <path fillRule="evenodd" d="M11.354 1.646a.5.5 0 0 1 0 .708L5.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0"/>
+                </svg>
+            </Link>
+            <h1 className={styles.TituloCategorias}> Tus favoritos</h1>
+
+        </div>
             {favoritos.length > 0 ? (
                 <div className={styles.productosGrid}>
                     {favoritos.map((producto) => (
@@ -56,7 +59,16 @@ export default function Favoritos() {
                     ))}
                 </div>
             ) : (
-                <p className={styles.noFavoritos}>No tienes productos en favoritos.</p>
+                <div className={styles.container_noHay}>
+                    <div className={styles.div_noHay}>
+                            <img src='/favoritos.png'></img>
+                            <p className={styles.noFavoritos_principal}>¡No tienes productos en favoritos!</p>
+                            <div className={styles.div_links}>
+                                <p className={styles.noFavoritos}>Agrega los productos que mas te gusten a favoritos<Link href='../../views/productos'>Aqui</Link></p>
+                            </div>
+                    </div>
+                </div>
+                
             )}
            
         </div>
