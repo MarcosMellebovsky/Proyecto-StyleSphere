@@ -13,7 +13,7 @@ export default function Categorias() {
     const [productos, setProductos] = useState([]);
     const searchParams = useSearchParams();
     const idTipoProducto = searchParams.get('idTipoProducto');
-    const from = searchParams.get('from'); // Obtenemos el valor del parámetro 'from'
+    const from = searchParams.get('from'); 
     const router = useRouter();
 
     useEffect(() => {
@@ -70,7 +70,6 @@ export default function Categorias() {
         });
     };
 
-    // Determinamos la ruta de vuelta
     const backLink = from === 'productos' ? '/views/productos' : '/views/Inicio';
 
     return (

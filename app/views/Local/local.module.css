@@ -11,6 +11,7 @@
 .cardsContainer {
     display: grid;
     grid-template-columns: auto;
+    padding-bottom: 4rem;
 }
 
 .card {

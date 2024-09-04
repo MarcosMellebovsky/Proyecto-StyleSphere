@@ -31,7 +31,7 @@ export default function Inicio() {
     }, []);
   
     const handleLocalClick = (local) => {
-      router.push(`/views/categorias?idTienda=${local.idProducto}`);
+      router.push(`/views/categorias_locales?idTienda=${local.idTienda}`);
     };
     
     return(

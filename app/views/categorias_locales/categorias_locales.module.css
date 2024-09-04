@@ -1,0 +1,27 @@
+.container {
+    padding: 20px;
+}
+
+.productosContainer {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.productoCard {
+    border: 1px solid #ddd;
+    padding: 10px;
+    border-radius: 5px;
+    width: 200px;
+    text-align: center;
+}
+
+.productoImg {
+    width: 100%;
+    height: auto;
+    border-radius: 5px;
+}
+
+.productoInfo {
+    margin-top: 10px;
+}
