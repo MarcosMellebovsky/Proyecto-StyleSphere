@@ -3,6 +3,7 @@ import React, { useState, useEffect } from 'react';
 import styles from './favoritos.module.css';
 import Swal from 'sweetalert2';
 import Link from 'next/link';
+import Navegador from '@/app/components/navegador';
 
 export default function Favoritos() {
     const [favoritos, setFavoritos] = useState([]);
@@ -70,7 +71,8 @@ export default function Favoritos() {
                 </div>
                 
             )}
-           
+                 <Navegador />
         </div>
+        
     );
 }
