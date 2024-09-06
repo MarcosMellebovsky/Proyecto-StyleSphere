@@ -40,6 +40,7 @@ export default function Inicio() {
               <SearchBar />
             </div>
             <div className={styles.cardsContainer}>
+              
               <div className={styles.cards}>
                 {locales.map((local, index) => (
                   <div 
