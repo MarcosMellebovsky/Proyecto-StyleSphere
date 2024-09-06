@@ -1,4 +1,25 @@
-/* estilos.css */
+/* CSS global */
+.body {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    overflow-x: hidden; /* Evita el corrimiento horizontal */
+}
+
+
+
+.imagenTiendaContainer {
+    width: 100%;
+    height: 250px; /* Aumenta la altura para que ocupe más espacio */
+    overflow: hidden;
+    position: relative;
+}
+
+.imagenTienda {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Asegura que la imagen se ajuste al contenedor sin distorsionarse */
+}
 
 .TituloCategorias {
     flex-grow: 1; 
@@ -28,6 +49,8 @@
     padding: 20px;
     max-width: 600px;
     margin: 0 auto;
+    background-color: aqua;
+    overflow: hidden; /* Asegura que no haya desplazamiento vertical */
 }
 
 .productosContainer {

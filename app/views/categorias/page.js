@@ -75,7 +75,7 @@ export default function Categorias() {
     return (
         <>
             <div className={styles.HeaderPadre}>
-                <SearchBar onFocus={() => router.push('/views/search')} />
+                <SearchBar/>
             </div>
 
             <div className={styles.VolverHeader}>

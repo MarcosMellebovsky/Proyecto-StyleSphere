@@ -35,8 +35,9 @@ export default function Inicio() {
       router.push(`/views/categorias?idTipoProducto=${producto.idTipoProducto}&from=Inicio`);
   };
   const handleLocalClick = (local) => {
-    router.push(`/views/categorias_locales?idTienda=${local.idTienda}`);
+    router.push(`/views/categorias_locales?idTienda=${local.idTienda}&from=Inicio`);
   };
+  
   
   
     return (
@@ -90,7 +91,7 @@ export default function Inicio() {
                 {locales.map((local, index) => (
                   <div key={index} className={styles.card} onClick={() => handleLocalClick(local)}>
                     <div className="card">
-                      <img height={100} width={200} src={local.imagen} className={styles.cardImgTop} alt={local.nombreLocal} />
+                      <img height={100} width={200} src={local.imagenTienda} className={styles.cardImgTop} alt={local.nombreLocal} />
                       <div className="card-body">
                         <h5 className="card-title">{local.nombre}</h5>
                         <p className="card-text">{local.direccion}</p>

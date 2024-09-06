@@ -3,8 +3,17 @@
   padding: 0;
   box-sizing: border-box;
 }
+*,
+*::before,
+*::after {
+    box-sizing: inherit; /* Aplica box-sizing a todos los elementos */
+}
 body {
   font-family: Arial, sans-serif;
-  overflow-x: hidden; 
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  overflow-x: hidden; /* Evita el corrimiento horizontal */
+
 }
 
