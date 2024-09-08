@@ -1,11 +1,11 @@
 
 
 .username {
-  font-size: 2rem; /* Tamaño de fuente mayor para destacar el nombre */
-  font-weight: 600; /* Negrita para el nombre */
-  color: #333; /* Color de texto oscuro para mejor legibilidad */
-  margin-top: 4rem; /* Mayor margen superior para separación del borde superior */
-  margin-bottom: 2rem; /* Margen inferior para separación de los elementos del menú */
+  font-size: 2rem; 
+  font-weight: 600; 
+  color: #333;
+  margin-top: 4rem; 
+  margin-bottom: 2rem; 
 }
 .headerRegistro {
  
@@ -24,13 +24,13 @@
 }
 .menu {
   width: 100%;
-  max-width: 600px; /* Ancho máximo para el menú */
-  margin-top: 2rem; /* Menor margen superior */
+  max-width: 600px; 
+  margin-top: 2rem; 
   border-top: 1px solid #ddd;
   border-bottom: 1px solid #ddd;
-  background-color: #fff; /* Fondo blanco para el menú */
-  border-radius: 8px; /* Bordes redondeados para el menú */
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Sombra ligera para el menú */
+  background-color: #fff; 
+  border-radius: 8px; 
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); 
 }
 
   
@@ -38,17 +38,17 @@
   display: flex;
   align-items: center;
   padding: 15px;
-  border-bottom: 1px solid #ddd; /* Borde inferior en lugar de borde superior para separar elementos */
+  border-bottom: 1px solid #ddd; 
   gap: 1rem;
   padding: 30px;
-  color: #333; /* Color de texto oscuro para legibilidad */
-  transition: background-color 0.3s, color 0.3s; /* Transiciones suaves para los efectos hover */
+  color: #333; 
+  transition: background-color 0.3s, color 0.3s; 
 }
 
 
 .menuItem:hover {
-  background-color: #f0f0f0; /* Fondo ligeramente gris en hover para destacar el ítem */
-  color: #007bff; /* Color de texto en hover para destacar el ítem */
+  background-color: #f0f0f0; 
+  color: #007bff; 
 }
 
 .icon {
@@ -59,27 +59,29 @@
 }
 
 .icon svg {
-  width: 24px; /* Tamaño más grande para los íconos */
-  height: 24px; /* Tamaño más grande para los íconos */
-  fill: #333; /* Color de los íconos oscuro */
+  width: 24px; 
+  height: 24px; 
+  fill: #333;
 }
 
 .logout {
   color: #e74c3c;
-   /* Color rojo para el texto de cerrar sesión */
-  font-weight: bold; /* Negrita para el texto de cerrar sesión */
+  font-weight: bold; 
 }
+
 
 .menuItemLog {
   display: flex;
   align-items:  center;
-  height: 150px;
   padding: 15px;
-  border-bottom: 1px solid #ddd; /* Borde inferior en lugar de borde superior para separar elementos */
+  border-bottom: 1px solid #ddd; 
   gap: 1rem;
   padding: 30px;
-  color: #333; /* Color de texto oscuro para legibilidad */
-  transition: background-color 0.3s, color 0.3s; /* Transiciones suaves para los efectos hover */
+  color: #333; 
+  transition: background-color 0.3s, color 0.3s;
+}
+.menuItemLog:hover{
+  background-color: #f0f0f0; 
 }
 .FotoPerfil {
   border: solid red 5px;
@@ -108,8 +110,8 @@
 
 .cambiafoto {
   background-color: red;
-  width: 140px; /* Ancho igual al contenedor */
-  height: 140px; /* Altura igual al contenedor */
+  width: 140px; 
+  height: 140px; 
   border: none;
   display: flex;
   justify-content: center;

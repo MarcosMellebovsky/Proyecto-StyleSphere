@@ -6,19 +6,10 @@ import Navegador from '../../components/navegador';
 import styles from "./local.module.css";
 
 export default function Inicio() {
-    const [productos, setProductos] = useState([]);
     const [locales, setLocales] = useState([]);
     const router = useRouter();
   
-    useEffect(() => {
-      const fetchProductos = async () => {
-        const response = await fetch('http://localhost:3001/api/producto');
-        const data = await response.json();
-        setProductos(data);
-      };
-  
-      fetchProductos();
-    }, []);
+   
   
     useEffect(() => {
       const fetchLocales = async () => {
