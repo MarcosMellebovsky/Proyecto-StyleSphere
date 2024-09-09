@@ -211,9 +211,7 @@
   margin-bottom: 20px;
 }
 
-.invalid .input_field {
-  border: 2px solid red;
-}
+
 
 .valid .input_field {
   border: 2px solid green;
