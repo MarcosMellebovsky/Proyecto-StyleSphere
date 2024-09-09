@@ -35,6 +35,7 @@
     align-items: center;
     margin-right: auto; 
     color: black;
+    width: 20%;
 }
 
 .VolverHeader{
@@ -145,4 +146,53 @@
 
 .botonCard:hover {
     background-color: #2268ff;
+}
+
+.filtrosContainer {
+    display: flex;
+    gap: 10px; /* Espacio entre los botones */
+    overflow-x: auto; /* Habilitar desplazamiento horizontal */
+    padding: 10px;
+    scrollbar-width: thin; /* Anchura del scrollbar (en Firefox) */
+}
+
+.filtrosContainer::-webkit-scrollbar {
+    height: 6px; /* Altura del scrollbar en Chrome */
+}
+
+.filtrosContainer::-webkit-scrollbar-thumb {
+    background-color: rgba(0, 0, 0, 0.2); /* Color del scrollbar */
+    border-radius: 10px;
+}
+
+.botonActivo {
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 25px;
+    font-size: 14px;
+    cursor: pointer;
+    white-space: nowrap; /* Evita que el texto se rompa */
+    transition: background-color 0.3s ease;
+}
+
+.filtrosContainer button {
+    background-color: #f1f1f1;
+    color: #333;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 25px;
+    font-size: 14px;
+    cursor: pointer;
+    white-space: nowrap; /* Evita que el texto se rompa */
+    transition: background-color 0.3s ease;
+}
+
+.filtrosContainer button:hover {
+    background-color: #ddd;
+}
+
+.filtrosContainer button:active {
+    background-color: #ccc;
 }

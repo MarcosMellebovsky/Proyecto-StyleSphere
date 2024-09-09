@@ -1,14 +1,13 @@
 "use client";
 import { useState } from "react";
 import Link from "next/link";
-import Image from "next/image";
 import styles from './registro.module.css';
 export default function Form() {
   return (
     <>
      <div className={styles.hoad}> 
      <div className={styles.headerRegistro}>
-          <Image
+          <img
             src={"/logo.png"}
             alt="Logo"
             className={styles.logo}
