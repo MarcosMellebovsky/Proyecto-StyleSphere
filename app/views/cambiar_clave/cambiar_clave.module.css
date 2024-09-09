@@ -1,0 +1,113 @@
+.VolverHeader {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    padding-bottom: 20px; 
+}
+.AHeader {
+    display: flex;
+    align-items: center;
+    color: black;
+    margin-right: auto;
+
+}
+.container {
+    padding: 30px;
+    margin-top: 2rem;
+   
+}
+.TituloCategorias {
+    
+ 
+        font-size: 2.5rem;
+        color: #41419b; ;
+        font-weight: 600 bold;
+        letter-spacing: -1px;
+        position: relative;
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        padding-left: 30px;
+      
+      
+      
+}   
+.padreTitulo{
+    width: 250px;
+}
+.subtitulo{
+    font-size: 18px;
+    display: flex;
+    color:grey;
+    padding-left: 30px;
+    margin-top: 2rem;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+   
+
+}
+.padreSubtitulo{
+    width: 95vw;
+}
+
+.input_container {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    margin-top: 2rem;
+   
+   
+  }
+
+  .checkbox_label {
+    display: flex;
+    align-items: center;
+    font-size: 20px;
+    margin-bottom: 0.5rem;
+  }
+  
+  .checkbox_input {
+    margin-right: 10px;
+  }
+
+  
+  .submit_button {
+    background: #007bff;
+    color: #fff;
+    padding: 10px;
+    border: none;
+    border-radius: 4px;
+    font-size: 18px;
+    text-align: center;
+    text-decoration: none;
+    width: 100%;
+    margin-top: 1.5rem;
+  }
+  
+  .submit_button:hover {
+    background: #0056b3;
+  }
+  .todo {
+    display: flex;
+   margin-left: 10px;
+  align-items: center;
+  }
+  .form {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    gap: 10px;
+    padding: 20px;
+    border-radius: 20px;
+    position: relative;
+  }
+  .input {
+    width: 85vw;
+    padding: 20px 20px 20px 10px;
+    outline: 0;
+    border: 1px solid rgba(105, 105, 105, 0.397);
+    border-radius: 10px;
+  }
+  
