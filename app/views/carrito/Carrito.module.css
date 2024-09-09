@@ -1,0 +1,28 @@
+.container {
+    padding: 20px;
+    min-height: 100vh;
+    font-family: 'Arial', sans-serif;
+    color: #333;
+    background-color: #f8f9fa;
+}
+.VolverHeader {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    padding-bottom: 20px; 
+}
+.AHeader {
+    display: flex;
+    align-items: center;
+    color: black;
+    margin-right: auto;
+
+}
+.TituloCategorias {
+    flex-grow: 1;
+    text-align: center;
+    margin: 0;
+    font-size: 1.6rem; 
+    font-weight: 600;
+}
