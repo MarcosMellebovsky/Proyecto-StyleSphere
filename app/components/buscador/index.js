@@ -3,7 +3,7 @@ import Image from 'next/image';
 import Styles from "./navegador.module.css";
 import Link from 'next/link';
 
-const SearchBar = ({ value, onChange = () => {}, onSearch, onFocus }) => {
+const SearchBar = ({ value, onChange = () => {}, onFocus }) => {
 
   const [result, setResult] = useState([]);
   const [filteredResult, setFilteredResult] = useState([]);

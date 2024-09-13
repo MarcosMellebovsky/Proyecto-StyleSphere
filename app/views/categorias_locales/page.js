@@ -97,7 +97,7 @@ export default function CategoriaLocales() {
                     <button onClick={() => fetchProductos(idTienda)} className={!categoriaSeleccionada ? styles.botonActivo : ''}>Todos</button>
                     {categorias.map(categoria => (
                         <button 
-                            key={categoria.id} 
+                            key={categoria.idTipoProducto} 
                             onClick={() => fetchProductosFiltrados(categoria.idTipoProducto)} 
                             className={categoriaSeleccionada === categoria.idTipoProducto ? styles.botonActivo : ''}
                         >
