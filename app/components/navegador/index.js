@@ -46,6 +46,7 @@ const Navegador = () => {
             <p className={`${styles.itemsNav} ${pathname === '/views/Local' ? styles.active : ''}`}>Locales</p>
           </Link>
         </div>
+        
         <div className={`${styles.itemsNav} ${pathname === '/views/perfil' ? styles.active : ''}`}>
           <Link className={styles.linkNav} href="../views/perfil">
           <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" className="bi bi-person" viewBox="0 0 16 16">

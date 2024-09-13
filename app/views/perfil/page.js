@@ -6,9 +6,6 @@ import { UserContext } from '../../components/contexts/UserContext';
 import Navegador from '@/app/components/navegador';
 
 const UserProfile = () => {
-  const [username, setUsername] = useState(""); 
-  const [email, setEmail] = useState(""); 
-  const [password, setPassword] = useState(""); 
   const [imageSrc, setImageSrc] = useState(null);
   const { user } = useContext(UserContext); 
   

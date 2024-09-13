@@ -41,12 +41,7 @@ export default function Registro() {
         body: JSON.stringify({ email, password, nombre, apellido }),
       });
   
-      // Verifica el estado de la respuesta
-      console.log("Response status:", response.status);
-  
-      // Leemos el cuerpo una vez
       const responseBody = await response.text();
-  
       if (response.ok && responseBody) {
         const data = JSON.parse(responseBody);
         localStorage.setItem("user", JSON.stringify(data));
