@@ -31,33 +31,39 @@ export default function Registro() {
       setErrorMessage("Las contraseñas no coinciden.");
       return;
     }
-
+  
     try {
       const response = await fetch("http://localhost:3001/api/cliente/register", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ email, password, nombre , apellido}),
+        body: JSON.stringify({ email, password, nombre, apellido }),
       });
-
-      const data = await response.json();
-      console.log(data)
-
-      if (response.ok) {
+  
+      // Verifica el estado de la respuesta
+      console.log("Response status:", response.status);
+  
+      // Leemos el cuerpo una vez
+      const responseBody = await response.text();
+  
+      if (response.ok && responseBody) {
+        const data = JSON.parse(responseBody);
         localStorage.setItem("user", JSON.stringify(data));
-        localStorage.setItem("apellido", JSON.stringify(data));
-
         setUser(data);
-        router.push("../../views/Inicio");
+        router.push("../../views/iniciar_Sesion");
+      } else if (responseBody) {
+        const errorData = JSON.parse(responseBody);
+        setErrorMessage(errorData.message || "Error al registrar el usuario.");
       } else {
-        setErrorMessage(data.message || "Error al registrar el usuario.");
+        setErrorMessage("Error desconocido al registrar el usuario.");
       }
     } catch (error) {
-      setErrorMessage("Error al conectar con la API");
-      console.log(error)
+      console.error("Error fetching data:", error);
+      setErrorMessage("Hubo un problema al comunicarse con el servidor.");
     }
   };
+  
 
   return (
     <>

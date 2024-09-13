@@ -38,7 +38,7 @@ export default function Iniciar_Sesion() {
         },
         body: JSON.stringify({ email, password }),
       });
-
+      console.log(response)
       const data = await response.json();
 
       if (response.ok) {
