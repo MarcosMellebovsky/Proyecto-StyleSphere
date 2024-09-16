@@ -44,8 +44,16 @@
         border:1px solid rgb(201, 201, 201);
         border-radius: 5px;
     }
+    .contenedorVerMas{
+        display: flex;
+        align-items: center;
+        color: rgb(75, 108, 255);
+    }
+    .verTodas{
+        text-decoration: none;
+        color: rgb(75, 108, 255);
+    }
 
-    /* Sección Ofertas */
     .ofertas {
         margin-top: 1rem;
         box-shadow: rgba(14, 30, 37, 0.12) 0px 2px 4px 0px, rgba(14, 30, 37, 0.32) 0px 2px 16px 0px;
