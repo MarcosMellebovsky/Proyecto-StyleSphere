@@ -28,9 +28,7 @@ export default function cambiarContra() {
             <div className={styles.input_container}>
             <label required className={styles.checkbox_label}> Email* </label>
         <input required placeholder="" type="email" className={styles.input} />
-
-     
-     <Link href="../views/Inicio"> <button className={styles.submit_button}>Siguiente</button></Link>
+     <Link href="../views/codigoGmail"> <button className={styles.submit_button} type="submit">Siguiente</button></Link>
             </div>
             </form> </div>
     </>)

@@ -1,0 +1,120 @@
+.AHeader {
+    display: flex;
+    align-items: center;
+    color: black;
+    margin-right: auto;
+}
+
+.username {
+    font-size: 2rem; 
+    font-weight: 600; 
+    color: #333;
+    margin-top: 4rem; 
+    margin-bottom: 2rem; 
+}
+
+.headerRegistro {
+    background-color: #41419b; /* Color del header azul */
+    padding: 20px;
+    text-align: center;
+    width: 100%;
+    height: 200px;
+    position: relative; /* Esto permitirá que la imagen se superponga */
+    margin-bottom: 40px; /* Espacio para la superposición de la imagen */
+}
+
+.padrefoto {
+    position: absolute; /* Hacer que la imagen se superponga */
+    top: 80%; /* Ajustar la posición de la imagen sobre el header */
+    left: 50%;
+    transform: translate(-50%, -50%); /* Centrar la imagen */
+}
+
+.FotoPerfil {
+    border-radius: 50%;
+    width: 140px;
+    height: 140px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+}
+
+.profileImage {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; 
+}
+
+.cambiafoto {
+    background-color: red;
+    width: 140px;
+    height: 140px;
+    border: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    position: relative;
+}
+.cambiafoto::after {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    font-size: 14px;
+    pointer-events: none; 
+  }
+.formContainer {
+    margin-top: 100px; /* Espacio para evitar la superposición del formulario con la imagen */
+  display: flex;
+    align-items: center;
+ flex-wrap: wrap;
+ justify-content: center;
+    
+}
+
+.botonModificar {
+    border: none;
+    border-radius: 10px;
+    
+    margin: 10px;
+    width: 50%;
+    padding: 10px;
+    background-color: #41419b;;
+    font-weight: bold;
+    font-size: 1.1rem;
+    margin-top: 40px;
+    color: white;
+}
+
+.inputt {
+    border: 2px solid  #41419b ;
+    border-radius: 10px;
+    margin: 10px;
+    width: 90vw;
+    padding: 10px;
+    font-weight: bold;
+}
+
+.labell {
+    font-weight: bold;
+    margin-top: 10px;
+}
+
+
+.formPerfil{
+    display: flex;
+    justify-content: center;
+    align-items: baseline;
+    flex-direction: column;
+    
+    width: 100%;
+ 
+  }
+
+  .p{
+    margin-top: 10px;
+    font-weight: bold;
+  }
