@@ -61,7 +61,7 @@ export default function Categorias() {
             icon: isAdding ? "success" : "info",
             title: isAdding ? "Se añadió a favoritos" : "Se eliminó de tus favoritos",
             showConfirmButton: false,
-            timer: 2500,
+            timer: 1000,
             timerProgressBar: true,
             didOpen: (toast) => {
                 toast.onmouseenter = Swal.stopTimer;
