@@ -21,7 +21,7 @@ export default function Categorias() {
   useEffect(() => {
     const fetchProductos = async () => {
       try {
-        const response = await fetch(`http://localhost:3001/api/producto/${idTipoProducto}`);
+        const response = await fetch(`http://localhost:3001/api/producto/productos_id/${idTipoProducto}`);
         const data = await response.json();
         setProductos(data);
 
