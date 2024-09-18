@@ -1,5 +1,5 @@
 "use client";
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { useSearchParams } from 'next/navigation';
 import Link from 'next/link';
 import styles from './categorias.module.css';
@@ -7,6 +7,7 @@ import SearchBar from '../../components/buscador';
 import Swal from 'sweetalert2';
 import { useRouter } from 'next/navigation';
 import Navegador from '@/app/components/navegador';
+import { UserContext } from '@/app/components/contexts/UserContext';
 
 export default function Categorias() {
     const [isBookmarked, setIsBookmarked] = useState({});
@@ -15,60 +16,62 @@ export default function Categorias() {
     const idTipoProducto = searchParams.get('idTipoProducto');
     const from = searchParams.get('from'); 
     const router = useRouter();
+    const { user } = useContext(UserContext); 
+  
+  useEffect(() => {
+    const fetchProductos = async () => {
+      try {
+        const response = await fetch(`http://localhost:3001/api/producto/${idTipoProducto}`);
+        const data = await response.json();
+        setProductos(data);
 
-    useEffect(() => {
-        const fetchProductos = async () => {
-            try {
-                const response = await fetch(`http://localhost:3001/api/producto/${idTipoProducto}`);
-                if (!response.ok) {
-                    throw new Error('Error al obtener los productos');
-                }
-                const data = await response.json();
-                setProductos(data);
-
-                const favoritosGuardados = JSON.parse(localStorage.getItem('productosFavoritos')) || {};
-                setIsBookmarked(favoritosGuardados);
-            } catch (error) {
-                console.error('Error:', error);
-            }
-        };
-
-        if (idTipoProducto) {
-            fetchProductos();
+        if (user.idCliente) {
+          // Obtener los favoritos del cliente desde la base de datos
+          const favoritosResponse = await fetch(`http://localhost:3001/api/favorito/${user.idCliente}`);
+          const favoritosData = await favoritosResponse.json();
+          const favoritos = {};
+          favoritosData.forEach(fav => favoritos[fav.idProducto] = true);
+          setIsBookmarked(favoritos);
         }
-    }, [idTipoProducto]);
-
-    const agregarAFavoritos = (producto) => {
-        let favoritosGuardados = { ...isBookmarked };
-
-        if (favoritosGuardados[producto.idProducto]) {
-            delete favoritosGuardados[producto.idProducto];
-        } else {
-            favoritosGuardados[producto.idProducto] = producto;
-        }
-
-        localStorage.setItem('productosFavoritos', JSON.stringify(favoritosGuardados));
-        setIsBookmarked(favoritosGuardados);
+      } catch (error) {
+        console.error('Error:', error);
+      }
     };
 
-    const toggleBookmark = (producto) => {
-        agregarAFavoritos(producto);
+    if (idTipoProducto) {
+      fetchProductos();
+    }
+  }, [idTipoProducto, user.idCliente]);
 
-        const isAdding = !isBookmarked[producto.idProducto];
-        Swal.fire({
-            toast: true,
-            position: "bottom-end",
-            icon: isAdding ? "success" : "info",
-            title: isAdding ? "Se añadió a favoritos" : "Se eliminó de tus favoritos",
-            showConfirmButton: false,
-            timer: 1000,
-            timerProgressBar: true,
-            didOpen: (toast) => {
-                toast.onmouseenter = Swal.stopTimer;
-                toast.onmouseleave = Swal.resumeTimer;
-            }
+  const toggleBookmark = async (producto) => {
+    const isAdding = !isBookmarked[producto.idProducto];
+    try {
+      if (isAdding) {
+        await fetch('http://localhost:3001/api/favorito', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ idProducto: producto.idProducto, idCliente: user.idCliente })
         });
-    };
+      } else {
+        await fetch(`http://localhost:3001/api/favorito/${producto.idProducto}`, {
+          method: 'DELETE'
+        });
+      }
+      setIsBookmarked(prev => ({ ...prev, [producto.idProducto]: isAdding }));
+
+      Swal.fire({
+        toast: true,
+        position: "bottom-end",
+        icon: isAdding ? "success" : "info",
+        title: isAdding ? "Se añadió a favoritos" : "Se eliminó de tus favoritos",
+        showConfirmButton: false,
+        timer: 1000,
+        timerProgressBar: true,
+      });
+    } catch (error) {
+      console.error('Error al modificar favoritos:', error);
+    }
+  };
 
     const backLink = from === 'productos' ? '/views/productos' : '/views/Inicio';
 

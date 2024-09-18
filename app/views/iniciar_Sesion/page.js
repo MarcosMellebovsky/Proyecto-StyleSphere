@@ -12,7 +12,6 @@ export default function Iniciar_Sesion() {
 
   const [password, setPassword] = useState("");
   const [mailValido, setmailValido] = useState(null);
-  const [mostrarContrasena, setMostrarContrasena] = useState(false);
   const [errorMessage, setErrorMessage] = useState(""); 
   const router = useRouter();
 
@@ -23,9 +22,7 @@ export default function Iniciar_Sesion() {
     setmailValido(emailRegla.test(value));
   };
 
-  const toggleMostrarContrasena = () => {
-    setMostrarContrasena(!mostrarContrasena);
-  };
+  
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -88,7 +85,7 @@ export default function Iniciar_Sesion() {
             <input
               required
               placeholder=""
-              type={mostrarContrasena ? "text" : "password"}
+              type= "password"
               className={styles.input}
               value={password}
               onChange={(e) => setPassword(e.target.value)}
@@ -96,10 +93,8 @@ export default function Iniciar_Sesion() {
             <span>Contraseña*</span>
             <button
               type="button"
-              onClick={toggleMostrarContrasena}
               className={styles.toggleButton}
             >
-              {mostrarContrasena ? "Ocultar" : "Mostrar"}
             </button>
           </label>
 

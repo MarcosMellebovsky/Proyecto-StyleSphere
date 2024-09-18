@@ -64,7 +64,7 @@ export default function CategoriaLocales() {
 
     const fetchProductosFiltrados = async (idTipoProducto) => {
         try {
-            const response = await fetch(`http://localhost:3001/api/producto/productos_filtro?seleccionados=${idTipoProducto}&idTienda=${idTienda}`);
+            const response = await fetch(`http://localhost:3001/api/producto/productos_filtro?seleccionados=${idTipoProducto}`);
             const data = await response.json();
             setProductos(data); 
             setCategoriaSeleccionada(idTipoProducto); 

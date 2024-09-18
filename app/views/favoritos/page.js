@@ -1,32 +1,56 @@
 "use client";
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import styles from './favoritos.module.css';
 import Swal from 'sweetalert2';
 import Link from 'next/link';
 import Navegador from '@/app/components/navegador';
+import { UserContext } from '@/app/components/contexts/UserContext';
 
 export default function Favoritos() {
+    const { user } = useContext(UserContext);
     const [favoritos, setFavoritos] = useState([]);
-
+  
     useEffect(() => {
+      const fetchFavoritos = async () => {
         try {
-            const productosFavoritos = JSON.parse(localStorage.getItem('productosFavoritos'));
-            setFavoritos(Object.values(productosFavoritos));
+          const response = await fetch(`http://localhost:3001/api/favorito/${user.idCliente}`);
+          const data = await response.json();
+          setFavoritos(data);
+        } catch (error) {
+          console.error('Error al obtener favoritos:', error);
         }
-        catch {
+      };
+  
+      if (user.idCliente) {
+        fetchFavoritos();
+      }
+    }, [user.idCliente]);
+  
+    const toggleBookmark = async (idFavorito) => {
+        try {
+          const response = await fetch(`http://localhost:3001/api/favorito/${idFavorito}`, {
+            method: 'DELETE'
+          });
+      
+          if (!response.ok) {
+            throw new Error('Error al eliminar el favorito');
+          }
+      
+          setFavoritos(prev => prev.filter(favorito => favorito.idFavorito !== idFavorito));
+      
+          Swal.fire({
+            toast: true,
+            position: "bottom-end",
+            icon: "info",
+            title: "Se eliminó de tus favoritos",
+            showConfirmButton: false,
+            timer: 1000,
+            timerProgressBar: true,
+          });
+        } catch (error) {
+          console.error('Error al eliminar favorito:', error);
         }
-    }, []);
-
-    const toggleBookmark = (idProducto) => {
-        let productosFavoritos = JSON.parse(localStorage.getItem('productosFavoritos'));
-    
-        if (productosFavoritos[idProducto]) {
-            delete productosFavoritos[idProducto];
-            setFavoritos(Object.values(productosFavoritos));
-        }
-
-        localStorage.setItem('productosFavoritos', JSON.stringify(productosFavoritos));
-    };
+      };
 
     return (
         <div className={styles.favoritosContainer}>
@@ -43,10 +67,10 @@ export default function Favoritos() {
             {favoritos.length > 0 ? (
                 <div className={styles.productosGrid}>
                     {favoritos.map((producto) => (
-                        <div key={producto.id} className={styles.productItem}>
+                        <div key={producto.idProducto} className={styles.productItem}>
                             <div className={styles.imageContainer}>
                                 <img src={producto.imagen} alt={producto.nombre} className={styles.productImage} />
-                                <button onClick={() => toggleBookmark(producto.idProducto)} className={styles.bookmarkButton}>
+                                <button onClick={() => toggleBookmark(producto.idFavorito)} className={styles.bookmarkButton}>
                                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-bookmark-fill" viewBox="0 0 16 16">
                                         <path d="M2 2v13.5a.5.5 0 0 0 .74.439L8 13.069l5.26 2.87A.5.5 0 0 0 14 15.5V2a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2"/>
                                     </svg>
