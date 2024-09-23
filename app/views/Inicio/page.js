@@ -37,6 +37,11 @@ export default function Inicio() {
   const handleLocalClick = (local) => {
     router.push(`/views/categorias_locales?idTienda=${local.idTienda}&from=Inicio`);
   };
+
+  const handleProductosClick = () => {
+    router.push(`/views/productos`);
+  };
+
   
   
   
@@ -50,7 +55,7 @@ export default function Inicio() {
           <div className={styles.container}>
             <h2>Ofertas de hoy</h2>
             <p>Mira todas las prendas de nuestros locales, ¡no te las pierdas!</p>
-            <button className={styles.btn}>Ver más</button>
+            <button onClick={handleProductosClick} className={styles.btn}>Ver más</button>
           </div>
         </section>
   

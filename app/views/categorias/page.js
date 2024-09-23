@@ -15,6 +15,7 @@ export default function Categorias() {
     const searchParams = useSearchParams();
     const idTipoProducto = searchParams.get('idTipoProducto');
     const from = searchParams.get('from'); 
+    const [categoriaNombre, setCategoriaNombre] = useState(''); 
     const router = useRouter();
     const { user } = useContext(UserContext); 
   
@@ -24,9 +25,10 @@ export default function Categorias() {
         const response = await fetch(`http://localhost:3001/api/producto/productos_id/${idTipoProducto}`);
         const data = await response.json();
         setProductos(data);
-
+        if (data.length > 0) {
+          setCategoriaNombre(data[0].nombrecategoria);
+        }
         if (user.idCliente) {
-          // Obtener los favoritos del cliente desde la base de datos
           const favoritosResponse = await fetch(`http://localhost:3001/api/favorito/${user.idCliente}`);
           const favoritosData = await favoritosResponse.json();
           const favoritos = {};
@@ -72,6 +74,7 @@ export default function Categorias() {
       console.error('Error al modificar favoritos:', error);
     }
   };
+  
 
     const backLink = from === 'productos' ? '/views/productos' : '/views/Inicio';
 
@@ -82,16 +85,22 @@ export default function Categorias() {
             </div>
 
             <div className={styles.VolverHeader}>
+              <div className={styles.contendedorHeader}>
                 <Link className={styles.AHeader} href={backLink}>
-                    <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" className="bi bi-chevron-left back-button" viewBox="0 0 16 16">
-                        <path fillRule="evenodd" d="M11.354 1.646a.5.5 0 0 1 0 .708L5.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0" />
-                    </svg>
-                </Link>
+                      <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" className="bi bi-chevron-left back-button" viewBox="0 0 16 16">
+                          <path fillRule="evenodd" d="M11.354 1.646a.5.5 0 0 1 0 .708L5.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0" />
+                      </svg>
+                  </Link> 
+                  <h1 className={styles.categoriaTitle}>{categoriaNombre}</h1>
+              </div>
+                
+
+
                 <div className={styles.productsContainer}>
                     <div className={styles.productosGrid}>
                         {productos.length > 0 ? (
                             productos.map((producto) => (
-                                <div key={producto.idProducto} className={styles.productItem}>
+                                <div key={producto.idProducto}  className={styles.productItem}>
                                     <div className={styles.imageContainer}>
                                         <img src={producto.imagen} alt={producto.nombre} className={styles.productImage} />
                                         <button 
