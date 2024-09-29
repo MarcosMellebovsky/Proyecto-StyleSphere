@@ -38,17 +38,18 @@ export default function Iniciar_Sesion() {
       const data = await response.json();
 
       if (response.ok) {
-        localStorage.setItem("user", JSON.stringify(data))
+        // Guarda el token, nombre y apellido en localStorage y el contexto
+        localStorage.setItem("token", data.token); // Guarda el token
         setUser(data);
 
         router.push("../../views/Inicio");
       } else {
+        setErrorMessage("Email o contraseña incorrectos.");
       }
     } catch (error) {
       setErrorMessage("Error al conectar con la API");
     }
-  
-  };
+};
 
   return (
     <>

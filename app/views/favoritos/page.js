@@ -13,7 +13,12 @@ export default function Favoritos() {
     useEffect(() => {
       const fetchFavoritos = async () => {
         try {
-          const response = await fetch(`http://localhost:3001/api/favorito/${user.idCliente}`);
+          const token = localStorage.getItem('token'); // O el método que uses para obtener el token
+          const response = await fetch(`http://localhost:3001/api/favorito`, {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          });
           const data = await response.json();
           setFavoritos(data);
         } catch (error) {

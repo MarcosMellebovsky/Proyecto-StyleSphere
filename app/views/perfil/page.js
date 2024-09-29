@@ -25,7 +25,9 @@ const UserProfile = () => {
   return (
     <div className={styles.container}>
       <div className={styles.headerRegistro}>
-      <h1 className={styles.username}>{user ? `${user.nombre} ${user.apellido}` : "Cargando..."}</h1>
+      <h1 className={styles.username}>          
+        {user && user.nombre && user.apellido ? `${user.nombre} ${user.apellido}` : "Cargando..."}
+      </h1>
         <div className={styles.padrefoto}>
           <div className={styles.FotoPerfil}>
             <input 
