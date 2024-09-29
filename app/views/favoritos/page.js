@@ -13,7 +13,7 @@ export default function Favoritos() {
     useEffect(() => {
       const fetchFavoritos = async () => {
         try {
-          const token = localStorage.getItem('token'); // O el método que uses para obtener el token
+          const token = localStorage.getItem('token'); 
           const response = await fetch(`http://localhost:3001/api/favorito`, {
             headers: {
               Authorization: `Bearer ${token}`,
@@ -32,30 +32,30 @@ export default function Favoritos() {
     }, [user.idCliente]);
   
     const toggleBookmark = async (idFavorito) => {
-        try {
+      try {
           const response = await fetch(`http://localhost:3001/api/favorito/${idFavorito}`, {
-            method: 'DELETE'
+              method: 'DELETE'
           });
-      
+  
           if (!response.ok) {
-            throw new Error('Error al eliminar el favorito');
+              throw new Error('Error al eliminar el favorito');
           }
-      
+  
           setFavoritos(prev => prev.filter(favorito => favorito.idFavorito !== idFavorito));
-      
+  
           Swal.fire({
-            toast: true,
-            position: "bottom-end",
-            icon: "info",
-            title: "Se eliminó de tus favoritos",
-            showConfirmButton: false,
-            timer: 1000,
-            timerProgressBar: true,
+              toast: true,
+              position: "bottom-end",
+              icon: "info",
+              title: "Se eliminó de tus favoritos",
+              showConfirmButton: false,
+              timer: 1000,
+              timerProgressBar: true,
           });
-        } catch (error) {
+      } catch (error) {
           console.error('Error al eliminar favorito:', error);
-        }
-      };
+      }
+  };
 
     return (
         <div className={styles.favoritosContainer}>
