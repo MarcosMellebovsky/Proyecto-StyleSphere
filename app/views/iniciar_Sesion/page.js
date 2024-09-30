@@ -6,6 +6,7 @@ import styles from "./iniciar_Sesion.module.css";
 import { UserContext } from "../../components/contexts/UserContext"; 
 
 
+
 export default function Iniciar_Sesion() {
   const [email, setEmail] = useState("");
   const { setUser } = useContext(UserContext); 
@@ -128,25 +129,15 @@ export default function Iniciar_Sesion() {
       </div>
 
       <div className={styles.divBtn}>
-        <button className={styles.btnG}>
-          <svg
-            version="1.1"
-            width="20"
-            id="Layer_1"
-            xmlns="http://www.w3.org/2000/svg"
-            xmlnsXlink="http://www.w3.org/1999/xlink"
-            x="0px"
-            y="0px"
-            viewBox="0 0 512 512"
-            style={{ enableBackground: "new 0 0 512 512" }}
-            xmlSpace="preserve"
-          >
-          </svg>
-          <button className={styles.btnG} onClick={() => window.location.href = 'http://localhost:3001/auth/google'}>
-  Regístrate con Google
-</button>
+       
+      <div className={styles.containerBtn}> 
+    <button className={styles.btnG} onClick={() => window.location.href = 'http://localhost:3001/auth/google'}>
+      <img src={"/google.png"} className={styles.iconGoogle}></img>
+      Regístrate con Google
+    </button>
+  </div>
 
-        </button>
+       
       </div>
     </>
   );

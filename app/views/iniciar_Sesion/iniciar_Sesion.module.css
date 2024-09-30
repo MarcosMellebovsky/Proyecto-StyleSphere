@@ -367,6 +367,30 @@
   font-size: 16px;
   transform: .3s ease;
 }
+.containerBtn{
+  display: flex;
+  justify-content: center;
+  margin-top: 2rem;
+  width: 100%;
+  justify-content: center;
+}
+.btnG {
+  display: flex; 
+  align-items: center; 
+  background-color: #ffffff; 
+  color: rgb(0, 0, 0); 
+  border: 1px solid rgb(180, 180, 180);
+  border-radius: 4px; 
+  font-size: 16px; 
+  padding: 5px;
+  width: 80%;
+  justify-content: center;
+}
+
+
+.iconGoogle{
+  width: 10%;
+}
 
 @keyframes pulse {
   from {

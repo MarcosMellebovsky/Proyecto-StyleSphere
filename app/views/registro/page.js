@@ -1,17 +1,22 @@
 "use client";
 import { useState, useContext } from "react";
 import { useRouter } from "next/navigation";
-import styles from "./Registro.module.css";
+import styles from "./registro.module.css";
 import { UserContext } from "../../components/contexts/UserContext"; 
 import Link from "next/link";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faGoogle } from '@fortawesome/free-brands-svg-icons';
+import { FaCheckCircle, FaTimesCircle, FaGoogle  } from "react-icons/fa"; // Importamos los íconos
 
 export default function Registro() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [confirmPassword, setConfirmPassword] = useState("");
   const [nombre, setName] = useState("");
-  const [apellido, setApellido] = useState("")
+  const [apellido, setApellido] = useState("");
   const [mailValido, setMailValido] = useState(null);
+  const [nombreValido, setNombreValido] = useState(null);
+  const [apellidoValido, setApellidoValido] = useState(null);
+  const [passwordValido, setPasswordValido] = useState(null);
   const [errorMessage, setErrorMessage] = useState("");
   const { setUser } = useContext(UserContext); 
   const router = useRouter();
@@ -23,15 +28,34 @@ export default function Registro() {
     setMailValido(emailRegla.test(value));
   };
 
+  const handleNombreChange = (e) => {
+    const value = e.target.value;
+    setName(value);
+    setNombreValido(value.length > 0);
+  };
 
+  const handleApellidoChange = (e) => {
+    const value = e.target.value;
+    setApellido(value);
+    setApellidoValido(value.length > 0);
+  };
+
+  const handlePasswordChange = (e) => {
+    const value = e.target.value;
+    setPassword(value);
+    setPasswordValido(value.length >= 6); 
+  };
+
+  const isFormValid = () => {
+    return (
+      nombreValido && apellidoValido && mailValido && passwordValido
+    );
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (password !== confirmPassword) {
-      setErrorMessage("Las contraseñas no coinciden.");
-      return;
-    }
-  
+    if (!isFormValid()) return;
+
     try {
       const response = await fetch("http://localhost:3001/api/cliente/register", {
         method: "POST",
@@ -40,7 +64,7 @@ export default function Registro() {
         },
         body: JSON.stringify({ email, password, nombre, apellido }),
       });
-  
+
       const responseBody = await response.text();
       if (response.ok && responseBody) {
         const data = JSON.parse(responseBody);
@@ -58,95 +82,127 @@ export default function Registro() {
       setErrorMessage("Hubo un problema al comunicarse con el servidor.");
     }
   };
-  
 
   return (
     <>
-      <div className={styles.hoad}> 
-     <div className={styles.headerRegistro}>
-          <img
-            src={"/logo.png"}
-            alt="Logo"
-            className={styles.logo}
-            width={400}
-            height={160}
-          />
+      <div className={styles.hoad}>
+        <div className={styles.headerRegistro}>
+          <img src={"/logo.png"} alt="Logo" className={styles.logo} width={400} height={160} />
         </div>
-     </div>
-     <h3 className={styles.bienvenida}>¡Bienvenido/a!</h3>
+      </div>
 
-      <div className={styles.todo}>
+      <div className={styles.contenedor}>
         <form className={styles.form} onSubmit={handleSubmit}>
-          <p className={styles.title}>Crear cuenta</p>
+          
+          <div className={styles.contenedor_subHeader}>
+            <h1 className={styles.title}>Crear cuenta</h1>
+            <p className={styles.p2}>Creemos tu cuenta.</p>
+          </div>
+          
 
-          <label>
-            <input
-              required
-              type="text"
-              className={styles.input}
-              value={nombre}
-              onChange={(e) => setName(e.target.value)}
-            />
-            <span>Nombre*</span>
-          </label>
+          <div className={styles.contenedor_inputs}>
+            <div className={styles.inputGroup}>
+            <label className={styles.label}>Nombre</label>
 
-          <label>
-            <input
-              required
-              type="text"
-              className={styles.input}
-              value={apellido}
-              onChange={(e) => setApellido(e.target.value)}
-            />
-            <span>Apellido*</span>
-          </label>
+              <input
+                required
+                type="text"
+                className={`${styles.input} ${nombreValido === false ? styles.inputError : nombreValido === true ? styles.inputSuccess : ''}`}
+                value={nombre}
+                onChange={handleNombreChange}
+                placeholder="Introduzca su nombre"
+              />
+              {nombreValido !== null && (
+                nombreValido ? <FaCheckCircle className={styles.iconSuccess} /> : <FaTimesCircle className={styles.iconError} />
+              )}
+            </div>
 
-          <label>
-            <input
-              required
-              type="email"
-              className={styles.input}
-              value={email}
-              onChange={handleEmailChange}
-            />
-            <span>Correo electrónico*</span>
-          </label>
+            <div className={styles.inputGroup}>
+            <label className={styles.label}>Apellido</label>
 
-          <label>
-            <input
-              required
-             type="password"
-              className={styles.input}
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-            />
-            <span>Contraseña*</span>
-           
-          </label>
+              <input
+                required
+                type="text"
+                className={`${styles.input} ${apellidoValido === false ? styles.inputError : apellidoValido === true ? styles.inputSuccess : ''}`}
+                value={apellido}
+                onChange={handleApellidoChange}
+                placeholder="Introduzca su apellido"
+              />
+              {apellidoValido !== null && (
+                apellidoValido ? <FaCheckCircle className={styles.iconSuccess} /> : <FaTimesCircle className={styles.iconError} />
+              )}
+            </div>
 
-          <label>
-            <input
-              required
-              type="password"
-              className={styles.input}
-              value={confirmPassword}
-              onChange={(e) => setConfirmPassword(e.target.value)}
-            />
-            <span>Confirmar contraseña*</span>
-          </label>
+            <div className={styles.inputGroup}>
+            <label className={styles.label}>Correo electrónico</label>
+
+              <input
+                required
+                type="email"
+                className={`${styles.input} ${mailValido === false ? styles.inputError : mailValido === true ? styles.inputSuccess : ''}`}
+                value={email}
+                onChange={handleEmailChange}
+                placeholder="Introduzca su correo electronico"
+              />
+              {mailValido !== null && (
+                mailValido ? <FaCheckCircle className={styles.iconSuccess} /> : <FaTimesCircle className={styles.iconError} />
+              )}
+            </div>
+
+            <div className={styles.inputGroup}>
+            <label className={styles.label}>Contraseña</label>
+
+              <input
+                required
+                type="password"
+                className={`${styles.input} ${passwordValido === false ? styles.inputError : passwordValido === true ? styles.inputSuccess : ''}`}
+                value={password}
+                onChange={handlePasswordChange}
+                placeholder="Introduzca su contraseña"
+              />
+              {passwordValido !== null && (
+                passwordValido ? <FaCheckCircle className={styles.iconSuccess} /> : <FaTimesCircle className={styles.iconError} />
+              )}
+            </div>
+
+          </div>
 
           {errorMessage && <p className={styles.errorMessage}>{errorMessage}</p>}
 
-          <button className={styles.submit} type="submit">
-            Registrarse
-          </button>
+          <div className={styles.contenedorBoton}>
 
-          <p className={styles.message}>
-            Al registrarse acepta nuestros términos de uso y política de privacidad.
+            <button
+              className={styles.submit}
+              type="submit"
+              disabled={!isFormValid()}
+              style={{ backgroundColor: isFormValid() ? 'blue' : 'grey' }}
+            >
+              Registrarse
+            </button>
+
+          </div>
+
+         
+
+        
+          <p className={styles.signin}>
+            Ya tienes cuenta? <Link className={styles.linkFromIniciarSesion} href={"../views/iniciar_Sesion"}>Iniciar sesión</Link>
           </p>
-          <p className={styles.signin}>Ya tienes cuenta? <Link href={"../views/iniciar_Sesion"}>Iniciar sesion</Link></p>
-
         </form>
+
+        <div className={styles.separator}>
+          <hr className={styles.line} />
+            <span>Acceso rapido con</span>
+          <hr className={styles.line} />
+      </div>
+      <div className={styles.containerBtn}> 
+    <button className={styles.btnG} onClick={() => window.location.href = 'http://localhost:3001/auth/google'}>
+      <img src={"/google.png"} className={styles.iconGoogle}></img>
+      Regístrate con Google
+    </button>
+  </div>
+        
+
       </div>
     </>
   );
