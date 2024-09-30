@@ -9,7 +9,7 @@ import { UserContext } from "../../components/contexts/UserContext";
 export default function Iniciar_Sesion() {
   const [email, setEmail] = useState("");
   const { setUser } = useContext(UserContext); 
-
+  const { login } = useContext(UserContext); 
   const [password, setPassword] = useState("");
   const [mailValido, setmailValido] = useState(null);
   const [errorMessage, setErrorMessage] = useState(""); 
@@ -36,10 +36,9 @@ export default function Iniciar_Sesion() {
         body: JSON.stringify({ email, password }),
       });
       const data = await response.json();
-
+      console.log(data)
       if (response.ok) {
-        // Guarda el token, nombre y apellido en localStorage y el contexto
-        localStorage.setItem("token", data.token); // Guarda el token
+        login(data); 
         setUser(data);
 
         router.push("../../views/Inicio");

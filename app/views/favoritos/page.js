@@ -9,23 +9,21 @@ import { UserContext } from '@/app/components/contexts/UserContext';
 export default function Favoritos() {
     const { user } = useContext(UserContext);
     const [favoritos, setFavoritos] = useState([]);
-  
     useEffect(() => {
       const fetchFavoritos = async () => {
         try {
-          const token = localStorage.getItem('token'); 
-          const response = await fetch(`http://localhost:3001/api/favorito`, {
+          const response = await fetch(`http://localhost:3001/api/favorito/`, {
             headers: {
-              Authorization: `Bearer ${token}`,
+              Authorization: `Bearer ${user.token}`,
+              method: 'GET'
             },
           });
           const data = await response.json();
-          setFavoritos(data);
+          setFavoritos(Array.isArray(data) ? data : []);
         } catch (error) {
           console.error('Error al obtener favoritos:', error);
         }
       };
-  
       if (user.idCliente) {
         fetchFavoritos();
       }
@@ -56,7 +54,6 @@ export default function Favoritos() {
           console.error('Error al eliminar favorito:', error);
       }
   };
-
     return (
         <div className={styles.favoritosContainer}>
 
