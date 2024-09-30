@@ -143,7 +143,10 @@ export default function Iniciar_Sesion() {
             xmlSpace="preserve"
           >
           </svg>
-          Regístrate con Google
+          <button className={styles.btnG} onClick={() => window.location.href = 'http://localhost:3001/auth/google'}>
+  Regístrate con Google
+</button>
+
         </button>
       </div>
     </>
