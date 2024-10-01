@@ -31,8 +31,8 @@
 }
 .contenedor_inputs {
   display: flex;
-  flex-direction: column; /* Asegura que los inputs estén en columna */
-  align-items: center; /* Centra horizontalmente los inputs */
+  flex-direction: column; 
+  align-items: center; 
 }
 .inputGroup {
   position: relative;
@@ -121,6 +121,7 @@
  .signin {
   text-align: center;
   color: gray;
+  margin-top: 1rem;
 }
 .linkFromIniciarSesion{
   color: black;
@@ -133,7 +134,7 @@
   justify-content: center;
   gap: 30px;
   color: #acacac;
-  padding-top: 2rem;
+  padding-top: .8rem;
 }
 
 .separator .line {
@@ -156,6 +157,8 @@
   background-color: #ffffff; 
   color: rgb(0, 0, 0); 
   border: 1px solid rgb(180, 180, 180);
+  gap: 10px;
+
   border-radius: 4px; 
   font-size: 16px; 
   padding: 5px;

@@ -4,9 +4,8 @@ import { useRouter } from "next/navigation";
 import styles from "./registro.module.css";
 import { UserContext } from "../../components/contexts/UserContext"; 
 import Link from "next/link";
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faGoogle } from '@fortawesome/free-brands-svg-icons';
-import { FaCheckCircle, FaTimesCircle, FaGoogle  } from "react-icons/fa"; // Importamos los íconos
+
+import { FaCheckCircle, FaTimesCircle  } from "react-icons/fa"; 
 
 export default function Registro() {
   const [email, setEmail] = useState("");
@@ -24,26 +23,42 @@ export default function Registro() {
   const handleEmailChange = (e) => {
     const value = e.target.value;
     setEmail(value);
-    const emailRegla = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    setMailValido(emailRegla.test(value));
+    if (value === "") {
+      setMailValido(null);
+    } else {
+      const emailRegla = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      setMailValido(emailRegla.test(value));
+    }
   };
-
+  
   const handleNombreChange = (e) => {
     const value = e.target.value;
     setName(value);
-    setNombreValido(value.length > 0);
+    if (value === "") {
+      setNombreValido(null);
+    } else {
+      setNombreValido(value.length > 0);
+    }
   };
-
+  
   const handleApellidoChange = (e) => {
     const value = e.target.value;
     setApellido(value);
-    setApellidoValido(value.length > 0);
+    if (value === "") {
+      setApellidoValido(null);
+    } else {
+      setApellidoValido(value.length > 0);
+    }
   };
-
+  
   const handlePasswordChange = (e) => {
     const value = e.target.value;
     setPassword(value);
-    setPasswordValido(value.length >= 6); 
+    if (value === "") {
+      setPasswordValido(null);
+    } else {
+      setPasswordValido(value.length >= 6);
+    }
   };
 
   const isFormValid = () => {
@@ -142,7 +157,7 @@ export default function Registro() {
                 className={`${styles.input} ${mailValido === false ? styles.inputError : mailValido === true ? styles.inputSuccess : ''}`}
                 value={email}
                 onChange={handleEmailChange}
-                placeholder="Introduzca su correo electronico"
+                placeholder="Introduzca su mail"
               />
               {mailValido !== null && (
                 mailValido ? <FaCheckCircle className={styles.iconSuccess} /> : <FaTimesCircle className={styles.iconError} />
@@ -175,19 +190,14 @@ export default function Registro() {
               className={styles.submit}
               type="submit"
               disabled={!isFormValid()}
-              style={{ backgroundColor: isFormValid() ? 'blue' : 'grey' }}
+              style={{ backgroundColor: isFormValid() ? '	#41419b' : 'grey' }}
             >
               Registrarse
             </button>
 
           </div>
-
-         
-
         
-          <p className={styles.signin}>
-            Ya tienes cuenta? <Link className={styles.linkFromIniciarSesion} href={"../views/iniciar_Sesion"}>Iniciar sesión</Link>
-          </p>
+         
         </form>
 
         <div className={styles.separator}>
@@ -201,6 +211,10 @@ export default function Registro() {
       Regístrate con Google
     </button>
   </div>
+
+  <p className={styles.signin}>
+            Ya tienes cuenta? <Link className={styles.linkFromIniciarSesion} href={"../views/iniciar_Sesion"}>Iniciar sesión</Link>
+          </p>
         
 
       </div>

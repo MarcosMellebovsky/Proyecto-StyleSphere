@@ -4,6 +4,8 @@ import Link from "next/link";
 import { useRouter } from "next/navigation"; 
 import styles from "./iniciar_Sesion.module.css";
 import { UserContext } from "../../components/contexts/UserContext"; 
+import { FaCheckCircle, FaTimesCircle  } from "react-icons/fa"; 
+
 
 
 
@@ -12,15 +14,37 @@ export default function Iniciar_Sesion() {
   const { setUser } = useContext(UserContext); 
   const { login } = useContext(UserContext); 
   const [password, setPassword] = useState("");
-  const [mailValido, setmailValido] = useState(null);
+  const [mailValido, setMailValido] = useState(null);
+  const [passwordValido, setPasswordValido] = useState(null);
+
   const [errorMessage, setErrorMessage] = useState(""); 
   const router = useRouter();
 
   const handleEmailChange = (e) => {
     const value = e.target.value;
     setEmail(value);
-    const emailRegla = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    setmailValido(emailRegla.test(value));
+    if (value === "") {
+      setMailValido(null);
+    } else {
+      const emailRegla = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      setMailValido(emailRegla.test(value));
+    }
+  };
+
+  const handlePasswordChange = (e) => {
+    const value = e.target.value;
+    setPassword(value);
+    if (value === "") {
+      setPasswordValido(null);
+    } else {
+      setPasswordValido(value.length >= 6);
+    }
+  };
+
+  const isFormValid = () => {
+    return (
+       mailValido && passwordValido
+    );
   };
 
   
@@ -64,71 +88,84 @@ export default function Iniciar_Sesion() {
           />
         </div>
       </div>
-      <h3 className={styles.bienvenida}>¡Bienvenido/a!</h3>
 
-      <div className={styles.todo}>
         <form className={styles.form} onSubmit={handleSubmit}>
-          <p className={styles.title}>Iniciar Sesion</p>
 
-          <label>
-            <input
-              required
-              placeholder=""
-              type="email"
-              className={styles.input}
-              value={email}
-              onChange={handleEmailChange}
-            />
-            <span>Correo electronico*</span>
-          </label>
+          <div className={styles.div_TituloYsubTitulo}>
+            <h1 className={styles.title}>Ingrese a su cuenta</h1>
+            <p className={styles.subTitulo}>Es genial verte denuevo.</p>
+          </div>
+          
+          <div className={styles.contenedor_inputs}>
+            
+          <div className={styles.inputGroup}>
+            <label className={styles.label}>Correo electrónico</label>
 
-          <label>
-            <input
-              required
-              placeholder=""
-              type= "password"
-              className={styles.input}
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-            />
-            <span>Contraseña*</span>
-            <button
-              type="button"
-              className={styles.toggleButton}
-            >
-            </button>
-          </label>
+              <input
+                required
+                type="email"
+                className={`${styles.input} ${mailValido === false ? styles.inputError : mailValido === true ? styles.inputSuccess : ''}`}
+                value={email}
+                onChange={handleEmailChange}
+                placeholder="Introduzca su mail"
+              />
+              {mailValido !== null && (
+                mailValido ? <FaCheckCircle className={styles.iconSuccess} /> : <FaTimesCircle className={styles.iconError} />
+              )}
+            </div>
 
-          {errorMessage && <p className={styles.errorMessage}>{errorMessage}</p>}
 
-          <button className={styles.submit} type="submit">
-            Siguiente
-          </button>
-          <p className={styles.message}>
-            Al continuar acepta nuestros términos de uso y política de
-            privacidad.
-          </p>
+            <div className={styles.inputGroup}>
+            <label className={styles.label}>Contraseña</label>
+
+              <input
+                required
+                type="password"
+                className={`${styles.input} ${passwordValido === false ? styles.inputError : passwordValido === true ? styles.inputSuccess : ''}`}
+                value={password}
+                onChange={handlePasswordChange}
+                placeholder="Introduzca su contraseña"
+              />
+              {passwordValido !== null && (
+                passwordValido ? <FaCheckCircle className={styles.iconSuccess} /> : <FaTimesCircle className={styles.iconError} />
+              )}
+            </div>
+          </div>
+
           <div className={styles.links}>
             <Link className={styles.olvidaste} href="../views/Inicio">
-              Olvidaste tu contraseña?{" "}
-              <strong className={styles.strongA}>Cambiar contraseña</strong>
+              Olvidaste tu contraseña?
+              <p className={styles.strongA}>Cambiar contraseña</p>
             </Link>
           </div>
 
-          <p className={styles.signin}>
-            ¿No tienes cuenta?{" "}
-            <Link href={"../views/registro"}>Registrarse</Link>
-          </p>
+
+          {errorMessage && <p className={styles.errorMessage}>{errorMessage}</p>}
+
+          <div className={styles.contenedorBoton}>
+
+              <button
+                className={styles.submit}
+                type="submit"
+                disabled={!isFormValid()}
+                style={{ backgroundColor: isFormValid() ? '#41419b' : 'grey' }}
+              >
+                Iniciar sesion
+              </button>
+
+            </div>
+        
+          
+
+          
         </form>
-      </div>
 
       <div className={styles.separator}>
         <hr className={styles.line} />
-        <span>O</span>
+        <span>Acceso rapido con</span>
         <hr className={styles.line} />
       </div>
 
-      <div className={styles.divBtn}>
        
       <div className={styles.containerBtn}> 
     <button className={styles.btnG} onClick={() => window.location.href = 'http://localhost:3001/auth/google'}>
@@ -137,8 +174,12 @@ export default function Iniciar_Sesion() {
     </button>
   </div>
 
+        <p className={styles.signin}>
+            ¿No tienes cuenta?
+            <Link className={styles.linkFromIniciarSesion} href={"../views/registro"}>Registrarse</Link>
+          </p>
+
        
-      </div>
     </>
   );
 }
