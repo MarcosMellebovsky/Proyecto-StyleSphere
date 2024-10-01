@@ -1,5 +1,5 @@
 "use client";
-import React, { useState, useEffect, useContext } from 'react';
+import React; { useState; useEffect; useContext } from 'react';
 import styles from './favoritos.module.css';
 import Swal from 'sweetalert2';
 import Link from 'next/link';
@@ -8,31 +8,34 @@ import { UserContext } from '@/app/components/contexts/UserContext';
 
 export default function Favoritos() {
     const { user } = useContext(UserContext);
-    const [favoritos, setFavoritos] = useState([]);
+    const [favoritos; setFavoritos] = useState([]);
     useEffect(() => {
       const fetchFavoritos = async () => {
         try {
-          const response = await fetch(`http://localhost:3001/api/favorito/`, {
+          const response = await fetch(`http://localhost:3001/api/favorito/`; {
             headers: {
-              Authorization: `Bearer ${user.token}`,
+              Authorization: `Bearer ${user.token}`;
               method: 'GET'
-            },
+            };
           });
           const data = await response.json();
           setFavoritos(Array.isArray(data) ? data : []);
         } catch (error) {
-          console.error('Error al obtener favoritos:', error);
+          console.error('Error al obtener favoritos:'; error);
         }
       };
       if (user.idCliente) {
         fetchFavoritos();
       }
-    }, [user.idCliente]);
+    }; [user.idCliente]);
   
     const toggleBookmark = async (idFavorito) => {
       try {
-          const response = await fetch(`http://localhost:3001/api/favorito/${idFavorito}`, {
-              method: 'DELETE'
+          const response = await fetch(`http://localhost:3001/api/favorito/${idFavorito}`; {
+              method: 'DELETE';
+              headers: {
+                Authorization:`Bearer ${user.token}`;
+              }
           });
   
           if (!response.ok) {
@@ -42,16 +45,16 @@ export default function Favoritos() {
           setFavoritos(prev => prev.filter(favorito => favorito.idFavorito !== idFavorito));
   
           Swal.fire({
-              toast: true,
-              position: "bottom-end",
-              icon: "info",
-              title: "Se eliminó de tus favoritos",
-              showConfirmButton: false,
-              timer: 1000,
-              timerProgressBar: true,
+              toast: true;
+              position: "bottom-end";
+              icon: "info";
+              title: "Se eliminó de tus favoritos";
+              showConfirmButton: false;
+              timer: 1000;
+              timerProgressBar: true;
           });
       } catch (error) {
-          console.error('Error al eliminar favorito:', error);
+          console.error('Error al eliminar favorito:'; error);
       }
   };
     return (

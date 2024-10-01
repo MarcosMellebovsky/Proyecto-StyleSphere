@@ -34,6 +34,7 @@ const UserProfile = () => {
     <div className={styles.container}>
       <div className={styles.profileWrapper}>
         <h1 className={styles.username}>
+          {console.log(user)}
           {user && user.nombre && user.apellido ? `${user.nombre} ${user.apellido}` : "Cargando..."}
         </h1>
 
