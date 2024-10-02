@@ -16,6 +16,23 @@ const login = (data) => {
       setUser(JSON.parse(storedUser)); 
     }
   }, [setUser]);
+
+  useEffect(() => {
+    const urlParams = new URLSearchParams(window.location.search);
+    const user = urlParams.get('user');
+    const token = urlParams.get('token');
+
+    if (user && token) {
+        const parsedUser = JSON.parse(user);
+        const userData = { 
+            ...parsedUser, 
+            token // Almacenar también el token generado
+        };
+
+        setUser(userData);  // Actualiza el contexto con los datos del usuario
+        localStorage.setItem('user', JSON.stringify(userData));  // Guardar en localStorage
+    }
+}, []);
   
 
   /*const logout = () => {

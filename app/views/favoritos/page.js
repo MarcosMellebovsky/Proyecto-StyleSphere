@@ -29,31 +29,48 @@ export default function Favoritos() {
       }
     }, [user.idCliente]);
   
-    const toggleBookmark = async (idFavorito) => {
-      try {
-          const response = await fetch(`http://localhost:3001/api/favorito/${idFavorito}`, {
-              method: 'DELETE'
-          });
-  
-          if (!response.ok) {
-              throw new Error('Error al eliminar el favorito');
-          }
-  
-          setFavoritos(prev => prev.filter(favorito => favorito.idFavorito !== idFavorito));
-  
-          Swal.fire({
-              toast: true,
-              position: "bottom-end",
-              icon: "info",
-              title: "Se eliminó de tus favoritos",
-              showConfirmButton: false,
-              timer: 1000,
-              timerProgressBar: true,
-          });
-      } catch (error) {
-          console.error('Error al eliminar favorito:', error);
-      }
-  };
+    const toggleBookmark = async (producto) => {
+        const isAdding = !isBookmarked[producto.idProducto];
+    
+        try {
+            if (!user.token) {
+                console.error('Token no disponible');
+                return;
+            }
+    
+            const headers = {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${user.token}`  // Enviar el token correctamente
+            };
+    
+            if (isAdding) {
+                await fetch('http://localhost:3001/api/favorito/', {
+                    method: 'POST',
+                    headers,
+                    body: JSON.stringify({ idProducto: producto.idProducto })
+                });
+            } else {
+                await fetch(`http://localhost:3001/api/favorito/${producto.idFavorito}`, {
+                    method: 'DELETE',
+                    headers
+                });
+            }
+    
+            setIsBookmarked(prev => ({ ...prev, [producto.idProducto]: isAdding }));
+    
+            Swal.fire({
+                toast: true,
+                position: "bottom-end",
+                icon: isAdding ? "success" : "info",
+                title: isAdding ? "Se añadió a favoritos" : "Se eliminó de tus favoritos",
+                showConfirmButton: false,
+                timer: 1000,
+                timerProgressBar: true,
+            });
+        } catch (error) {
+            console.error('Error al modificar favoritos:', error);
+        }
+    };
     return (
         <div className={styles.favoritosContainer}>
 

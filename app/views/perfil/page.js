@@ -37,9 +37,9 @@ const UserProfile = () => {
         </div>
         <div>
           <h1 className={styles.username}>
-            {user ? `${user.nombre} ${user.apellido}` : "Cargando..."}
+          {user ? `${user.nombre} ${user.apellido}` : "Cargando..."}
           </h1>
-          {user ? `${"martin@gmail.com"} ${""}` : "martin@gmail.com"} {/* Agregar el correo electrónico */}
+          <p>{user.email}</p>
         </div>
       </div>
 
