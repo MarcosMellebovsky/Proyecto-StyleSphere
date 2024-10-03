@@ -5,11 +5,12 @@ export const UserContext = createContext();
 
 export const UserProvider = ({ children }) => {
   const [user, setUser] = useState({});
- 
-const login = (data) => {
+
+  const login = (data) => {
     localStorage.setItem("user", JSON.stringify(data));
-    
+    setUser(data); 
   };
+
   useEffect(() => {
     const storedUser = localStorage.getItem("user");
     if (storedUser) {
@@ -19,21 +20,22 @@ const login = (data) => {
 
   useEffect(() => {
     const urlParams = new URLSearchParams(window.location.search);
-    const user = urlParams.get('user');
+    const userParam = urlParams.get('user');
     const token = urlParams.get('token');
+    console.log('User param:', userParam); // Verifica si los parámetros están presentes
+    console.log('Token param:', token);
 
-    if (user && token) {
-        const parsedUser = JSON.parse(user);
+    if (userParam && token) {
+        const parsedUser = JSON.parse(userParam);
         const userData = { 
             ...parsedUser, 
-            token // Almacenar también el token generado
+            token 
         };
 
-        setUser(userData);  // Actualiza el contexto con los datos del usuario
-        localStorage.setItem('user', JSON.stringify(userData));  // Guardar en localStorage
+        setUser(userData); 
+        localStorage.setItem('user', JSON.stringify(userData));  
     }
-}, []);
-  
+  }, []);
 
   /*const logout = () => {
     localStorage.removeItem("token");
@@ -44,7 +46,7 @@ const login = (data) => {
 
 
   return (
-    <UserContext.Provider value={{ user, setUser, login/*, logout*/ }}>
+    <UserContext.Provider value={{ user, setUser, login /*logout*/ }}>
       {children}
     </UserContext.Provider>
   );

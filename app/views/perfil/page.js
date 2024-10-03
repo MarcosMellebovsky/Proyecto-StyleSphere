@@ -1,5 +1,5 @@
 "use client";
-import React, { useState, useContext } from "react";
+import React, { useState, useContext,useEffect } from "react";
 import { UserContext } from "../../components/contexts/UserContext";
 import Navegador from "@/app/components/navegador";
 import Link from "next/link";
@@ -16,6 +16,9 @@ const UserProfile = () => {
       setImageSrc(fileURL);
     }
   };
+  useEffect(() => {
+    console.log("User context:", user); 
+  }, [user]);
 
   return (
     <div className={styles.container}>
@@ -37,9 +40,11 @@ const UserProfile = () => {
         </div>
         <div>
           <h1 className={styles.username}>
-          {user ? `${user.nombre} ${user.apellido}` : "Cargando..."}
+            {user && user.nombre && user.apellido 
+              ? `${user.nombre} ${user.apellido}` 
+              : "Cargando..."}
           </h1>
-          <p>{user.email}</p>
+          <p>{user && user.correoElectronico ? user.correoElectronico : "Sin correo"}</p>
         </div>
       </div>
 
