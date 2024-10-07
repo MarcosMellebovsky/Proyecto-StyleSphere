@@ -1,3 +1,7 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+
 .padre {
     display: flex;
     justify-content: center;
@@ -5,10 +9,10 @@
     height: 100vh;
     background: linear-gradient(180deg, 
     rgba(255,255,255,1) 0%, 
-    rgb(255, 255, 255) 25%,
-    rgba(0,176,255,1) 50%, 
-    rgba(69,139,199,1) 75%, 
-    rgba(0,122,255,1) 100% 
+    rgb(151, 163, 240) 27.5%,
+    rgb(105, 126, 248) 50%, 
+    rgb(73, 83, 219) 75%, 
+    rgb(28, 39, 190) 100% 
 );
     font-family: Arial, sans-serif;
 }
@@ -26,11 +30,14 @@
 .h1 {
     font-size: 2.5em;
     margin: 0.5em 0;
+    font-family: "poppins";
+    color: rgb(255, 255, 255);
 }
 
 .d {
     font-size: 1.2em;
     margin-bottom: 1em;
+    color: white;
 }
 
 .clasHR {
