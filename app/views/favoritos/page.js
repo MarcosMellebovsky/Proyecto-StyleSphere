@@ -9,6 +9,8 @@ import { UserContext } from '@/app/components/contexts/UserContext';
 export default function Favoritos() {
     const { user } = useContext(UserContext);
     const [favoritos, setFavoritos] = useState([]);
+    const [isBookmarked, setIsBookmarked] = useState({});
+
     useEffect(() => {
       const fetchFavoritos = async () => {
         try {
@@ -20,6 +22,13 @@ export default function Favoritos() {
           });
           const data = await response.json();
           setFavoritos(Array.isArray(data) ? data : []);
+
+          // Initialize isBookmarked state based on fetched data
+          const bookmarkedStatus = {};
+          data.forEach(producto => {
+            bookmarkedStatus[producto.idProducto] = true; // Set to true if product is in favorites
+          });
+          setIsBookmarked(bookmarkedStatus);
         } catch (error) {
           console.error('Error al obtener favoritos:', error);
         }
@@ -28,7 +37,7 @@ export default function Favoritos() {
         fetchFavoritos();
       }
     }, [user.idCliente]);
-  
+
     const toggleBookmark = async (producto) => {
         const isAdding = !isBookmarked[producto.idProducto];
     
@@ -54,6 +63,9 @@ export default function Favoritos() {
                     method: 'DELETE',
                     headers
                 });
+
+                // Remove the product from the 'favoritos' state
+                setFavoritos(prevFavoritos => prevFavoritos.filter(item => item.idProducto !== producto.idProducto));
             }
     
             setIsBookmarked(prev => ({ ...prev, [producto.idProducto]: isAdding }));
@@ -71,6 +83,7 @@ export default function Favoritos() {
             console.error('Error al modificar favoritos:', error);
         }
     };
+
     return (
         <div className={styles.favoritosContainer}>
 
@@ -89,7 +102,7 @@ export default function Favoritos() {
                         <div key={producto.idProducto} className={styles.productItem}>
                             <div className={styles.imageContainer}>
                                 <img src={producto.imagen} alt={producto.nombre} className={styles.productImage} />
-                                <button onClick={() => toggleBookmark(producto.idFavorito)} className={styles.bookmarkButton}>
+                                <button onClick={() => toggleBookmark(producto)} className={styles.bookmarkButton}>
                                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-bookmark-fill" viewBox="0 0 16 16">
                                         <path d="M2 2v13.5a.5.5 0 0 0 .74.439L8 13.069l5.26 2.87A.5.5 0 0 0 14 15.5V2a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2"/>
                                     </svg>

@@ -170,7 +170,7 @@ export default function Iniciar_Sesion() {
       <div className={styles.containerBtn}> 
     <button className={styles.btnG} onClick={() => window.location.href = 'http://localhost:3001/auth/google'}>
       <img src={"/google.png"} className={styles.iconGoogle}></img>
-      Regístrate con Google
+      Iniciar sesion con Google
     </button>
   </div>
 

@@ -29,7 +29,7 @@ export default function Categorias() {
                     setCategoriaNombre(data[0].nombrecategoria);
                 }
                 if (user.idCliente) {
-                    const favoritosResponse = await fetch(`http://localhost:3001/api/favorito`, {
+                    const favoritosResponse = await fetch(`http://localhost:3001/api/favorito/`, {
                         headers: {
                             'Authorization': `Bearer ${user.token}`,
                         },
@@ -39,6 +39,7 @@ export default function Categorias() {
                     favoritosData.forEach(fav => {
                       favoritos[fav.idProducto] = fav.idFavorito; 
                     });
+                    console.log(favoritos)
                     setIsBookmarked(favoritos); 
                 }
             } catch (error) {
@@ -53,34 +54,40 @@ export default function Categorias() {
 
     const toggleBookmark = async (producto) => {
         const isAdding = !isBookmarked[producto.idProducto];
-
+        
         try {
             if (!user.token) {
                 console.error('Token no disponible');
                 return;
             }
-
+    
             const headers = {
                 'Content-Type': 'application/json',
-                'Authorization': `Bearer ${user.token}`  // Enviar el token correctamente
+                'Authorization': `Bearer ${user.token}`  
             };
-
+    
             if (isAdding) {
-                await fetch('http://localhost:3001/api/favorito/', {
+                const response = await fetch('http://localhost:3001/api/favorito/', {
                     method: 'POST',
                     headers,
                     body: JSON.stringify({ idProducto: producto.idProducto })
                 });
+                const result = await response.json();
+                console.log('resultado ', result)
+                const idFavorito = result[0].idFavorito; // Obtener el idFavorito desde la respuesta
+                console.log('el id del producto a marcar es ',producto.idProducto)
+                console.log('el id del favorito a marcar es ',idFavorito)
+                setIsBookmarked(prev => ({ ...prev, [producto.idProducto]: idFavorito }));
             } else {
-                await fetch(`http://localhost:3001/api/favorito/${producto.idFavorito}`, {
+                const idFavorito = isBookmarked[producto.idProducto];
+                await fetch(`http://localhost:3001/api/favorito/${idFavorito}`, {
                     method: 'DELETE',
                     headers
-                });
+                }); 
+                setIsBookmarked(prev => ({ ...prev, [producto.idProducto]: undefined }));
             }
-
-            // Update the local state for bookmarks
-            setIsBookmarked(prev => ({ ...prev, [producto.idProducto]: isAdding }));
-
+               
+    
             Swal.fire({
                 toast: true,
                 position: "bottom-end",
@@ -119,7 +126,9 @@ export default function Categorias() {
                             productos.map((producto) => (
                                 <div key={producto.idProducto} className={styles.productItem}>
                                     <div className={styles.imageContainer}>
+                                    <Link href={`/views/detalle_producto?idProducto=${producto.idProducto}`} passHref>
                                         <img src={producto.imagen} alt={producto.nombre} className={styles.productImage} />
+                                    </Link>
                                         <button 
                                             onClick={() => toggleBookmark(producto)} 
                                             className={styles.bookmarkButton}
