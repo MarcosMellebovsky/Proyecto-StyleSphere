@@ -1,0 +1,38 @@
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.7);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.modal {
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+    width: 300px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+}
+
+.textarea {
+    width: 100%;
+    margin-bottom: 10px;
+}
+
+.valoracion {
+    color: #FFD700; /* Color dorado para las estrellas */
+}
+
+.estrellaLlena {
+    color: #FFD700;
+    cursor: pointer;
+}
+
+.estrellaVacia {
+    color: #ccc; /* Color gris para las estrellas vacías */
+}

@@ -22,8 +22,6 @@ export const UserProvider = ({ children }) => {
     const urlParams = new URLSearchParams(window.location.search);
     const userParam = urlParams.get('user');
     const token = urlParams.get('token');
-    console.log('User param:', userParam); // Verifica si los parámetros están presentes
-    console.log('Token param:', token);
 
     if (userParam && token) {
         const parsedUser = JSON.parse(userParam);

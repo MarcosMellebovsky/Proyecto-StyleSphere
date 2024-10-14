@@ -90,6 +90,9 @@ export default function CategoriaLocales() {
                 <h1 className={styles.TituloCategorias}>{nombreTienda || 'Cargando...'}</h1>
                 <div className={styles.containerDetalleTienda}>
                     <h2 className={styles.direccion}>{direccionTienda}</h2>
+                    <Link href={`/views/resenias?idTienda=${idTienda}`} className={styles.botonResenas}>
+                    Ver Reseñas
+                    </Link>
                     <h3>Hoy: {horarioApertura}hs - {horarioClausura}hs</h3>
                 </div>
 

@@ -22,8 +22,7 @@ export default function Favoritos() {
           });
           const data = await response.json();
           setFavoritos(Array.isArray(data) ? data : []);
-
-          // Initialize isBookmarked state based on fetched data
+          console.log('usuario es:', user)
           const bookmarkedStatus = {};
           data.forEach(producto => {
             bookmarkedStatus[producto.idProducto] = true; // Set to true if product is in favorites

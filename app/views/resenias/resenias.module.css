@@ -1,0 +1,67 @@
+.container {
+    padding: 20px;
+}
+
+.reseñasContainer {
+    margin-top: 20px;
+}
+
+.reseñaCard {
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    padding: 10px;
+    margin-bottom: 15px;
+}
+
+.valoracion {
+    color: #FFD700; /* Color dorado para las estrellas */
+}
+
+.estrellaLlena {
+    color: #FFD700;
+}
+
+.estrellaVacia {
+    color: #ccc; /* Color gris para las estrellas vacías */
+}
+.botonEditar, .botonBorrar {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    width: 30px; 
+    height: 30px;
+    border-radius: 13px; 
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.botonAgregar {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    width: 50%;
+    padding: 10px;
+    border-radius: 8px; 
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.botonEditar {
+    background-color: blue;
+    color: white;
+}
+
+.botonBorrar {
+    background-color: red;
+    color: white;
+}
+
+.botonAgregar {
+    background-color: green;
+    color: white;
+}
+
+.botonEditar:hover, .botonBorrar:hover, .botonAgregar:hover {
+    opacity: 0.8;
+}
