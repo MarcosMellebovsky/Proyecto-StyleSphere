@@ -5,7 +5,6 @@ export default function ModalAgregarResenia({ onClose, onSubmit, initialData }) 
     const [comentario, setComentario] = useState('');
     const [valoracion, setValoracion] = useState(0);
 
-    // Efecto para cargar datos iniciales cuando se abre el modal
     useEffect(() => {
         if (initialData) {
             setComentario(initialData.comentario);

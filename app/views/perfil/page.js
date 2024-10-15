@@ -14,13 +14,11 @@ const UserProfile = () => {
     if (file) {
       const fileURL = URL.createObjectURL(file);
       setImageSrc(fileURL);
-      // Guardar la URL de la imagen en localStorage
       localStorage.setItem("profileImage", fileURL);
     }
   };
 
   useEffect(() => {
-    // Recuperar la imagen desde localStorage cuando el componente se monta
     const savedImage = localStorage.getItem("profileImage");
     if (savedImage) {
       setImageSrc(savedImage);
@@ -54,8 +52,8 @@ const UserProfile = () => {
                 ? `${user.nombre} ${user.apellido}` 
                 : "Cargando..."}
             </h1>
-            <p className={styles.correo_p}> {user && user.Celular
-                ? `${user.Celular}` 
+            <p className={styles.correo_p}> {user && user.correoElectronico
+                ? `${user.correoElectronico}` 
                 : "Cargando..."}</p>
           </div>
         </div>

@@ -8,6 +8,7 @@ export const UserProvider = ({ children }) => {
 
   const login = (data) => {
     localStorage.setItem("user", JSON.stringify(data));
+    console.log(user)
     setUser(data); 
   };
 

@@ -43,7 +43,7 @@ export default function Resenias() {
 
         if (response.ok) {
             fetchResenias();
-            setModalVisible(false); // Cierra el modal al agregar
+            setModalVisible(false); 
         } else {
             console.error('Error al agregar la reseña');
         }
@@ -65,7 +65,7 @@ export default function Resenias() {
 
         if (response.ok) {
             fetchResenias();
-            setModalVisible(false); // Cierra el modal al editar
+            setModalVisible(false);
         } else {
             console.error('Error al editar la reseña');
         }
