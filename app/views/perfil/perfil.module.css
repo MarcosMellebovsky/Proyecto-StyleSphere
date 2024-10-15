@@ -113,6 +113,7 @@
   color: white;
   transition: background-color 0.3s ease;
   margin-bottom: 10px;
+  width: 100%;
 }
 .menuItemC{
   display: flex;
@@ -125,6 +126,7 @@
   color: red;
   transition: background-color 0.3s ease ;
   margin-bottom: 10px;
+  width: 100%;
 }
 
 .menuItem:last-child {

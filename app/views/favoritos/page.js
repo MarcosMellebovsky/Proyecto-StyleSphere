@@ -2,14 +2,19 @@
 import React, { useState, useEffect, useContext } from 'react';
 import styles from './favoritos.module.css';
 import Swal from 'sweetalert2';
+import { useSearchParams } from 'next/navigation';
 import Link from 'next/link';
 import Navegador from '@/app/components/navegador';
 import { UserContext } from '@/app/components/contexts/UserContext';
+
 
 export default function Favoritos() {
     const { user } = useContext(UserContext);
     const [favoritos, setFavoritos] = useState([]);
     const [isBookmarked, setIsBookmarked] = useState({});
+    const searchParams = useSearchParams();
+    const from = searchParams.get('from'); 
+
 
     useEffect(() => {
       const fetchFavoritos = async () => {
@@ -63,7 +68,6 @@ export default function Favoritos() {
                     headers
                 });
 
-                // Remove the product from the 'favoritos' state
                 setFavoritos(prevFavoritos => prevFavoritos.filter(item => item.idProducto !== producto.idProducto));
             }
     
@@ -83,11 +87,20 @@ export default function Favoritos() {
         }
     };
 
+    const backLink = 
+    from === 'Inicio' ? '/views/Inicio' :
+    from === 'Carrito' ? '/views/carrito' :
+    from === 'Perfil' ? '/views/perfil' :
+    from === 'Local' ? `/views/Local?idTienda=${searchParams.get('idTienda')}` :
+    from === 'Categorias' ? `/views/categorias?idCategoria=${searchParams.get('idCategoria')}` :
+    from === 'Productos' ? `/views/productos?idProducto=${searchParams.get('idProducto')}` :
+    '/views/Inicio'; 
+
     return (
         <div className={styles.favoritosContainer}>
 
             <div className={styles.VolverHeader}>
-                <Link className={styles.AHeader} href="./Inicio">
+                <Link className={styles.AHeader} href={backLink}>
                     <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" className="bi bi-chevron-left back-button" viewBox="0 0 16 16">
                         <path fillRule="evenodd" d="M11.354 1.646a.5.5 0 0 1 0 .708L5.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0"/>
                     </svg>

@@ -6,10 +6,8 @@ export default function Principal() {
     return (
         <div className={styles.padre}>
             <main className={styles.main}>
-                <Image
+                <img
                     src="/logo.png"
-                    width={1000}
-                    height={250}
                     alt="Logo"
                     className={styles.img}
                 />
