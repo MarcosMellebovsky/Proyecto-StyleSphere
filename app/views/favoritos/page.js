@@ -25,7 +25,7 @@ export default function Favoritos() {
           console.log('usuario es:', user)
           const bookmarkedStatus = {};
           data.forEach(producto => {
-            bookmarkedStatus[producto.idProducto] = true; // Set to true if product is in favorites
+            bookmarkedStatus[producto.idProducto] = true; 
           });
           setIsBookmarked(bookmarkedStatus);
         } catch (error) {
@@ -48,7 +48,7 @@ export default function Favoritos() {
     
             const headers = {
                 'Content-Type': 'application/json',
-                'Authorization': `Bearer ${user.token}`  // Enviar el token correctamente
+                'Authorization': `Bearer ${user.token}`
             };
     
             if (isAdding) {

@@ -20,9 +20,11 @@ export default function Resenias() {
             try {
                 const response = await fetch(`http://localhost:3001/api/resenia/${idTienda}`);
                 const data = await response.json();
-                setResenias(data);
+                setResenias(Array.isArray(data) ? data : []); 
             } catch (error) {
                 console.error('Error al obtener las reseñas:', error);
+                setResenias([]); 
+
             }
         }
     };

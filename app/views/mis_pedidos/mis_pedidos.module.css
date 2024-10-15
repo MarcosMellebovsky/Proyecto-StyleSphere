@@ -1,49 +1,45 @@
-.container {
-    max-width: 400px;
-    margin: 100px auto; /* Centrado vertical */
-    padding: 20px;
-    background-color: #e0f7fa; /* Fondo azul claro */
-    border-radius: 8px;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-    text-align: center;
-  }
-  
-  .title {
-    color: #00796b; /* Color de título */
-    font-size: 24px;
-    margin-bottom: 20px;
-  }
-  
-  .message {
-    margin: 20px 0;
-    font-size: 18px;
-    color: #004d40; /* Color del mensaje */
-  }
-  
-  .redirectButton {
-    background-color: #00796b; /* Botón azul oscuro */
-    color: white;
-    border: none;
-    border-radius: 5px;
-    padding: 10px 15px;
-    cursor: pointer;
-    transition: background-color 0.3s;
-  }
-  
-  .redirectButton:hover {
-    background-color: #004d40; /* Color al pasar el mouse */
-  }
-  .VolverHeader{
-    display: flex;
-    width: 100%;
-    justify-content: space-evenly;
-    flex-wrap: wrap;
-    flex-direction: column;
-    padding: 20px;
-  }
-  .AHeader{
-    display: flex;
-    align-items: center;
-    margin-right: auto; 
-    color: black;
-  }
+.VolverHeader{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding: 1rem;
+}
+
+.AHeader{
+  display: flex;
+  align-items: center;
+  margin-right: auto; 
+  color: black;
+}
+
+.TituloPedidos {
+  flex-grow: 1; 
+  text-align: center; 
+  margin: 0;
+}
+.container_noHay {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  height: 80vh;
+  padding: 15px;
+}
+.imagenProducto{
+  color: gray;
+}
+
+.div_noHay p{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+.noFavoritos_principal {
+  color: gray;
+  font-size: 1.2rem;
+  margin-bottom: 10px; 
+
+}
