@@ -41,8 +41,9 @@ export default function ModalAgregarResenia({ onClose, onSubmit, initialData }) 
     return (
         <div className={styles.overlay}>
             <div className={styles.modal}>
-                <h2>{initialData ? 'Editar Reseña' : 'Agregar Reseña'}</h2>
+                <h2 className={styles.modalTitle}>{initialData ? 'Editar Reseña' : 'Agregar Reseña'}</h2>
                 <textarea
+                    className={styles.textarea}
                     value={comentario}
                     onChange={(e) => setComentario(e.target.value)}
                     placeholder="Escribe tu comentario aquí..."
@@ -51,8 +52,10 @@ export default function ModalAgregarResenia({ onClose, onSubmit, initialData }) 
                 <div className={styles.valoracion}>
                     {renderEstrellas(valoracion)}
                 </div>
-                <button onClick={handleSubmit}>{initialData ? 'Actualizar Reseña' : 'Enviar Reseña'}</button>
-                <button onClick={onClose}>Cerrar</button>
+                <button className={styles.button} onClick={handleSubmit}>
+                    {initialData ? 'Actualizar Reseña' : 'Enviar Reseña'}
+                </button>
+                <button className={`${styles.button} ${styles.closeButton}`} onClick={onClose}>Cerrar</button>
             </div>
         </div>
     );

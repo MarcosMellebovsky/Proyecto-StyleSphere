@@ -110,13 +110,18 @@ export default function Resenias() {
 
     return (
       <>
-        <Link className={styles.AHeader} href={`../../views/categorias_locales?idTienda=${idTienda}`}>
-                        <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" className="bi bi-chevron-left back-button" viewBox="0 0 16 16">
-                            <path fillRule="evenodd" d="M11.354 1.646a.5.5 0 0 1 0 .708L5.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0"/>
+      <div className={styles.container}>
+          <Link className={styles.backButton} href="./perfil">
+          <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" className="bi bi-chevron-left" viewBox="0 0 16 16">
+            <path fillRule="evenodd" d="M11.354 1.646a.5.5 0 0 1 0 .708L5.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0" />
           </svg>
         </Link>
-        <div className={styles.container}>
-            <h1>Reseñas</h1>
+        
+        <header className={styles.headerr}>
+       
+        <h1 className={styles.asd}>Reseñas</h1>
+      </header>
+            
             {modalVisible && (
                 <ModalAgregarResenia 
                     onClose={() => setModalVisible(false)} 
@@ -128,13 +133,9 @@ export default function Resenias() {
                 <div className={styles.reseñasContainer}>
                     {resenias.map((reseña) => (
                         <div key={reseña.idReseña} className={styles.reseñaCard}>
-                            <p><strong>{reseña.nombre + " " + reseña.apellido}</strong></p>
-                            <p>{reseña.comentario}</p>
-                            <div className={styles.valoracion}>
-                                {renderEstrellas(reseña.valoracion)}
-                            </div>
+                            <p className={styles.texto}><strong>{reseña.nombre + " " + reseña.apellido}</strong></p>
                             {reseña.idCliente == user.idCliente && (
-                                <div>
+                                <div className={styles.botonesK}>
                                     <button 
                                         className={styles.botonEditar} 
                                         onClick={() => {
@@ -151,7 +152,15 @@ export default function Resenias() {
                                         <FontAwesomeIcon icon={faTrash} />
                                     </button>
                                 </div>
+                                
                             )}
+                          
+                          <p className={styles.comentario}>{reseña.comentario}</p>
+                        
+                            <div className={styles.valoracion}>
+                                {renderEstrellas(reseña.valoracion)}
+                            </div>
+                            
                         </div>
                     ))}
                 </div>

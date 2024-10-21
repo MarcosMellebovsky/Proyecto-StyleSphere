@@ -110,10 +110,11 @@
   background-color: #b4b3b3;
   border-radius: 5px;
   text-decoration: none;
-  color: white;
+
   transition: background-color 0.3s ease;
   margin-bottom: 10px;
   width: 100%;
+  border: none;
 }
 .menuItemC{
   display: flex;
