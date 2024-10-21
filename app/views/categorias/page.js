@@ -39,7 +39,6 @@ export default function Categorias() {
                     favoritosData.forEach(fav => {
                       favoritos[fav.idProducto] = fav.idFavorito; 
                     });
-                    console.log(favoritos)
                     setIsBookmarked(favoritos); 
                 }
             } catch (error) {

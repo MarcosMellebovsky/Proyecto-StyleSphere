@@ -49,6 +49,7 @@ export default function Inicio() {
       <>
         <div className={styles.HeaderPadre}>
           <SearchBar />
+          
         </div>
   
         <section className={styles.ofertas}>

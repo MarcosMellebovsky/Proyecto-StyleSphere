@@ -76,3 +76,41 @@
     font-size: 1.5rem; 
     font-weight: 600;
 }
+
+.botonAgregar {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 10px;
+    width: 70%; 
+    border-radius: 8px; 
+    justify-content: center;
+    background-color: #4400ff;
+    color: white;
+}
+.boton{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+}
+.selectorCantidad {
+    margin-top: 10px;
+    display: flex;
+    align-items: center;
+  }
+  
+  .selectorCantidad label {
+    margin-right: 10px;
+    font-size: 16px;
+  }
+  
+  .inputCantidad {
+    width: 50px;
+    height: 30px;
+    font-size: 18px;
+    text-align: center;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
+  
