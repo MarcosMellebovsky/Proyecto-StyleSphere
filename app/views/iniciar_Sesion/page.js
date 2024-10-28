@@ -133,7 +133,7 @@ export default function Iniciar_Sesion() {
           </div>
 
           <div className={styles.links}>
-            <Link className={styles.olvidaste} href="../views/Inicio">
+            <Link className={styles.olvidaste} href="../views/cambiar_clave">
               Olvidaste tu contraseña?
               <p className={styles.strongA}>Cambiar contraseña</p>
             </Link>
@@ -183,4 +183,3 @@ export default function Iniciar_Sesion() {
     </>
   );
 }
-
