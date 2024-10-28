@@ -5,6 +5,7 @@
     color: #333;
     background-color: #f8f9fa;
 }
+
 .VolverHeader {
     display: flex;
     align-items: center;
@@ -12,13 +13,14 @@
     width: 100%;
     padding-bottom: 20px; 
 }
+
 .AHeader {
     display: flex;
     align-items: center;
     color: black;
     margin-right: auto;
-
 }
+
 .TituloCategorias {
     flex-grow: 1;
     text-align: center;
@@ -82,4 +84,89 @@
 .productCategory {
     font-size: 18px;
     margin: 5px 0;
+}
+
+.productList {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.productItem {
+    display: flex;
+    padding: 15px;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    align-items: center;
+    gap: 15px;
+    position: relative; /* Agregado para posicionar el botón de borrar */
+}
+
+.imageContainer {
+    width: 80px;
+}
+
+.productImage {
+    width: 100%;
+    height: auto;
+    border-radius: 5px;
+}
+
+.productDetails {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.productName {
+    font-weight: bold;
+    font-size: 16px;
+    margin-bottom: 5px;
+}
+
+.productPrice {
+    color: #555;
+    font-size: 14px;
+    margin-bottom: 10px;
+}
+
+.controls {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 15px;
+}
+
+.quantityControl {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.quantityControl button {
+    width: 30px;
+    height: 30px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 50%;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.botonBorrar {
+    background-color: red;
+    color: white;
+    border: none;
+    cursor: pointer;
+    width: 30px; 
+    height: 30px;
+    border-radius: 50%; /* Cambiado a un borde redondeado */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute; /* Agregado para que se posicione arriba a la derecha */
+    top: 10px; /* Ajusta según sea necesario */
+    right: 10px; /* Ajusta según sea necesario */
 }

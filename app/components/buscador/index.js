@@ -2,9 +2,10 @@ import { React, useState, useEffect } from 'react';
 import Image from 'next/image';
 import Styles from "./navegador.module.css";
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 
-const SearchBar = ({ value, onChange = () => {}, onFocus }) => {
-
+const SearchBar = ({ value, onChange = () => {}, onFocus, searchScope = "todos" }) => {
+  const router = useRouter();
   const [result, setResult] = useState([]);
   const [filteredResult, setFilteredResult] = useState([]);
   const [searchHistory, setSearchHistory] = useState([]);
@@ -17,23 +18,27 @@ const SearchBar = ({ value, onChange = () => {}, onFocus }) => {
   }, []);
 
   const handleKeyDown = (e) => {
-    if (e.key === "Backspace") {
+    if (e.key == "Backspace") {
       handleChange(e);
     }
   };
 
   const handleChange = async (e) => {
     const searchQuery = e.target.value.toLowerCase();
-    onChange(e); 
+    onChange(e);
 
-    if (searchQuery === '') {
+    if (searchQuery == '') {
       setFilteredResult([]);
       setShowNoResults(false);
       return;
     }
 
     try {
-      const res = await fetch(`http://localhost:3001/api/buscador/${encodeURIComponent(searchQuery)}`);
+      const endpoint = searchScope == "locales"
+        ? `http://localhost:3001/api/buscador/local/${encodeURIComponent(searchQuery)}`
+        : `http://localhost:3001/api/buscador/${encodeURIComponent(searchQuery)}`;
+
+      const res = await fetch(endpoint);
       if (!res.ok) throw new Error('Error en la solicitud');
       const data = await res.json();
       const filtered = data.filter(item =>
@@ -41,7 +46,7 @@ const SearchBar = ({ value, onChange = () => {}, onFocus }) => {
       );
       setResult(data);
       setFilteredResult(filtered);
-      setShowNoResults(filtered.length === 0);
+      setShowNoResults(filtered.length == 0);
     } catch (error) {
       setFilteredResult([]);
       setShowNoResults(true);
@@ -53,10 +58,18 @@ const SearchBar = ({ value, onChange = () => {}, onFocus }) => {
     handleChange({ target: { value: query } });
   };
 
-  const handleSelect = (query) => {
-    const updatedHistory = [query, ...searchHistory.filter(item => item !== query)].slice(0, 5);
+  const handleSelect = (item) => {
+    const updatedHistory = [item.nombre, ...searchHistory.filter(q => q != item.nombre)].slice(0, 5);
     setSearchHistory(updatedHistory);
     localStorage.setItem('searchHistory', JSON.stringify(updatedHistory));
+
+    if (item.idTienda) {
+      router.push(`/views/categorias_locales?idTienda=${item.idTienda}`);
+    } else if (item.idProducto) {
+      router.push(`/views/detalle_producto?idProducto=${item.idProducto}`);
+    } else if (item.idTipoProducto) {
+      router.push(`/views/categorias?idTipoProducto=${item.idTipoProducto}`);
+    }
   };
 
   const handleFocus = () => {
@@ -99,7 +112,7 @@ const SearchBar = ({ value, onChange = () => {}, onFocus }) => {
         </Link>
       </div>
 
-      {showNoResults && value !== '' && (
+      {showNoResults && value != '' && (
         <div className={Styles.noResults}>
           No existe ese producto
         </div>
@@ -107,26 +120,20 @@ const SearchBar = ({ value, onChange = () => {}, onFocus }) => {
 
       {isInputFocused && (filteredResult.length > 0 || showNoResults) && (
         <ul className={Styles.resultList}>
-          {filteredResult.map((r, index) => (
-            <li key={`${r.idTipoProducto}-${index}`} className={Styles.resultItem}>
-              <Link 
-                href={`/views/categorias?idTipoProducto=${r.idTipoProducto}`} 
-                className={Styles.resultLink}
-                onClick={() => handleSelect(r.nombre)}
-              >
-                <div className={Styles.imageContainer}>
-                  <img src={r.imagen} alt={r.nombre} className={Styles.resultImage} />
-                </div>
-                <div className={Styles.resultText}>
-                  {r.nombre}
-                </div>
-              </Link>
+          {filteredResult.map((item, index) => (
+            <li key={`${item.id}-${index}`} className={Styles.resultItem} onClick={() => handleSelect(item)}>
+              <div className={Styles.imageContainer}>
+                <img src={item.imagen} alt={item.nombre} className={Styles.resultImage} />
+              </div>
+              <div className={Styles.resultText}>
+                {item.nombre}
+              </div>
             </li>
           ))}
         </ul>
       )}
 
-      {isInputFocused && value === '' && searchHistory.length > 0 && (
+      {isInputFocused && value == '' && searchHistory.length > 0 && (
         <div className={Styles.historyContainer}>
           <h4 className={Styles.historyTitle}>Historial de búsqueda</h4>
           <ul className={Styles.historyList}>

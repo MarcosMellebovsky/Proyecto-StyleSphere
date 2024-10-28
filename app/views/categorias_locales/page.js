@@ -17,9 +17,7 @@ export default function CategoriaLocales() {
     const searchParams = useSearchParams();
     const idTienda = searchParams.get('idTienda');
     const router = useRouter();
-    const from = searchParams.get('from');  
-
-
+  
     const fetchProductos = async () => {
         if (idTienda) {
             try {
@@ -32,14 +30,12 @@ export default function CategoriaLocales() {
                     setDireccionTienda(data[0].direccion);
                     setHorarioApertura(data[0].horarioApertura);
                     setHorarioClausura(data[0].horarioClausura);
-                }
-                else{
+                } else {
                     setNombreTienda(data[0].marca);
                     setImagenTienda(data[0].imagenTienda);
                     setDireccionTienda(data[0].direccion);
                     setHorarioApertura(data[0].horarioApertura);
                     setHorarioClausura(data[0].horarioClausura);
-
                 }
             } catch (error) {
                 console.error('Error al obtener los productos:', error);
@@ -72,8 +68,6 @@ export default function CategoriaLocales() {
             console.error('Error al filtrar los productos:', error);
         }
     };
-    const backLink = from === 'Local' ? '/views/Local' : '/views/Inicio';
-
 
     return (
         <>
@@ -82,16 +76,17 @@ export default function CategoriaLocales() {
             </div>
 
             <div className={styles.container}>
-            <Link className={styles.AHeader} href={backLink}>
-                        <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" className="bi bi-chevron-left back-button" viewBox="0 0 16 16">
-                            <path fillRule="evenodd" d="M11.354 1.646a.5.5 0 0 1 0 .708L5.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0"/>
-                        </svg>
-                    </Link>
+                <button onClick={() => router.back()} className={styles.AHeader}>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" className="bi bi-chevron-left back-button" viewBox="0 0 16 16">
+                        <path fillRule="evenodd" d="M11.354 1.646a.5.5 0 0 1 0 .708L5.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0"/>
+                    </svg>
+                </button>
+
                 <h1 className={styles.TituloCategorias}>{nombreTienda || 'Cargando...'}</h1>
                 <div className={styles.containerDetalleTienda}>
                     <h2 className={styles.direccion}>{direccionTienda}</h2>
                     <Link href={`/views/resenias?idTienda=${idTienda}`} className={styles.botonResenas}>
-                    Ver Reseñas
+                        Ver Reseñas
                     </Link>
                     <h3>Hoy: {horarioApertura}hs - {horarioClausura}hs</h3>
                 </div>
@@ -117,7 +112,9 @@ export default function CategoriaLocales() {
                                 <div className={styles.productoInfo}>
                                     <p>${producto.precio}</p>
                                     <h2>{producto.nombre}</h2>
-                                    <button className={styles.botonCard}>Agregar al carrito</button>
+                                    <Link href={`/views/detalle_producto?idProducto=${producto.idProducto}`} passHref>
+                                        <button className={styles.botonCard}>Ver más</button>
+                                    </Link>
                                 </div>
                             </div>
                         ))

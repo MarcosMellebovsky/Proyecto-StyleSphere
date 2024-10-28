@@ -30,12 +30,18 @@
     font-weight: bold;
 }
 
-.AHeader{
+.AHeader {
     display: flex;
     align-items: center;
-    margin-right: auto; 
-    color: black;
-    width: 20%;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    background-color: black;
+    border-radius: 50%;
+    color: white;
+    margin-right: auto;
+    transition: background-color 0.3s ease, color 0.3s ease;
+    border: none;
 }
 
 .VolverHeader{
@@ -45,6 +51,7 @@
     width: 100%;
     padding-bottom: 15px;
 }
+
 
 .container {
     padding: 20px;

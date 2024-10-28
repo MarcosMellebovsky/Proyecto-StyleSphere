@@ -29,7 +29,7 @@ export default function Inicio() {
     return(
         <>
             <div className={styles.HeaderPadre}>
-              <SearchBar />
+              <SearchBar searchScope="locales"/>
             </div>
             <div className={styles.cardsContainer}>
               

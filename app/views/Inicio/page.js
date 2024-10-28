@@ -48,7 +48,7 @@ export default function Inicio() {
     return (
       <>
         <div className={styles.HeaderPadre}>
-          <SearchBar />
+        <SearchBar searchScope="todos" />
           
         </div>
   

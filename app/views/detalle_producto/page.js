@@ -134,24 +134,13 @@ export default function DetalleProducto() {
   return (
     <>
       <div className={styles.VolverHeader}>
-        <Link className={styles.AHeader} href="./Inicio">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="25"
-            height="25"
-            fill="currentColor"
-            className="bi bi-chevron-left back-button"
-            viewBox="0 0 16 16"
-          >
-            <path
-              fillRule="evenodd"
-              d="M11.354 1.646a.5.5 0 0 1 0 .708L5.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0"
-            />
-          </svg>
-        </Link>
+      <button onClick={() => router.back()} className={styles.AHeader}>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" className="bi bi-chevron-left back-button" viewBox="0 0 16 16">
+                        <path fillRule="evenodd" d="M11.354 1.646a.5.5 0 0 1 0 .708L5.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0"/>
+                    </svg>
+                </button>
         <h1 className={styles.categoriaTitle}>Detalles</h1>
 
-        {/* Mapear sobre el array de productos */}
         {producto.map((prod) => (
           <div className={styles.productItem} key={prod.idProducto}>
             <div className={styles.imageContainer}>
@@ -163,22 +152,6 @@ export default function DetalleProducto() {
             </div>
             <p className={styles.productName}>{prod.nombre}</p>
             <p className={styles.productPrice}>${prod.precio}</p>
-            <p className={styles.productPrice}>Talle: {prod.talle}</p>
-            <div className={styles.colorContainer}>
-              <span>Color:</span>
-              <div
-                style={{
-                  backgroundColor:
-                    colores[prod.color.toLowerCase()] || prod.color,
-                  width: "20px",
-                  height: "20px",
-                  display: "inline-block",
-                  marginLeft: "10px",
-                  border: "1px solid #000",
-                }}
-              ></div>
-            </div>
-
             <div className={styles.cantidadContainer}>
               <label htmlFor="cantidad">Cantidad:</label>
               <input
