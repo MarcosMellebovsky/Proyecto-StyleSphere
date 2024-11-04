@@ -12,6 +12,8 @@ export default function DetalleProducto() {
   const [loading, setLoading] = useState(true);
   const [cantidad, setCantidad] = useState(1);
   const [carrito, setCarrito] = useState([]);
+  const [colorSeleccionado, setColorSeleccionado] = useState(null);
+  const [talleSeleccionado, setTalleSeleccionado] = useState(null);
   const searchParams = useSearchParams();
   const idProducto = searchParams.get("idProducto");
   const { user } = useContext(UserContext);
@@ -50,7 +52,6 @@ export default function DetalleProducto() {
     fetchProducto();
   }, [idProducto]);
 
-  // Obtener productos en el carrito del usuario
   useEffect(() => {
     const fetchCarrito = async () => {
       if (user?.token) {
@@ -70,19 +71,32 @@ export default function DetalleProducto() {
     fetchCarrito();
   }, [user]);
 
-  // Función para agregar o actualizar producto en el carrito
-  const agregarOActualizarProducto = async (productoSeleccionado) => {
+  const agregarOActualizarProducto = async (
+    productoSeleccionado,
+    colorSeleccionado,
+    talleSeleccionado
+  ) => {
+    // Check if there's an existing product in the cart with the same ID, color, and size
     const productoEnCarrito = carrito.find(
-      (item) => item.idProducto === productoSeleccionado.idProducto
+      (item) =>
+        item.idProducto === productoSeleccionado.idProducto &&
+        item.color === colorSeleccionado &&
+        item.talle === talleSeleccionado
     );
-
+  
+    if (!colorSeleccionado || !talleSeleccionado) {
+      alert("Por favor selecciona un color y un talle.");
+      return;
+    }
+  
     try {
       const headers = {
         "Content-Type": "application/json",
         Authorization: `Bearer ${user.token}`,
       };
-
+  
       if (productoEnCarrito) {
+        // If the product already exists in the cart, update its quantity
         const response = await fetch(
           `http://localhost:3001/api/carrito/${productoEnCarrito.idProducto}`,
           {
@@ -93,22 +107,28 @@ export default function DetalleProducto() {
             }),
           }
         );
-
+  
         if (response.ok) {
           router.push("/views/carrito");
         } else {
           console.error("Error al actualizar la cantidad en el carrito");
         }
       } else {
-        const response = await fetch("http://localhost:3001/api/carrito", {
-          method: "POST",
-          headers,
-          body: JSON.stringify({
-            idProducto: productoSeleccionado.idProducto,
-            cantidad: cantidad,
-          }),
-        });
-
+        // If it's a new combination, add it to the cart
+        const response = await fetch(
+          "http://localhost:3001/api/carrito/agregar",
+          {
+            method: "POST",
+            headers,
+            body: JSON.stringify({
+              idProducto: productoSeleccionado.idProducto,
+              cantidad: cantidad,
+              color: colorSeleccionado,
+              talle: talleSeleccionado,
+            }),
+          }
+        );
+  
         if (response.ok) {
           router.push("/views/carrito");
         } else {
@@ -122,23 +142,34 @@ export default function DetalleProducto() {
       );
     }
   };
+  
 
   if (loading) {
     return <p>Cargando...</p>;
   }
 
-  if (producto.length === 0) {
+  if (producto.length == 0) {
     return <p>No se encontró el producto.</p>;
   }
 
   return (
     <>
       <div className={styles.VolverHeader}>
-      <button onClick={() => router.back()} className={styles.AHeader}>
-                    <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" className="bi bi-chevron-left back-button" viewBox="0 0 16 16">
-                        <path fillRule="evenodd" d="M11.354 1.646a.5.5 0 0 1 0 .708L5.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0"/>
-                    </svg>
-                </button>
+        <button onClick={() => router.back()} className={styles.AHeader}>
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="25"
+            height="25"
+            fill="currentColor"
+            className="bi bi-chevron-left back-button"
+            viewBox="0 0 16 16"
+          >
+            <path
+              fillRule="evenodd"
+              d="M11.354 1.646a.5.5 0 0 1 0 .708L5.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0"
+            />
+          </svg>
+        </button>
         <h1 className={styles.categoriaTitle}>Detalles</h1>
 
         {producto.map((prod) => (
@@ -152,6 +183,7 @@ export default function DetalleProducto() {
             </div>
             <p className={styles.productName}>{prod.nombre}</p>
             <p className={styles.productPrice}>${prod.precio}</p>
+
             <div className={styles.cantidadContainer}>
               <label htmlFor="cantidad">Cantidad:</label>
               <input
@@ -163,10 +195,66 @@ export default function DetalleProducto() {
               />
             </div>
 
+            <div className={styles.coloresContainer}>
+              <p>Colores disponibles:</p>
+              <div className={styles.colores}>
+                {(() => {
+                  const colorElements = [];
+                  for (let i = 0; i < prod.colores_disponibles.length; i++) {
+                    const color = prod.colores_disponibles[i];
+                    colorElements.push(
+                      <div
+                        key={color}
+                        className={`${styles.colorBox} ${
+                          colorSeleccionado === color ? styles.selected : ""
+                        }`}
+                        style={{
+                          backgroundColor: colores[color.toLowerCase()],
+                        }}
+                        onClick={() => setColorSeleccionado(color)}
+                        title={color}
+                      />
+                    );
+                  }
+                  return colorElements;
+                })()}
+              </div>
+            </div>
+
+            <div className={styles.tallasContainer}>
+              <p>Talles disponibles:</p>
+              <div className={styles.tallas}>
+                {(() => {
+                  const tallaElements = [];
+                  for (let i = 0; i < prod.talles_disponibles.length; i++) {
+                    const talla = prod.talles_disponibles[i];
+                    tallaElements.push(
+                      <span
+                        key={talla}
+                        className={`${styles.talla} ${
+                          talleSeleccionado === talla ? styles.selected : ""
+                        }`}
+                        onClick={() => setTalleSeleccionado(talla)}
+                      >
+                        {talla}
+                      </span>
+                    );
+                  }
+                  return tallaElements;
+                })()}
+              </div>
+            </div>
+
             <div className={styles.boton}>
               <button
                 className={styles.botonAgregar}
-                onClick={() => agregarOActualizarProducto(prod)}
+                onClick={() =>
+                  agregarOActualizarProducto(
+                    prod,
+                    colorSeleccionado,
+                    talleSeleccionado
+                  )
+                }
               >
                 Agregar al carrito
               </button>

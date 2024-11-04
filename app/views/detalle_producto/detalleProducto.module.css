@@ -113,4 +113,35 @@
     border: 1px solid #ccc;
     border-radius: 4px;
   }
+
+  .coloresContainer, .tallasContainer {
+    margin: 10px 0;
+  }
   
+  .colores {
+    display: flex;
+    gap: 10px;
+  }
+  
+  .colorBox {
+    width: 30px;
+    height: 30px;
+    border: 1px solid #ccc; /* Borde opcional */
+    cursor: pointer; /* Cambia el cursor para indicar que es interactivo */
+  }
+  
+  .tallas {
+    display: flex;
+    gap: 10px;
+  }
+  
+  .talla {
+    padding: 5px 10px;
+    border: 1px solid #ccc; /* Borde para las tallas */
+    border-radius: 4px;
+    cursor: pointer; /* Cambia el cursor para indicar que es interactivo */
+  }
+  
+  .selected {
+    border: 2px solid black;
+  }

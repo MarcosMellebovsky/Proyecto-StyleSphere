@@ -14,6 +14,19 @@ export default function Carrito() {
     const { user } = useContext(UserContext); 
     const router = useRouter();
     const [isScrolled, setIsScrolled] = useState(false);
+    const colores = {
+        rojo: "red",
+        azul: "blue",
+        verde: "green",
+        amarillo: "yellow",
+        negro: "black",
+        blanco: "white",
+        gris: "gray",
+        naranja: "orange",
+        violeta: "purple",
+        rosa: "pink",
+        beige: "beige",
+    };
 
     useEffect(() => {
         const fetchCarrito = async () => {
@@ -50,7 +63,7 @@ export default function Carrito() {
         return () => window.removeEventListener('scroll', handleScroll);
     }, []); 
 
-    const updateCantidad = (productoId, cantidad) => {
+    const updateCantidad = async (productoId, cantidad) => {
         setProductosCarrito((prevProductos) => 
             prevProductos.map((producto) => 
                 producto.idProducto === productoId 
@@ -58,12 +71,55 @@ export default function Carrito() {
                     : producto
             )
         );
+        const productoEnCarrito = productosCarrito.find(producto => producto.idProducto === productoId);
+    
+        if (productoEnCarrito) {
+            const headers = {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${user.token}`
+            };
+            try {
+                const response = await fetch(
+                    `http://localhost:3001/api/carrito/${productoEnCarrito.idProducto}`,
+                    {
+                        method: "PUT",
+                        headers,
+                        body: JSON.stringify({
+                            cantidad: productoEnCarrito.cantidadAComprar + cantidad,
+                        }),
+                    }
+                );
+
+                if (!response.ok) {
+                    console.error('Error al actualizar la cantidad del producto en la base de datos');
+                }
+            } catch (error) {
+                console.error('Error en la llamada a la API:', error);
+            }
+        }
     };
 
-    const eliminarProducto = (productoId) => {
-        setProductosCarrito((prevProductos) =>
-            prevProductos.filter((producto) => producto.idProducto !== productoId)
-        );
+    const eliminarProducto = async (idCarrito) => {
+        try {
+            const headers = {
+                'Authorization': `Bearer ${user.token}`,
+                'Content-Type': 'application/json'
+            };
+            const response = await fetch(`http://localhost:3001/api/carrito/${idCarrito}`, {
+                method: 'DELETE',
+                headers: headers
+            });
+
+            if (response.ok) {
+                setProductosCarrito((prevProductos) =>
+                    prevProductos.filter((producto) => producto.idCarrito !== idCarrito)
+                );
+            } else {
+                console.error('Error al eliminar el producto del carrito');
+            }
+        } catch (error) {
+            console.error('Error en la llamada a la API:', error);
+        }
     };
 
     if (loading) {
@@ -85,7 +141,7 @@ export default function Carrito() {
                 <div className={styles.productList}>
                     {productosCarrito.length > 0 ? (
                         productosCarrito.map((producto) => (
-                            <div key={producto.idProducto} className={styles.productItem}>
+                            <div key={producto.idCarrito} className={styles.productItem}>
                                 <div className={styles.imageContainer}>
                                     <Link href={`/views/detalle_producto?idProducto=${producto.idProducto}`}>
                                         <img
@@ -98,11 +154,13 @@ export default function Carrito() {
                                 <div className={styles.productDetails}>
                                     <p className={styles.productName}>{producto.nombre}</p>
                                     <p className={styles.productPrice}>${producto.precio * producto.cantidadAComprar}</p>
+                                    <p className={styles.productPrice}>{producto.color}</p>
+                                    <p className={styles.productPrice}>{producto.talle}</p>
                                     <div className={styles.controls}>
                                         <div className={styles.botonContainer}>
                                             <button 
                                                 className={styles.botonBorrar} 
-                                                onClick={() => eliminarProducto(producto.idProducto)}
+                                                onClick={() => eliminarProducto(producto.idCarrito)} // Use idCarrito here
                                             >
                                                 <FontAwesomeIcon icon={faTrash} />
                                             </button>
