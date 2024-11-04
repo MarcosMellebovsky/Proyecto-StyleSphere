@@ -1,11 +1,9 @@
 "use client";
 import React, { useState, useEffect, useContext } from 'react';
-import { useSearchParams } from 'next/navigation';
+import { useSearchParams, useRouter } from 'next/navigation';
 import Link from 'next/link';
 import styles from './categorias.module.css';
-import SearchBar from '../../components/buscador';
 import Swal from 'sweetalert2';
-import { useRouter } from 'next/navigation';
 import Navegador from '@/app/components/navegador';
 import { UserContext } from '@/app/components/contexts/UserContext';
 
@@ -20,8 +18,17 @@ export default function Categorias() {
     const { user } = useContext(UserContext); 
 
     useEffect(() => {
-        const fetchProductos = async () => {
+        const fetchProductos = async (filters = {}) => {
+            const { talle, color, precioMin, precioMax } = filters;
+            const query = new URLSearchParams({
+                talle,
+                color,
+                precioMin,
+                precioMax,
+            }).toString();
+
             try {
+                // Primero, se obtienen todos los productos sin filtros
                 const response = await fetch(`http://localhost:3001/api/producto/productos_id/${idTipoProducto}`);
                 const data = await response.json();
                 setProductos(data);
@@ -37,7 +44,7 @@ export default function Categorias() {
                     const favoritosData = await favoritosResponse.json();
                     const favoritos = {};
                     favoritosData.forEach(fav => {
-                      favoritos[fav.idProducto] = fav.idFavorito; 
+                        favoritos[fav.idProducto] = fav.idFavorito; 
                     });
                     setIsBookmarked(favoritos); 
                 }
@@ -47,9 +54,22 @@ export default function Categorias() {
         };
 
         if (idTipoProducto) {
-            fetchProductos();
+            fetchProductos(); // Carga inicial de productos sin filtros
         }
     }, [idTipoProducto, user.idCliente]);
+
+    const applyFilters = async () => {
+        const filters = {
+            talle: searchParams.get('talle') || '',
+            color: searchParams.get('color') || '',
+            precioMin: searchParams.get('precioMin') || '',
+            precioMax: searchParams.get('precioMax') || '',
+        };
+        const query = new URLSearchParams(filters).toString();
+        const response = await fetch(`http://localhost:3001/api/filtro_categorias/${idTipoProducto}?${query}`);
+        const data = await response.json();
+        setProductos(data);
+    };
 
     const toggleBookmark = async (producto) => {
         const isAdding = !isBookmarked[producto.idProducto];
@@ -59,12 +79,12 @@ export default function Categorias() {
                 console.error('Token no disponible');
                 return;
             }
-    
+
             const headers = {
                 'Content-Type': 'application/json',
                 'Authorization': `Bearer ${user.token}`  
             };
-    
+
             if (isAdding) {
                 const response = await fetch('http://localhost:3001/api/favorito/', {
                     method: 'POST',
@@ -72,10 +92,7 @@ export default function Categorias() {
                     body: JSON.stringify({ idProducto: producto.idProducto })
                 });
                 const result = await response.json();
-                console.log('resultado ', result)
-                const idFavorito = result[0].idFavorito; // Obtener el idFavorito desde la respuesta
-                console.log('el id del producto a marcar es ',producto.idProducto)
-                console.log('el id del favorito a marcar es ',idFavorito)
+                const idFavorito = result[0].idFavorito; 
                 setIsBookmarked(prev => ({ ...prev, [producto.idProducto]: idFavorito }));
             } else {
                 const idFavorito = isBookmarked[producto.idProducto];
@@ -85,8 +102,7 @@ export default function Categorias() {
                 }); 
                 setIsBookmarked(prev => ({ ...prev, [producto.idProducto]: undefined }));
             }
-               
-    
+
             Swal.fire({
                 toast: true,
                 position: "bottom-end",
@@ -105,16 +121,19 @@ export default function Categorias() {
 
     return (
         <>
-
             <div className={styles.VolverHeader}>
                 <div className={styles.contendedorHeader}>
-                <button onClick={() => router.back()} className={styles.AHeader}>
-                    <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" className="bi bi-chevron-left back-button" viewBox="0 0 16 16">
-                        <path fillRule="evenodd" d="M11.354 1.646a.5.5 0 0 1 0 .708L5.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0"/>
-                    </svg>
-                </button>
+                    <button onClick={() => router.back()} className={styles.AHeader}>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" className="bi bi-chevron-left back-button" viewBox="0 0 16 16">
+                            <path fillRule="evenodd" d="M11.354 1.646a.5.5 0 0 1 0 .708L5.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0"/>
+                        </svg>
+                    </button>
                     <h1 className={styles.categoriaTitle}>{categoriaNombre}</h1>
                 </div>
+
+                <Link href={`/views/filtro_tipoProducto?idTipoProducto=${idTipoProducto}`} className={styles.linkFiltros}>
+                    Aplicar Filtros
+                </Link>
 
                 <div className={styles.productsContainer}>
                     <div className={styles.productosGrid}>
@@ -122,9 +141,9 @@ export default function Categorias() {
                             productos.map((producto) => (
                                 <div key={producto.idProducto} className={styles.productItem}>
                                     <div className={styles.imageContainer}>
-                                    <Link href={`/views/detalle_producto?idProducto=${producto.idProducto}`} passHref>
-                                        <img src={producto.imagen} alt={producto.nombre} className={styles.productImage} />
-                                    </Link>
+                                        <Link href={`/views/detalle_producto?idProducto=${producto.idProducto}`} passHref>
+                                            <img src={producto.imagen} alt={producto.nombre} className={styles.productImage} />
+                                        </Link>
                                         <button 
                                             onClick={() => toggleBookmark(producto)} 
                                             className={styles.bookmarkButton}

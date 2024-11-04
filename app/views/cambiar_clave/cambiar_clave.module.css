@@ -1,113 +1,86 @@
-.VolverHeader {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    width: 100%;
-    padding-bottom: 20px; 
-}
-.AHeader {
-    display: flex;
-    align-items: center;
-    color: black;
-    margin-right: auto;
-
-}
 .container {
-    padding: 30px;
-    margin-top: 2rem;
-   
+  max-width: 400px; /* Limita el ancho máximo */
+  margin: 20px auto; /* Centra el contenedor */
+  padding: 20px;
+  background: #f9f9f9; /* Fondo claro */
+  border-radius: 12px; /* Bordes redondeados */
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Sombra suave */
 }
-.TituloCategorias {
-    
- 
-        font-size: 2.5rem;
-        color: #41419b; ;
-        font-weight: 600 bold;
-        letter-spacing: -1px;
-        position: relative;
-        display: flex;
-        flex-wrap: wrap;
-        align-items: center;
-        padding-left: 30px;
-      
-      
-      
-}   
-.padreTitulo{
-    width: 250px;
-}
-.subtitulo{
-    font-size: 18px;
-    display: flex;
-    color:grey;
-    padding-left: 30px;
-    margin-top: 2rem;
-    display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
-   
 
+.VolverHeader {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  margin-bottom: 20px;
 }
-.padreSubtitulo{
-    width: 95vw;
+
+.AHeader {
+  color: #41419b; /* Color del enlace */
+}
+
+.TituloCategorias {
+  font-size: 2rem;
+  color: #41419b;
+  font-weight: 600;
+  text-align: center; /* Centrado */
+  margin-bottom: 10px; /* Espaciado */
+}
+
+.subtitulo {
+  font-size: 16px;
+  color: grey;
+  text-align: center; /* Centrado */
+  margin-bottom: 20px; /* Espaciado */
+}
+
+.formContainer {
+  display: flex;
+  flex-direction: column;
 }
 
 .input_container {
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    margin-top: 2rem;
-   
-   
-  }
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 1rem; /* Espaciado entre los campos */
+}
 
-  .checkbox_label {
-    display: flex;
-    align-items: center;
-    font-size: 20px;
-    margin-bottom: 0.5rem;
-  }
-  
-  .checkbox_input {
-    margin-right: 10px;
-  }
+.checkbox_label {
+  font-size: 16px;
+  margin-bottom: 0.5rem;
+}
 
-  
-  .submit_button {
-    background: #007bff;
-    color: #fff;
-    padding: 10px;
-    border: none;
-    border-radius: 4px;
-    font-size: 18px;
-    text-align: center;
-    text-decoration: none;
-    width: 100%;
-    margin-top: 1.5rem;
-  }
-  
-  .submit_button:hover {
-    background: #0056b3;
-  }
-  .todo {
-    display: flex;
-   margin-left: 10px;
-  align-items: center;
-  }
-  .form {
-    display: flex;
-    justify-content: center;
-    flex-direction: column;
-    gap: 10px;
-    padding: 20px;
-    border-radius: 20px;
-    position: relative;
-  }
-  .input {
-    width: 85vw;
-    padding: 20px 20px 20px 10px;
-    outline: 0;
-    border: 1px solid rgba(105, 105, 105, 0.397);
-    border-radius: 10px;
-  }
-  
+.input {
+  padding: 12px;
+  border: 1px solid rgba(105, 105, 105, 0.5);
+  border-radius: 5px;
+  width: 100%; /* Ocupa todo el ancho */
+  box-sizing: border-box; /* Incluye padding en el ancho total */
+}
+
+.submit_button {
+  background: #007bff;
+  color: #fff;
+  padding: 12px;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background 0.3s;
+  margin-top: 10px; /* Espaciado superior */
+}
+
+.submit_button:hover {
+  background: #0056b3;
+}
+
+.successMessage {
+  color: green;
+  margin-top: 10px;
+  text-align: center; /* Centrado */
+}
+
+.errorMessage {
+  color: red;
+  margin-top: 10px;
+  text-align: center; /* Centrado */
+}
