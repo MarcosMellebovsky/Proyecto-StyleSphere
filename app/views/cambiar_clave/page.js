@@ -74,7 +74,7 @@ export default function CambiarContra() {
         if (response.ok) {
             setMessage("Contraseña cambiada con éxito.");
             setError("");
-            router.push("/views/login");
+            router.push("/views/iniciar_Sesion");
         } else {
             setError(result[0]); // Mensaje de error desde la API
             setMessage("");

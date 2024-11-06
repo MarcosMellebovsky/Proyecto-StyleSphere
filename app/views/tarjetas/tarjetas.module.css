@@ -1,183 +1,132 @@
-/* From Uiverse.io by vinodjangid07 */ 
-.visacard {
+.container {
+  width: 100%;
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.VolverHeader {
+  margin-bottom: 20px;
+}
+
+.AHeader svg {
+  cursor: pointer;
+}
+
+.txt {
+  font-size: 24px;
+  font-weight: bold;
+  text-align: center;
+}
+
+.separator {
+  text-align: center;
+  margin: 20px 0;
+}
+
+.line {
+  width: 80%;
+  margin: 0 auto;
+}
+
+.txtp {
+  font-size: 18px;
+  margin-bottom: 10px;
+}
+
+.tarjetasContainer {
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
-  justify-content: flex-end;
-  width: 300px;
-  height: 180px;
-  background-image: radial-gradient(
-    circle 897px at 9% 80.3%,
-    rgba(55, 60, 245, 1) 0%,
-    rgba(234, 161, 15, 0.9) 100.2%
-  );
-  border-radius: 10px;
-  padding: 20px;
-  font-family: Arial, Helvetica, sans-serif;
-  position: relative;
   gap: 15px;
 }
-.logoContainer {
-  width: 100%;
+
+.tarjetaCard {
   display: flex;
+  justify-content: space-between;
   align-items: center;
-  justify-content: flex-end;
-  height: fit-content;
-  position: absolute;
-  top: 0;
-  left: 0;
-  padding: 18px;
+  padding: 15px;
+  background: #f4f4f4;
+  border-radius: 8px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
 }
-.svgLogo {
-  height: 40px;
-  width: auto;
-}
-.inputstyle::placeholder {
-  color: #ffffff;
-}
-.inputstyle {
-  background-color: transparent;
-  border: none;
-  outline: none;
-  color: white;
-  caret-color: red;
-  font-size: 13px;
-  height: 25px;
-  letter-spacing: 1.5px;
-}
-.numbercontainer {
-  width: 100%;
-  height: fit-content;
+
+.cardInfo {
   display: flex;
   flex-direction: column;
-}
-#cardNumber {
-  width: 100%;
-  height: 25px;
-}
-.namedatecvvcontainer {
-  width: 100%;
-  height: 25px;
-  display: flex;
-  gap: 10px;
-}
-.namewrapper {
-  width: 60%;
-  height: fit-content;
-  display: flex;
-  flex-direction: column;
-}
-.expirywrapper,
-.cvvwrapper {
-  width: 30%;
-  height: fit-content;
-  display: flex;
-  flex-direction: column;
-}
-.cvvwrapper {
-  width: 10%;
-}
-#expiry,
-#cvv {
-  width: 100%;
-}
-.inputlabel {
-  font-size: 8px;
-  letter-spacing: 1.5px;
-  color: #e2e2e2;
-  width: 100%;
+  gap: 5px;
 }
 
-  .VolverHeader{
-    display: flex;
-    width: 100%;
-    justify-content: space-evenly;
-    flex-wrap: wrap;
-    flex-direction: column;
-    padding: 20px;
-  }
-  .AHeader{
-    display: flex;
-    align-items: center;
-    margin-right: auto; 
-    color: black;
-  }
-
-
-  /* From Uiverse.io by vinodjangid07 */ 
-.InputContainerr {
-  height: 45px;
-  display: flex;
-  align-items: center;
- gap: 20px;
- justify-content: space-around;
-  background-color: rgb(8, 8, 8);
-  overflow: hidden;
-  padding: 0px 5px 0px 15px;
-  border: 1px solid rgba(255, 255, 255, 0.322);
-  border-radius: 10px;
-  box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.075);
-  width: 90vw;
-}
-
-.inputt {
-  width: 170px;
-  height: 100%;
-  border: none;
-  outline: none;
-  font-size: 0.9em;
-  caret-color: rgb(255, 81, 0);
-  background-color: rgb(8, 8, 8);
-  font-weight: 600;
-  color: white;
-}
-
-.visaCardd {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  position: relative;
-  width: 40px;
-  height: 25px;
-  background-color: rgb(8, 8, 8);
-  pointer-events: none;
-  border: 1px solid rgba(255, 255, 255, 0.068);
-  border-radius: 7px;
-}
-
-.papainpt{
-  display: flex;
-  justify-content: center;
-margin-top: 10px;
-}
-.txt{
-  display: flex;
-  justify-content: center;
-  margin-bottom: 30px;
-
-}
-.txtp{
-  display: flex;
-  justify-content: start;
-  margin-bottom: 10px;
-  padding: 20px;
+.cardNumber {
   font-weight: bold;
-
 }
-.separator {
+
+.cardExpDate {
+  font-size: 14px;
+  color: #888;
+}
+
+.eliminarBtn {
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.agregarBtn {
+  padding: 10px 15px;
+  font-size: 16px;
+  background-color: #28a745;
+  color: white;
+  border: none;
+  border-radius: 5px;
   width: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 30px;
-  color: #acacac;
-  padding-top: .8rem;
+  cursor: pointer;
 }
 
-.separator .line {
+.agregarBtn:hover {
+  background-color: #218838;
+}
+
+.formContainer {
+  margin-top: 20px;
+  padding: 20px;
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.inputGroup {
+  margin-bottom: 20px;
+}
+
+.inputGroup label {
   display: block;
-  width: 90vw;
-  height: 1px;
-  border: 0;
-  background-color: #9e9b9b;
+  font-size: 14px;
+  margin-bottom: 5px;
+}
+
+.inputGroup input {
+  width: 100%;
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.error {
+  color: red;
+  font-size: 12px;
+}
+
+.submitBtn {
+  padding: 10px 15px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  width: 100%;
+  cursor: pointer;
+}
+
+.submitBtn:hover {
+  background-color: #0056b3;
 }

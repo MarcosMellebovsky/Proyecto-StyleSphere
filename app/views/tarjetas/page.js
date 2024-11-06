@@ -2,6 +2,7 @@
 import { useState } from 'react';
 import styles from './tarjetas.module.css';
 import Link from 'next/link';
+
 const Tarjetas = () => {
   const [tarjetas, setTarjetas] = useState([
     { id: 1, numero: '**** **** **** 1234', fechaExpiracion: '12/25' },
@@ -16,155 +17,159 @@ const Tarjetas = () => {
   });
 
   const [mostrandoCampos, setMostrandoCampos] = useState(false);
+  const [errores, setErrores] = useState({});
 
-  const agregarTarjeta = () => {
-    if (
-      nuevaTarjeta.numero.length === 12 &&
-      nuevaTarjeta.fechaExpiracion &&
-      nuevaTarjeta.cvv.length === 3
-    ) {
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setNuevaTarjeta({ ...nuevaTarjeta, [name]: value });
+  };
+
+  const handleAgregarTarjeta = () => {
+    const { numero, titular, fechaExpiracion, cvv } = nuevaTarjeta;
+
+    let valid = true;
+    let nuevosErrores = {};
+
+    // Validación de número de tarjeta (debe ser 16 dígitos)
+    if (!/^\d{16}$/.test(numero)) {
+      nuevosErrores.numero = 'El número de tarjeta debe tener 16 dígitos';
+      valid = false;
+    }
+
+    // Validación de titular (solo letras)
+    if (!/^[a-zA-Z\s]+$/.test(titular)) {
+      nuevosErrores.titular = 'El titular debe contener solo letras';
+      valid = false;
+    }
+
+    // Validación de fecha de expiración (debe tener el formato MM/AA y ser una fecha real)
+    const fechaParts = fechaExpiracion.split('/');
+    if (fechaParts.length !== 2 || !/^\d{2}$/.test(fechaParts[0]) || !/^\d{2}$/.test(fechaParts[1])) {
+      nuevosErrores.fechaExpiracion = 'La fecha de expiración debe tener el formato MM/AA';
+      valid = false;
+    }
+
+    // Validación de CVV (debe ser 3 dígitos numéricos)
+    if (!/^\d{3}$/.test(cvv)) {
+      nuevosErrores.cvv = 'El CVV debe tener 3 dígitos';
+      valid = false;
+    }
+
+    if (valid) {
       setTarjetas([
         ...tarjetas,
-        { id: tarjetas.length + 1, numero: nuevaTarjeta.numero, fechaExpiracion: nuevaTarjeta.fechaExpiracion },
+        { id: tarjetas.length + 1, numero: '**** **** **** ' + numero.slice(-4), fechaExpiracion },
       ]);
       setNuevaTarjeta({ numero: '', titular: '', fechaExpiracion: '', cvv: '' });
       setMostrandoCampos(false);
+    } else {
+      setErrores(nuevosErrores);
     }
   };
 
   const eliminarTarjeta = (id) => {
-    setTarjetas(tarjetas.filter(tarjeta => tarjeta.id !== id));
+    setTarjetas(tarjetas.filter((tarjeta) => tarjeta.id !== id));
   };
 
   return (
-    <>
-
     <div className={styles.container}>
-         
-   
-     <div className={styles.VolverHeader}>
-          <Link className={styles.AHeader} href="./perfil">
-            <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" className="bi bi-chevron-left back-button" viewBox="0 0 16 16">
-              <path fillRule="evenodd" d="M11.354 1.646a.5.5 0 0 1 0 .708L5.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0"/>
-            </svg>
-          </Link>
-          </div> 
-          <h1 className={styles.txt}>Mis tarjetas</h1>  
-          <div className={styles.separator}>
+      <div className={styles.VolverHeader}>
+        <Link className={styles.AHeader} href="./perfil">
+          <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" className="bi bi-chevron-left back-button" viewBox="0 0 16 16">
+            <path fillRule="evenodd" d="M11.354 1.646a.5.5 0 0 1 0 .708L5.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0" />
+          </svg>
+        </Link>
+      </div>
+      <h1 className={styles.txt}>Mis tarjetas</h1>
+      <div className={styles.separator}>
         <hr className={styles.line} />
       </div>
-      <p className={styles.txtp}>Tarjetas guardadas:</p>  
- 
-          <div className={styles.papainpt}>
-          <div className={styles.InputContainerr}>
-          <div className={styles.visaCardd}>
-  <svg viewBox="0 0 48 48" height="23" width="23" y="0px" x="0px" xmlns="http://www.w3.org/2000/svg" className={styles.logoo}>
-            <path d="M32 10A14 14 0 1 0 32 38A14 14 0 1 0 32 10Z" fill="#ff9800"></path><path d="M16 10A14 14 0 1 0 16 38A14 14 0 1 0 16 10Z" fill="#d50000"></path><path d="M18,24c0,4.755,2.376,8.95,6,11.48c3.624-2.53,6-6.725,6-11.48s-2.376-8.95-6-11.48 C20.376,15.05,18,19.245,18,24z" fill="#ff3d00"></path>
-            </svg>
 
-</div>
-  <input placeholder="0000 0000 0000 0000" id="input" className={styles.inputt} name="text" type="text" input/>
-  <div class="form-check">
-  <input type="radio"  input/>
-</div>
-  </div>
- 
-</div>
-<div className={styles.papainpt}>
-          <div className={styles.InputContainerr}>
-          <div className={styles.visaCardd}>
-  <svg viewBox="0 0 48 48" height="23" width="23" y="0px" x="0px" xmlns="http://www.w3.org/2000/svg" className={styles.logoo}>
-            <path d="M32 10A14 14 0 1 0 32 38A14 14 0 1 0 32 10Z" fill="#ff9800"></path><path d="M16 10A14 14 0 1 0 16 38A14 14 0 1 0 16 10Z" fill="#d50000"></path><path d="M18,24c0,4.755,2.376,8.95,6,11.48c3.624-2.53,6-6.725,6-11.48s-2.376-8.95-6-11.48 C20.376,15.05,18,19.245,18,24z" fill="#ff3d00"></path>
-            </svg>
+      <p className={styles.txtp}>Tarjetas guardadas:</p>
+      <div className={styles.tarjetasContainer}>
+        {tarjetas.map((tarjeta) => (
+          <div key={tarjeta.id} className={styles.tarjetaCard}>
+            <div className={styles.cardInfo}>
+              <div className={styles.cardNumber}>
+                <span>{tarjeta.numero}</span>
+              </div>
+              <div className={styles.cardExpDate}>
+                <span>{tarjeta.fechaExpiracion}</span>
+              </div>
+            </div>
+            <button onClick={() => eliminarTarjeta(tarjeta.id)} className={styles.eliminarBtn}>
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" className="bi bi-trash" viewBox="0 0 16 16">
+                <path d="M5.5 0a.5.5 0 0 1 .5.5V1h5V.5a.5.5 0 0 1 .5-.5h3a.5.5 0 0 1 .5.5V1h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1v10a3 3 0 0 1-3 3H4a3 3 0 0 1-3-3V3H.5A.5.5 0 0 1 0 2.5v-1a.5.5 0 0 1 .5-.5h3a.5.5 0 0 1 .5.5V1h2V.5a.5.5 0 0 1 .5-.5h1zM4 3v10a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V3H4z" />
+              </svg>
+            </button>
+          </div>
+        ))}
+      </div>
 
-</div>
-  <input placeholder="0000 0000 0000 0000" id="input" className={styles.inputt} name="text" type="text" input/>
-  <div class="form-check">
-  <input type="radio"  input/>
-</div>
-  </div>
- 
-</div>
-<div className={styles.papainpt}>
-          <div className={styles.InputContainerr}>
-          <div className={styles.visaCardd}>
-  <svg viewBox="0 0 48 48" height="23" width="23" y="0px" x="0px" xmlns="http://www.w3.org/2000/svg" className={styles.logoo}>
-            <path d="M32 10A14 14 0 1 0 32 38A14 14 0 1 0 32 10Z" fill="#ff9800"></path><path d="M16 10A14 14 0 1 0 16 38A14 14 0 1 0 16 10Z" fill="#d50000"></path><path d="M18,24c0,4.755,2.376,8.95,6,11.48c3.624-2.53,6-6.725,6-11.48s-2.376-8.95-6-11.48 C20.376,15.05,18,19.245,18,24z" fill="#ff3d00"></path>
-            </svg>
+      {!mostrandoCampos ? (
+        <button onClick={() => setMostrandoCampos(true)} className={styles.agregarBtn}>Agregar tarjeta</button>
+      ) : (
+        <div className={styles.formContainer}>
+          <h2>Agregar tarjeta</h2>
+          <div className={styles.inputGroup}>
+            <label htmlFor="numero">Número de tarjeta</label>
+            <input
+              id="numero"
+              type="text"
+              name="numero"
+              value={nuevaTarjeta.numero}
+              onChange={handleChange}
+              maxLength="16"
+              placeholder="XXXX XXXX XXXX XXXX"
+            />
+            {errores.numero && <div className={styles.error}>{errores.numero}</div>}
+          </div>
 
-</div>
-  <input placeholder="0000 0000 0000 0000" id="input" className={styles.inputt} name="text" type="text" input/>
-  <div class="form-check">
-  <input type="radio"  input/>
-</div>
-  </div>
- 
-</div>
-<div className={styles.visacard}>
-  <div className={styles.logoContainer}>
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      x="0px"
-      y="0px"
-      width="23"
-      height="23"
-      viewBox="0 0 48 48"
-      className={styles.svgLogo}
-    >
-      <path
-        fill="#ff9800"
-        d="M32 10A14 14 0 1 0 32 38A14 14 0 1 0 32 10Z"
-      ></path>
-      <path
-        fill="#d50000"
-        d="M16 10A14 14 0 1 0 16 38A14 14 0 1 0 16 10Z"
-      ></path>
-      <path
-        fill="#ff3d00"
-        d="M18,24c0,4.755,2.376,8.95,6,11.48c3.624-2.53,6-6.725,6-11.48s-2.376-8.95-6-11.48 C20.376,15.05,18,19.245,18,24z"
-      ></path>
-    </svg>
-  </div>
-  <div className={styles.numbercontainer}>
-    <label className={styles.inputlabel} for="cardNumber">CARD NUMBER</label>
-    <input
-      className={styles.inputstyle}
-      id="cardNumber"
-      placeholder="XXXX XXXX XXXX XXXX"
-      name="cardNumber"
-      type="text"
-    />
-  </div>
+          <div className={styles.inputGroup}>
+            <label htmlFor="titular">Titular</label>
+            <input
+              id="titular"
+              type="text"
+              name="titular"
+              value={nuevaTarjeta.titular}
+              onChange={handleChange}
+              placeholder="Nombre del titular"
+            />
+            {errores.titular && <div className={styles.error}>{errores.titular}</div>}
+          </div>
 
-  <div className={styles.namedatecvvcontainer}>
-    <div className={styles.namewrapper}>
-      <label className={styles.inputlabel} for="holderName">CARD HOLDER</label>
-      <input
-        className={styles.inputstyle}
-        id="holderName"
-        placeholder="NAME"
-        type="text"
-      />
+          <div className={styles.inputGroup}>
+            <label htmlFor="fechaExpiracion">Fecha de expiración (MM/AA)</label>
+            <input
+              id="fechaExpiracion"
+              type="text"
+              name="fechaExpiracion"
+              value={nuevaTarjeta.fechaExpiracion}
+              onChange={handleChange}
+              maxLength="5"
+              placeholder="MM/AA"
+            />
+            {errores.fechaExpiracion && <div className={styles.error}>{errores.fechaExpiracion}</div>}
+          </div>
+
+          <div className={styles.inputGroup}>
+            <label htmlFor="cvv">CVV</label>
+            <input
+              id="cvv"
+              type="password"
+              name="cvv"
+              value={nuevaTarjeta.cvv}
+              onChange={handleChange}
+              maxLength="3"
+              placeholder="CVV"
+            />
+            {errores.cvv && <div className={styles.error}>{errores.cvv}</div>}
+          </div>
+
+          <button onClick={handleAgregarTarjeta} className={styles.submitBtn}>Guardar tarjeta</button>
+        </div>
+      )}
     </div>
-
-    <div className={styles.expirywrapper}>
-      <label className={styles.inputlabel} for="expiry">VALID THRU</label>
-      <input className={styles.inputstyle} id="expiry" placeholder="MM/YY" type="text" />
-    </div>
-    <div className={styles.cvvwrapper}>
-      <label className={styles.inputlabel} for="cvv">CVV</label>
-      <input
-        className={styles.inputstyle}
-        placeholder="***"
-        maxlength="3"
-        id="cvv"
-        type="password"
-      />
-    </div>
-  </div>
-</div>
-
-    </div></>
   );
 };
 
