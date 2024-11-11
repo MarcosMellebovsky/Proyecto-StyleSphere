@@ -1,6 +1,6 @@
 "use client";
 import React, { useState, useEffect, useContext } from 'react';
-import { useSearchParams } from 'next/navigation';
+import { useSearchParams, useRouter } from 'next/navigation';
 import ModalAgregarResenia from './ModalAgregarResenia';
 import styles from "./resenias.module.css"; 
 import { UserContext } from '@/app/components/contexts/UserContext.js';
@@ -14,7 +14,7 @@ export default function Resenias() {
     const [reseniaEditada, setReseniaEditada] = useState(null);
     const searchParams = useSearchParams();
     const idTienda = searchParams.get('idTienda');
-
+    const router = useRouter();
     const fetchResenias = async () => {
         if (idTienda) {
             try {
@@ -111,11 +111,11 @@ export default function Resenias() {
     return (
       <>
       <div className={styles.container}>
-          <Link className={styles.backButton} href="./perfil">
-          <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" className="bi bi-chevron-left" viewBox="0 0 16 16">
-            <path fillRule="evenodd" d="M11.354 1.646a.5.5 0 0 1 0 .708L5.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0" />
-          </svg>
-        </Link>
+      <button onClick={() => router.back()} className={styles.AHeader}>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" className="bi bi-chevron-left back-button" viewBox="0 0 16 16">
+                        <path fillRule="evenodd" d="M11.354 1.646a.5.5 0 0 1 0 .708L5.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0"/>
+                    </svg>
+                </button>
         
         <header className={styles.headerr}>
        

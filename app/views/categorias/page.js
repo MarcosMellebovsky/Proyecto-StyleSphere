@@ -12,23 +12,15 @@ export default function Categorias() {
     const [productos, setProductos] = useState([]);
     const searchParams = useSearchParams();
     const idTipoProducto = searchParams.get('idTipoProducto');
-    const from = searchParams.get('from'); 
-    const [categoriaNombre, setCategoriaNombre] = useState(''); 
+    const from = searchParams.get('from');
+    const [categoriaNombre, setCategoriaNombre] = useState('');
     const router = useRouter();
-    const { user } = useContext(UserContext); 
+    const { user } = useContext(UserContext);
 
     useEffect(() => {
         const fetchProductos = async (filters = {}) => {
             const { talle, color, precioMin, precioMax } = filters;
-            const query = new URLSearchParams({
-                talle,
-                color,
-                precioMin,
-                precioMax,
-            }).toString();
-
             try {
-                // Primero, se obtienen todos los productos sin filtros
                 const response = await fetch(`http://localhost:3001/api/producto/productos_id/${idTipoProducto}`);
                 const data = await response.json();
                 setProductos(data);
@@ -44,9 +36,9 @@ export default function Categorias() {
                     const favoritosData = await favoritosResponse.json();
                     const favoritos = {};
                     favoritosData.forEach(fav => {
-                        favoritos[fav.idProducto] = fav.idFavorito; 
+                        favoritos[fav.idProducto] = fav.idFavorito;
                     });
-                    setIsBookmarked(favoritos); 
+                    setIsBookmarked(favoritos);
                 }
             } catch (error) {
                 console.error('Error:', error);
@@ -54,7 +46,7 @@ export default function Categorias() {
         };
 
         if (idTipoProducto) {
-            fetchProductos(); // Carga inicial de productos sin filtros
+            fetchProductos();
         }
     }, [idTipoProducto, user.idCliente]);
 
@@ -92,14 +84,14 @@ export default function Categorias() {
                     body: JSON.stringify({ idProducto: producto.idProducto })
                 });
                 const result = await response.json();
-                const idFavorito = result[0].idFavorito; 
+                const idFavorito = result[0].idFavorito;
                 setIsBookmarked(prev => ({ ...prev, [producto.idProducto]: idFavorito }));
             } else {
                 const idFavorito = isBookmarked[producto.idProducto];
                 await fetch(`http://localhost:3001/api/favorito/${idFavorito}`, {
                     method: 'DELETE',
                     headers
-                }); 
+                });
                 setIsBookmarked(prev => ({ ...prev, [producto.idProducto]: undefined }));
             }
 
@@ -132,7 +124,7 @@ export default function Categorias() {
                 </div>
 
                 <Link href={`/views/filtro_tipoProducto?idTipoProducto=${idTipoProducto}`} className={styles.linkFiltros}>
-                    Aplicar Filtros
+                    Filtros
                 </Link>
 
                 <div className={styles.productsContainer}>
