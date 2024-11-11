@@ -1,74 +1,141 @@
+
+/* Contenedor principal */
 .container {
-    max-width: 600px;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    padding: 20px;
-    background-color: #e0f7fa; /* Fondo azul claro */
-    border-radius: 8px;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-    text-align: left;
-    gap: 20px;
-  }
-  
-  .title {
-    color: #00796b;
-    text-align: center;
-  }
-  
-  .faq, .contact {
-    margin-bottom: 30px;
-  }
-  
-  .question {
-    margin-bottom: 15px;
-  }
-  
-  .question h3 {
-    color: #004d40;
-  }
-  
-  .input, .textarea {
-    width: 100%;
-    padding: 10px;
-    margin: 10px 0;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-  }
-  
-  .textarea {
-    height: 100px;
-  }
-  
-  .submitButton {
-    background-color: #00796b;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    padding: 10px;
-    cursor: pointer;
-    transition: background-color 0.3s;
-  }
-  
-  .submitButton:hover {
-    background-color: #004d40;
-  }
-  
-  .successMessage {
-    color: #388e3c;
-    text-align: center;
-  }
-  .VolverHeader{
-    display: flex;
-    width: 100%;
-    justify-content: space-evenly;
-    flex-wrap: wrap;
-    flex-direction: column;
-    padding: 20px;
-  }
-  .AHeader{
-    display: flex;
-    align-items: center;
-    margin-right: auto; 
-    color: black;
-  }
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: white;
+  border-radius: 12px;
+ 
+  text-align: center;
+  margin-top: 10px;
+}
+
+/* Título principal */
+.title {
+  font-size: 28px;
+  font-weight: 600;
+  margin-bottom: 20px;
+  color: #41419b; /* Color de texto principal */
+}
+
+/* Subtítulo de los pasos */
+.subtitulo {
+  font-size: 16px;
+  color: #666;
+  margin-bottom: 30px;
+}
+
+/* Contenedor del formulario */
+.formContainer {
+  width: 100%;
+}
+
+.input_container {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 20px;
+  position: relative;
+}
+
+.checkbox_label {
+  font-size: 16px;
+  color: #444;
+  margin-bottom: 5px;
+}
+
+/* Estilo de los inputs */
+.input, .textarea {
+  width: 100%;
+  padding: 12px;
+  margin: 10px 0;
+  border: 1px solid #ddd;
+  border-radius: 8px; /* Bordes redondeados */
+  background-color: #f9f9f9;
+  font-size: 16px;
+  color: #333;
+  transition: all 0.3s ease-in-out; /* Transición para suavizar interacciones */
+}
+
+/* Sombra y efecto al hacer foco en los inputs */
+.input:focus, .textarea:focus {
+  outline: none;
+  border-color: #41419b;
+  box-shadow: 0 0 8px rgba(65, 65, 155, 0.5);
+}
+
+/* Estilo para el textarea */
+.textarea {
+  height: 120px;
+  resize: vertical;
+}
+
+/* Botón de envío */
+.submitButton {
+  background-color: #41419b;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  padding: 14px 20px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+  width: 100%;
+}
+
+/* Efecto hover para el botón */
+.submitButton:hover {
+  background-color: #333b8e;
+  transform: translateY(-2px); /* Le da un pequeño efecto de "flotante" */
+}
+
+/* Mensajes de éxito y error */
+.successMessage {
+  color: #388e3c; /* Verde */
+  font-size: 20px;
+  margin: 20px 0;
+  font-weight: bold;
+}
+
+/* Contenedor para centrar el mensaje de éxito o error */
+.messageContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  text-align: center;
+  flex-direction: column;
+  margin-top: 20px;
+}
+
+/* Estilo de la descripción del formulario */
+.descripcion {
+  font-size: 18px;
+  color: #555;
+  line-height: 1.5;
+  margin-bottom: 30px;
+  text-align: center;
+  max-width: 80%;
+  margin: 0 auto 30px;
+}
+
+/* Volver Header */
+.VolverHeader {
+  display: flex;
+  width: 100%;
+  justify-content: space-evenly;
+  flex-wrap: wrap;
+  flex-direction: column;
+  padding: 20px;
+}
+
+.AHeader {
+  display: flex;
+  align-items: center;
+  margin-right: auto;
+  color: black;
+}
+.tick{
+
+  font-size: 200px;
+}

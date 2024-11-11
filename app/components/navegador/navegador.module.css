@@ -43,7 +43,7 @@
   .favoritos {
     padding: 1rem;
     border-radius: 50%;
-    background-color: #2e3192;
+    background-color: #41419b;
     position: absolute;
     top: -20px;
     left: 50%;
@@ -58,11 +58,12 @@
     color: black;
   }
   .active {
-    color: blue;
+    color: #41419b;
+  
   }
   
   .active svg path {
-    fill: blue;
+    fill: #41419b;
   }
   
 }

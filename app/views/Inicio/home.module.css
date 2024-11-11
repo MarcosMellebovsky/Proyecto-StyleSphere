@@ -51,7 +51,8 @@
     }
     .verTodas{
         text-decoration: none;
-        color: rgb(75, 108, 255);
+        font-weight: 700;
+        color: #41419b;
     }
 
     .ofertas {

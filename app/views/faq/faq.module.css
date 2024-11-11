@@ -1,15 +1,25 @@
 .container {
     max-width: 600px;
-    margin: 50px auto;
+    margin: 5px auto;
     padding: 20px;
-    background-color: #e0f7fa; /* Fondo azul claro */
-    border-radius: 8px;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+   
     text-align: left;
+  }
+  .VolverHeader{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+  }
+  .AHeader{
+    display: flex;
+    align-items: center;
+    margin-right: auto; 
+    color: black;
   }
   
   .title {
-    color: #00796b;
+   
     text-align: center;
     margin-bottom: 20px;
   }
@@ -19,25 +29,26 @@
   }
   
   .preguntaButton {
-    background-color: #00796b; /* Botón azul oscuro */
+    background-color: #41419b; /* Botón azul oscuro */
     color: white;
     border: none;
     border-radius: 5px;
-    padding: 10px;
+    padding: 20px;
     width: 100%;
     text-align: left;
-    cursor: pointer;
+    cursor: pointer;  
+    font-size: 13px;
     transition: background-color 0.3s;
   }
   
   .preguntaButton:hover {
-    background-color: #004d40; /* Color al pasar el mouse */
+    background-color: #41419b; /* Color al pasar el mouse */
   }
   
   .respuesta {
     padding: 10px;
     background-color: #f1f8e9; /* Fondo más claro para la respuesta */
-    border-left: 4px solid #00796b; /* Línea a la izquierda */
+    border-left: 4px solid #41419b; /* Línea a la izquierda */
     border-radius: 4px;
     margin-top: 5px;
   }

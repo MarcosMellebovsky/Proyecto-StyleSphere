@@ -9,6 +9,7 @@ const UserProfile = () => {
   const [imageSrc, setImageSrc] = useState(null); // Añadido estado para la imagen
   const { user } = useContext(UserContext);
   const router = useRouter();
+  const [showModal, setShowModal] = useState(false); // Estado para controlar el modal
 
   const handleNavigation = (path) => {
     router.push(`${path}?from=Perfil`);
@@ -72,6 +73,15 @@ const UserProfile = () => {
     }
   }, [user]);
 
+  // Función para cerrar sesión
+  const handleLogout = () => {
+    // Aquí pondrías la lógica para cerrar sesión, por ejemplo:
+    // borrar los datos del usuario en el contexto o eliminar el token
+    localStorage.removeItem("profileImage");
+    // Redirigir a la página de inicio de sesión
+    router.push("/views/iniciar_Sesion");
+  };
+console.log('correo', user.correoElectronico)
   return (
     <div className={styles.container}>
       <div className={styles.profileHeader}>
@@ -97,13 +107,15 @@ const UserProfile = () => {
               : "Cargando..."}
           </h1>
           <p className={styles.correo_p}>
-            {user && user.correoElectronico
-              ? `${user.correoElectronico}` 
+            {user && user.username
+              ? `${user.username}` 
               : "Cargando..."}
           </p>
         </div>
       </div>
+
       <div className={styles.menu}>
+        <div className={styles.menuSection}>
         <div className={styles.menuSection}>
           <strong><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-video" viewBox="0 0 16 16">
   <path d="M8 9.05a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5"/>
@@ -146,19 +158,34 @@ const UserProfile = () => {
 </svg> Preguntas frecuentes</button>
         </div>
 
-        
-
-        <div className={styles.menuSection}>
-          <button onClick={() => handleNavigation("/views/iniciar_Sesion")} className={styles.menuItemC}><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-box-arrow-right" viewBox="0 0 16 16">
-  <path fill-rule="evenodd" d="M10 12.5a.5.5 0 0 1-.5.5h-8a.5.5 0 0 1-.5-.5v-9a.5.5 0 0 1 .5-.5h8a.5.5 0 0 1 .5.5v2a.5.5 0 0 0 1 0v-2A1.5 1.5 0 0 0 9.5 2h-8A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h8a1.5 1.5 0 0 0 1.5-1.5v-2a.5.5 0 0 0-1 0z"/>
-  <path fill-rule="evenodd" d="M15.854 8.354a.5.5 0 0 0 0-.708l-3-3a.5.5 0 0 0-.708.708L14.293 7.5H5.5a.5.5 0 0 0 0 1h8.793l-2.147 2.146a.5.5 0 0 0 .708.708z"/>
-</svg> Cerrar sesión</button>
+       
+          <button 
+            onClick={() => setShowModal(true)} // Mostrar el modal
+            className={styles.menuItemC}>
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-box-arrow-right" viewBox="0 0 16 16">
+              <path fillRule="evenodd" d="M10 12.5a.5.5 0 0 1-.5.5h-8a.5.5 0 0 1-.5-.5v-9a.5.5 0 0 1 .5-.5h8a.5.5 0 0 1 .5.5v2a.5.5 0 0 0 1 0v-2A1.5 1.5 0 0 0 9.5 2h-8A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h8a1.5 1.5 0 0 0 1.5-1.5v-2a.5.5 0 0 0-1 0z"/>
+              <path fillRule="evenodd" d="M15.854 8.354a.5.5 0 0 0 0-.708l-3-3a.5.5 0 0 0-.708.708L14.293 7.5H5.5a.5.5 0 0 0 0 1h8.793l-2.147 2.146a.5.5 0 0 0 .708.708z"/>
+            </svg> Cerrar sesión
+          </button>
         </div>
       </div>
 
       <Navegador />
+
+      {/* Modal de confirmación de cierre de sesión */}
+      {showModal && (
+        <div className={styles.modal}>
+          <div className={styles.modalContent}>
+            <h2>¿Quieres salir de tu cuenta?</h2>
+            <p>Tendrás que volver a ingresar para hacer un pedido.</p>
+            <div className={styles.modalButtons}>
+              <button onClick={() => setShowModal(false)} className={styles.modalButton}>Cancelar</button>
+              <button onClick={handleLogout} className={styles.modalButtonCerrar}>Cerrar sesión</button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
-  
   );
 };
 
