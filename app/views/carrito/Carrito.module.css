@@ -4,6 +4,7 @@
     font-family: 'Arial', sans-serif;
     color: #333;
     background-color: #f8f9fa;
+    padding-bottom: 80px;
 }
 
 .VolverHeader {
@@ -170,3 +171,18 @@
     top: 10px; /* Ajusta según sea necesario */
     right: 10px; /* Ajusta según sea necesario */
 }
+.checkoutButtonContainer {
+    display: flex;
+    justify-content: center;
+  }
+  
+  .checkoutButton {
+    margin-top: 1rem;
+    padding: .5rem;
+    background-color: #2e3192;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  

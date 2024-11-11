@@ -4,7 +4,6 @@ import { useRouter } from "next/navigation";
 import { UserContext } from "@/app/components/contexts/UserContext";
 import Navegador from "@/app/components/navegador";
 import styles from "./detalleProducto.module.css";
-import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 
 export default function DetalleProducto() {
