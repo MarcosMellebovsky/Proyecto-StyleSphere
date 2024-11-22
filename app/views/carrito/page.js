@@ -140,27 +140,54 @@ export default function Carrito() {
   }
   const handleIrAPagar = async () => {
     try {
-      const response = await fetch('http://localhost:3001/api/pedido/', {
-        method: 'POST',
-        headers: {
-          'Authorization': `Bearer ${user.token}`,
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          // Envía datos del pedido según tus necesidades, como detalles del carrito, método de pago, etc.
-        }),
-      });
-  
-      if (response.ok) {
-        const nuevoPedido = await response.json(); // Asume que el backend devuelve el idPedido creado
-        router.push(`/pedido/${nuevoPedido.idPedido}`); // Redirige a la página de detalles del pedido
-      } else {
-        console.error('Error al crear el pedido');
-      }
+        if (productosCarrito.length === 0) {
+            alert('El carrito está vacío');
+            return;
+        }
+
+        // Crear array de productos y calcular precio total correctamente
+        const productos = productosCarrito.map(producto => ({
+            idCarrito: producto.idCarrito,
+            precio: producto.precio,
+            cantidadAComprar: producto.cantidadAComprar
+        }));
+
+        // Calcular el precio total multiplicando precio por cantidad
+        const precioTotal = productos.reduce((sum, producto) => 
+            sum + (producto.precio * producto.cantidadAComprar), 0
+        );
+
+        const pedidoData = {
+            productos: productos,
+            precioTotal: precioTotal
+        };
+
+        console.log('Datos a enviar:', pedidoData);
+
+        const response = await fetch('http://localhost:3001/api/pedido/agregar', {
+            method: 'POST',
+            headers: {
+                'Authorization': `Bearer ${user.token}`,
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(pedidoData),
+        });
+
+        if (!response.ok) {
+            const errorData = await response.json();
+            throw new Error(`Error al procesar el pedido: ${errorData.error}`);
+        }
+
+        const resultado = await response.json();
+        console.log('Pedido creado:', resultado);
+        alert('Pedido creado exitosamente');
+        router.push('/pedidos');
+
     } catch (error) {
-      console.error('Error en la solicitud:', error);
+        console.error('Error:', error);
+        alert(error.message);
     }
-  };
+};
 
   return (
     <>
