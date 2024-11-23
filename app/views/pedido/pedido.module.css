@@ -1,0 +1,27 @@
+.container {
+  padding: 20px;
+}
+
+.title {
+  font-size: 24px;
+  margin-bottom: 20px;
+}
+
+.detalleProductos {
+  margin-bottom: 20px;
+}
+
+.productItem {
+  border: 1px solid #ccc;
+  padding: 10px;
+  margin-bottom: 10px;
+}
+
+.formaPago {
+  margin-bottom: 20px;
+}
+
+.resumen {
+  border-top: 1px solid #ccc;
+  padding-top: 10px;
+}

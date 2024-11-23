@@ -111,30 +111,31 @@ export default function Carrito() {
 
   const eliminarProducto = async (idCarrito) => {
     try {
-      const headers = {
-        Authorization: `Bearer ${user.token}`,
-        "Content-Type": "application/json",
-      };
-      const response = await fetch(
-        `http://localhost:3001/api/carrito/${idCarrito}`,
-        {
-          method: "DELETE",
-          headers: headers,
-        }
-      );
-
-      if (response.ok) {
-        setProductosCarrito((prevProductos) =>
-          prevProductos.filter((producto) => producto.idCarrito !== idCarrito)
+        const headers = {
+            Authorization: `Bearer ${user.token}`,
+            "Content-Type": "application/json",
+        };
+        const response = await fetch(
+            `http://localhost:3001/api/carrito/${idCarrito}`,
+            {
+                method: "DELETE",
+                headers: headers,
+            }
         );
-      } else {
-        console.error("Error al eliminar el producto del carrito");
-      }
-    } catch (error) {
-      console.error("Error en la llamada a la API:", error);
-    }
-  };
 
+        if (response.ok) {
+            setProductosCarrito((prevProductos) =>
+                prevProductos.filter((producto) => producto.idCarrito !== idCarrito)
+            );
+        } else {
+            const errorData = await response.json();
+            alert(errorData.error || "Error al eliminar el producto del carrito");
+        }
+    } catch (error) {
+        console.error("Error en la llamada a la API:", error);
+        alert("Error al eliminar el producto del carrito");
+    }
+};
   if (loading) {
     return <p>Cargando...</p>;
   }
@@ -157,12 +158,13 @@ export default function Carrito() {
             sum + (producto.precio * producto.cantidadAComprar), 0
         );
 
+        // Asegurarnos de que productos siempre sea un array
         const pedidoData = {
-            productos: productos,
+            productos: Array.isArray(productos) ? productos : [productos],
             precioTotal: precioTotal
         };
 
-        console.log('Datos a enviar:', pedidoData);
+        console.log('Datos a enviar:', pedidoData); // Para debug
 
         const response = await fetch('http://localhost:3001/api/pedido/agregar', {
             method: 'POST',
@@ -175,13 +177,13 @@ export default function Carrito() {
 
         if (!response.ok) {
             const errorData = await response.json();
-            throw new Error(`Error al procesar el pedido: ${errorData.error}`);
+            throw new Error(errorData.error || 'Error al procesar el pedido');
         }
 
         const resultado = await response.json();
         console.log('Pedido creado:', resultado);
         alert('Pedido creado exitosamente');
-        router.push('/pedidos');
+        router.push(`/views/pedido?idDetallePedido=${resultado.idDetallePedido}`);
 
     } catch (error) {
         console.error('Error:', error);
