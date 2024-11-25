@@ -46,16 +46,28 @@ export default function Pedido() {
     return <p>Cargando...</p>;
   }
   return (
-    <div className={styles.container}>
-      <h1 className={styles.title}>Resumen de la Compra</h1>
+    <div className={styles.resumenCompra}>
+      <Link href="/views/carrito" className={styles.volverCarrito}>
+        Volver al carrito
+      </Link>
+      <h2 className={styles.titulo}>Resumen de la compra</h2>
 
       <div className={styles.detalleProductos}>
         {pedidoInfo && pedidoInfo.productos && pedidoInfo.productos.length > 0 ? (
           pedidoInfo.productos.map((detalle) => (
-            <div key={detalle.idCarrito} className={styles.productItem}>
-              <img src={detalle.imagen} alt={`Producto ${detalle.idCarrito}`} className={styles.productImage} />
-              <p>{detalle.nombre}</p>
-              <p>Precio: ${detalle.precioFinal}</p>
+            <div key={detalle.idCarrito} className={styles.productoItem}>
+              <img 
+                src={detalle.imagen} 
+                alt={detalle.nombre} 
+                className={styles.productoImagen}
+              />
+              <span className={styles.productoCantidad}>{detalle.cantidad}</span>
+              <div className={styles.nombrePrecio}>
+                <span className={styles.productoNombre}>{detalle.nombre}</span>
+                <span className={styles.productoPrecio}>
+                  $ {detalle.precioFinal.toLocaleString('es-AR')}
+                </span>
+              </div>
             </div>
           ))
         ) : (
@@ -63,22 +75,15 @@ export default function Pedido() {
         )}
       </div>
 
-      {/* Formas de pago */}
-      <div className={styles.formaPago}>
-        <h2>Forma de Pago</h2>
-        <label>
-          <input type="radio" name="pago" value="tarjeta" /> Tarjeta
-        </label>
-        <label>
-          <input type="radio" name="pago" value="mercadopago" /> MercadoPago
-        </label>
-      </div>
-
-      {/* Resumen */}
-      <div className={styles.resumen}>
-        <h2>Resumen</h2>
-        <p>Subtotal: ${pedidoInfo ? pedidoInfo.precioTotal : 0}</p>
-        <p>Total: ${pedidoInfo ? pedidoInfo.precioTotal : 0}</p>
+      <div className={styles.totalSeccion}>
+        <div className={styles.subtotalRow}>
+          <span>Subtotal</span>
+          <span>$ {pedidoInfo ? pedidoInfo.precioTotal.toLocaleString('es-AR') : '0'}</span>
+        </div>
+        <div className={styles.totalRow}>
+          <span>Total</span>
+          <span>$ {pedidoInfo ? pedidoInfo.precioTotal.toLocaleString('es-AR') : '0'}</span>
+        </div>
       </div>
     </div>
   );
