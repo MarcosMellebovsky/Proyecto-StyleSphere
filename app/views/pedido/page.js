@@ -1,18 +1,20 @@
 "use client";
 import { useEffect, useState, useContext } from "react";
 import { UserContext } from "@/app/components/contexts/UserContext";
-import { useSearchParams } from "next/navigation"; // Importamos useSearchParams
-import styles from "./Pedido.module.css"; // Define tu propio CSS aquí para estilizar
+import { useSearchParams } from "next/navigation";
+import styles from "./Pedido.module.css";
 import Link from "next/link";
+import { CreditCard, WalletMinimal } from 'lucide-react';
+import { useRouter } from "next/navigation";
 
 export default function Pedido() {
   const [pedidoInfo, setPedidoInfo] = useState(null);
   const [loading, setLoading] = useState(true);
   const { user } = useContext(UserContext);
+  const router = useRouter();
 
-  // Obtener los parámetros de búsqueda de la URL
   const searchParams = useSearchParams();
-  const idDetallePedido = searchParams.get('idDetallePedido'); // Extraemos el idPedido de los parámetros
+  const idDetallePedido = searchParams.get('idDetallePedido');
 
   useEffect(() => {
     const fetchPedido = async () => {
@@ -36,15 +38,30 @@ export default function Pedido() {
       }
     };
 
-
     if (user && user.token && idDetallePedido) {
       fetchPedido();
     }
   }, [user, idDetallePedido]);
 
+  const handlePagoTarjeta = () => {
+    if (user && pedidoInfo) {
+      localStorage.setItem("productosPedido", JSON.stringify(pedidoInfo.productos));
+      router.push(`/views/tarjetaPago?idCliente=${user.idCliente}`);
+    } else {
+      console.error("Información requerida no disponible");
+    }
+  };
+
+  const handlePagoEfectivo = () => {
+    console.log("Pago en efectivo seleccionado");
+  
+  };
+
+
   if (loading) {
     return <p>Cargando...</p>;
   }
+
   return (
     <div className={styles.resumenCompra}>
       <Link href="/views/carrito" className={styles.volverCarrito}>
@@ -85,8 +102,28 @@ export default function Pedido() {
           <span>$ {pedidoInfo ? pedidoInfo.precioTotal.toLocaleString('es-AR') : '0'}</span>
         </div>
       </div>
+
+      <div className={styles.metodoPagoSeccion}>
+        <h3 className={styles.metodoPagoTitulo}>Selecciona tu método de pago</h3>
+        <div className={styles.botonesMetodoPago}>
+          <button 
+            onClick={handlePagoTarjeta}
+            className={styles.botonPago}
+          >
+            <CreditCard className={styles.iconoPago} />
+            Pagar con Tarjeta
+          </button>
+          
+
+          <button 
+            onClick={handlePagoEfectivo}
+            className={styles.botonPago}
+          >
+            <WalletMinimal className={styles.iconoPago} />
+            Pagar en Efectivo
+          </button>
+        </div>
+      </div>
     </div>
   );
 }
-
-

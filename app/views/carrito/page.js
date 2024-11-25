@@ -142,11 +142,10 @@ export default function Carrito() {
                 sum + (producto.precio * producto.cantidadAComprar), 0
             );
 
-            // Preparar los datos del pedido
             const pedidoData = {
                 productos: Array.isArray(productos) ? productos : [productos],
                 precioTotal: precioTotal,
-                idDetallePedido: existingOrderId // Usamos el id del pedido existente si está definido
+                idDetallePedido: existingOrderId
             };
 
             const response = await fetch('http://localhost:3001/api/pedido/agregar', {
@@ -164,8 +163,21 @@ export default function Carrito() {
             }
 
             const resultado = await response.json();
-            setExistingOrderId(resultado.idDetallePedido); // Guardamos el id del pedido creado o actualizado
-            alert('Pedido actualizado exitosamente');
+            
+            if (resultado.duplicado) {
+                alert('Ya existe un pedido con estos productos. Redirigiendo...');
+                router.push(`/views/pedido?idDetallePedido=${resultado.idDetallePedido}`);
+                return;
+            }
+
+            setExistingOrderId(resultado.idDetallePedido);
+            
+            if (existingOrderId) {
+                alert('Pedido actualizado exitosamente');
+            } else {
+                alert('Pedido creado exitosamente');
+            }
+            
             router.push(`/views/pedido?idDetallePedido=${resultado.idDetallePedido}`);
 
         } catch (error) {
@@ -173,10 +185,6 @@ export default function Carrito() {
             alert(error.message);
         }
     };
-
-    if (loading) {
-        return <p>Cargando...</p>;
-    }
 
     return (
         <>
